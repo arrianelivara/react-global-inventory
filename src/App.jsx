@@ -1,45 +1,25 @@
-import { useState } from 'react'
-import logo from './logo.svg'
-import './App.css'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthRoute } from "routes";
+import LayoutA from "./components/layout/layout-a";
+import { SignIn } from "./modules";
+import AuthorizedPage from "./pages/authorized/authorized.page";
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.jsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/auth" element={<SignIn />} />
+          <Route path="/*" element={localStorage.getItem("accessToken") ? (
+            <LayoutA component={<AuthorizedPage />}></LayoutA>
+            ) : (
+              <AuthRoute />
+            )} />
+        </Routes>
+      </BrowserRouter>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

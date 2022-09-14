@@ -1,0 +1,123 @@
+.primary {
+  background-color: #161F4A;
+  border: 1px solid #161F4A;
+  color: #ffffff;
+  box-shadow: none;
+  -webkit-transition: background-color 0.2s ease-in-out;
+  -moz-transition: background-color 0.2s ease-in-out;
+  -o-transition: background-color 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
+
+  -webkit-transition: border 0.2s ease-in-out;
+  -moz-transition: border 0.2s ease-in-out;
+  -o-transition: border 0.2s ease-in-out;
+  transition: border 0.2s ease-in-out;
+}
+
+.primary:hover {
+  background-color: #505777;
+  color: #ffffff;
+  border: 1px solid #505777;
+}
+
+.primary:focus {
+  background-color: #161F4A;
+  color: #ffffff;
+  border: 1px solid #161F4A;
+}
+
+.secondary {
+  font-weight: bold;
+  color: #1f2652;
+}
+
+.secondary:hover {
+  color: #505777;
+  border: 1px solid #505777;
+  box-shadow: none;
+}
+
+.secondary:focus {
+  color: #505777;
+  outline: none;
+  --tw-border-opacity: 1;
+  border: 1px solid rgba(229, 231, 235, var(--tw-border-opacity));
+  box-shadow: none;
+}
+
+.danger {
+  background: #ffffff;
+  border: 1px solid #e02d32;
+  color: #e02d32;
+}
+
+.danger:hover {
+  border: 1px solid #fc4c51;
+  color: #fc4c51;
+}
+
+.danger:active,
+.danger:focus {
+  border: 1px solid #b32428;
+  color: #b32428;
+}
+
+.ghost {
+  color: #73c3d4;
+  background-color: transparent;
+  border-radius: 3px;
+  border: none;
+}
+
+.ghost:hover {
+  color: #73c3d4;
+  border: none;
+  background: rgba(28, 79, 90, 0.05);
+}
+
+.link:hover,
+.link:active,
+.link:focus {
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  outline: none !important;
+  transition: none !important;
+}
+
+.plain {
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.plain:hover,
+.plain:focus {
+  border: 1px solid #ffffff;
+  background: #ffffff0e;
+  box-shadow: none;
+  outline: none !important;
+  transition: none !important;
+}
+
+.button {
+  touch-action: none !important;
+  user-select: none !important;
+  box-shadow: none !important;
+}
+
+.filter {
+  border-top: none;
+  border-bottom: none;
+  border-left: none;
+  border-right: solid 1px #cbe0e6;
+}
+
+.filter:hover {
+  background: white;
+}
+
+.buttonLink {
+  &:focus {
+    outline: none !important;
+  }
+}

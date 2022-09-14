@@ -1,0 +1,30 @@
+.container {
+  height: 1.125rem;
+  width: 1.125rem;
+  :global {
+    .ant-checkbox-input {
+      height: 1.125rem;
+      width: 1.125rem;
+    }
+
+    .ant-checkbox-checked .ant-checkbox-inner {
+      background-color: #161F4A;
+      border-color: #161F4A;
+      &:after {
+        border-color: #ffffff;
+      }
+    }
+
+    .ant-checkbox:hover .ant-checkbox-inner {
+      border-color: #161F4A
+    }
+
+    .ant-checkbox-indeterminate .ant-checkbox-inner {
+      background-color: #161F4A;
+      &::after {
+        height: 5%;
+        background-color: #ffffff;
+      }
+    }
+  }
+}

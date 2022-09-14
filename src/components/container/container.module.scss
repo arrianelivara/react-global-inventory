@@ -1,0 +1,5 @@
+.container {
+  > .container:not(.parent):last-child {
+    padding-bottom: 0px;
+  }
+}

@@ -1,0 +1,51 @@
+.container {
+  > thead {
+    > tr {
+      > th:first-child {
+        border-top-left-radius: 6px;
+      }
+      > th:last-child {
+        border-top-right-radius: 6px;
+      }
+      > th {
+        padding: 13.5px 20px;
+      }
+    }
+  }
+  > tbody {
+    > tr {
+      &:hover {
+        > td {
+          background: #f3f3f4;
+        }
+      }
+      > td {
+        padding: 12px 20px;
+        transition: background 0.6s;
+        :global {
+          .ant-skeleton,
+          .ant-skeleton-button {
+            width: 80% !important;
+          }
+        }
+      }
+      &:last-child {
+        > td:first-child {
+          border-bottom-left-radius: 6px;
+        }
+        > td:last-child {
+          border-bottom-right-radius: 6px;
+        }
+      }
+    }
+  }
+}
+
+.fixed {
+  // box-shadow: 10px 0 8px -8px rgba(0, 0, 0, 15%);
+}
+
+.content {
+  max-width: 83%;
+  vertical-align: middle;
+}

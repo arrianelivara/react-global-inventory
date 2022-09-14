@@ -1,0 +1,118 @@
+.container {
+  :global {
+    .ant-select-selector,
+    .ant-select-selection-search {
+      padding: 0px !important;
+      font-size: 0.875rem;
+    }
+    .ant-select-selector {
+      // width: calc(100% - 30px) !important;
+      overflow: hidden;
+    }
+    .ant-select-selector,
+    .ant-select-selection-search-input,
+    .ant-select-selection-search {
+      height: 100% !important;
+      right: 0px !important;
+      left: 0px !important;
+      // &:focus,
+      // &:active {
+      //   outline: 0 !important;
+      //   box-shadow: none !important;
+      // }
+      // outline: 0 !important;
+      // box-shadow: none !important;
+      // border: 0px !important;
+    }
+    .ant-select-selection-search-input {
+      padding: 0.25rem 1rem !important;
+    }
+
+    .ant-select-selection-placeholder,
+    .ant-select-selection-item {
+      font-size: 0.875rem;
+      display: flex !important;
+      align-items: center !important;
+      padding: 0.25rem 1rem !important;
+    }
+  }
+}
+
+.select:hover {
+  border-color: #40a9ff;
+  border-right-width: 1px;
+  outline: 0;
+  border-right-width: 1px;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.select:focus {
+  border-color: #40a9ff;
+  box-shadow: 0 0 0 2px rgb(24 144 255 / 20%);
+  border-right-width: 1px;
+  outline: 0;
+  border-right-width: 1px;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+// :global {
+//   .placeholderBlack:not(.ant-select-open) {
+//     .ant-select-selection-placeholder {
+//       color: #000000 !important;
+//     }
+//   }
+// }
+.placeholderBlack {
+  :global {
+    .ant-select-selection-placeholder {
+      color: #000000 !important;
+    }
+  }
+}
+
+.select {
+  // height: 3.125rem;
+  overflow: hidden;
+  :global {
+    .ant-select-arrow .anticon {
+      pointer-events: none;
+    }
+    .ant-select-arrow {
+      // margin-right: 0.5rem;
+      transition: transform 0.2s;
+      transform-origin: center center;
+      // height: 20px;
+    }
+    .ant-select-open {
+      .ant-select-arrow {
+        // transform: rotate(-90deg);
+      }
+    }
+  }
+}
+
+.required {
+  pointer-events: none;
+  border-top: 25px solid #cbe0e6;
+  border-left: 25px solid transparent;
+  top: 0px;
+  right: 0px;
+  position: absolute;
+
+  &.error {
+    border-top-color: #c83636;
+  }
+
+  > .icon {
+    position: absolute;
+    top: -25px;
+    right: 0px;
+    font-size: 7px;
+    color: #46b0c6;
+
+    &.error {
+      color: #ffffff;
+    }
+  }
+}
+

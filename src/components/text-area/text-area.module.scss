@@ -1,0 +1,16 @@
+.container:hover {
+  border-color: #40a9ff;
+  border-right-width: 1px;
+  outline: 0;
+  border-right-width: 1px;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.container:focus {
+  border-color: #40a9ff;
+  box-shadow: 0 0 0 2px rgb(24 144 255 / 20%);
+  border-right-width: 1px;
+  outline: 0;
+  border-right-width: 1px;
+  transition: border 0.3s, box-shadow 0.3s;
+}

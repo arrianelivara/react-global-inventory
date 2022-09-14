@@ -1,0 +1,41 @@
+.container {
+  color: #0a3637;
+  height: 2.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  border-radius: 0.25rem;
+  padding: 12px;
+  cursor: pointer;
+  border: 1px solid;
+  --tw-border-opacity: 1;
+  border-color: rgb(226 228 228 / var(--tw-border-opacity));
+}
+
+.text {
+  font-size: 13px;
+  color: gray;
+}
+
+.icon > svg {
+  font-size: 10px;
+  margin-left: 6px;
+}
+
+.container:hover {
+  border-color: #40a9ff;
+  border-right-width: 1px;
+  outline: 0;
+  border-right-width: 1px;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.container:focus {
+  border-color: #40a9ff;
+  box-shadow: 0 0 0 2px rgb(24 144 255 / 20%);
+  border-right-width: 1px;
+  outline: 0;
+  border-right-width: 1px;
+  transition: border 0.3s, box-shadow 0.3s;
+}

@@ -1,0 +1,90 @@
+.container {
+  overflow: hidden;
+}
+
+.container:hover {
+  .clearIcon {
+    right: 0;
+  }
+}
+
+.container .input,
+.input:focus {
+  border: none;
+  box-shadow: none;
+  outline: none;
+  color: inherit;
+}
+
+.container:hover {
+  border-color: #40a9ff;
+  border-right-width: 1px;
+  outline: 0;
+  border-right-width: 1px;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.container:focus {
+  border-color: #40a9ff;
+  box-shadow: 0 0 0 2px rgb(24 144 255 / 20%);
+  border-right-width: 1px;
+  outline: 0;
+  border-right-width: 1px;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.required {
+  border-top: 25px solid #cbe0e6;
+  border-left: 25px solid transparent;
+  top: 0px;
+  right: 0px;
+  position: absolute;
+
+  &.error {
+    border-top-color: #c83636;
+  }
+
+  > .icon {
+    position: absolute;
+    top: -25px;
+    right: 0px;
+    font-size: 7px;
+    color: #46b0c6;
+
+    &.error {
+      color: #ffffff;
+    }
+  }
+}
+
+.clearIcon {
+  position: absolute;
+  right: -40px;
+  border-radius: 16px;
+  background: #7a7984;
+  color: #ffffff;
+  font-size: 12px;
+  cursor: pointer;
+  // margin-left: -40px !important;
+  transition: right 0.5s;
+}
+
+.closeIcon > svg {
+  font-size: 12px;
+}
+
+// Requirement that error should not display while in focus
+.container:focus-within {
+  color: #1b1b1b;
+  border-color: #cbe0e6;
+  &.error {
+    border-top-color: #cbe0e6 !important;
+  }
+}
+
+:global {
+  .ant-input[disabled] {
+    background: transparent !important;
+    color: rgba(0, 0, 0, 0.25);
+  }
+}
