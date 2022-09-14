@@ -20,6 +20,7 @@ const preparePaths = ({ prefix, paths = {} }) => {
   newPaths[prefix.toString().toUpperCase()] = `/${prefix}`;
   return newPaths;
 };
+
 const Path = {
   ...preparePaths({ prefix: "auth", paths: authPaths }),
   ...preparePaths({ prefix: "inventory", paths: inventoryPaths }),
