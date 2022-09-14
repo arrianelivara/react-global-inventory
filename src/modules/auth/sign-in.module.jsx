@@ -4,15 +4,16 @@ import { CheckboxField, Field, Input, Text, Button, Navigation } from "../../com
 import { useApi, useForm } from "hooks";
 import { signIn } from "apis";
 import { initialFormState } from "./sign-in-form.state";
-import { redirectTo } from "services";
 import { Path } from "paths";
 import lang from "translations";
+import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
+  const navigate = useNavigate();
+
   const { request: signInRequest, loading } = useApi({
     api: signIn
   });
-
   const {
     fields,
     modifyField,
@@ -28,7 +29,7 @@ const SignIn = () => {
       const res = await signInRequest({ username: email, password });  
       if (res) {
         localStorage.setItem("accessToken", res.access);
-        redirectTo(Path.MENU);
+        navigate(Path.MENU);
       }
     } catch (e) {
       console.log(e);

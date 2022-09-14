@@ -1,16 +1,19 @@
 import React from 'react'
 import { Logo } from 'images';
 import { Text, Button } from "components"
-import { formatDate, redirectTo } from "services";
+import { formatDate } from "services";
 import lang from 'translations';
 import { Path } from 'paths';
 import { LogoutOutlined } from "@ant-design/icons";
 import { StyleType } from 'enums';
+import { useNavigate } from "react-router-dom";
+
 const Navigation = ({ isLoggedIn }) => {
+    const navigate = useNavigate();
 
     const logoutCallback = () => {
       localStorage.clear();
-      redirectTo(Path.AUTH);
+      navigate(Path.AUTH);
     }
     return <React.Fragment>
       <div className="w-full py-2 border-b bg-white px-5">
