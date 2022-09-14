@@ -49,5 +49,8 @@
     "vite": "^3.1.0",
     "vite-jsconfig-paths": "^2.0.1",
     "vite-plugin-svgr": "^2.2.1"
+  },
+  "engines": {
+    "node": "16.17.0"
   }
 }
