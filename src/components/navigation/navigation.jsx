@@ -13,7 +13,7 @@ const Navigation = ({ isLoggedIn }) => {
 
     const logoutCallback = () => {
       localStorage.clear();
-      navigate(Path.AUTH);
+      navigate(Path.AUTH,{ replace: true });
     }
     return <React.Fragment>
       <div className="w-full py-2 border-b bg-white px-5">
