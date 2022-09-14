@@ -29,7 +29,7 @@ const SignIn = () => {
       const res = await signInRequest({ username: email, password });  
       if (res) {
         localStorage.setItem("accessToken", res.access);
-        navigate(Path.MENU);
+        navigate(Path.MENU, { replace: true });
       }
     } catch (e) {
       console.log(e);
