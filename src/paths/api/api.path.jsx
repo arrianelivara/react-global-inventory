@@ -23,7 +23,7 @@ const preparePaths = ({ prefix, paths }) => {
 };
 
 const ApiPath = {
-  ...preparePaths({ prefix: "auth", paths: authPaths }),
+  ...preparePaths({ prefix: "token", paths: authPaths }),
   ...preparePaths({ prefix: "inventory", paths: inventoryPaths }),
   ...preparePaths({ prefix: "users", paths: userPaths }),
 };
