@@ -1,15 +1,15 @@
 FROM node:lts-alpine
 
-ARG API_URL
-ARG COGNITO_REGION
-ARG COGNITO_USER_POOL_ID
-ARG COGNITO_WEB_CLIENT_ID
+# Add a work directory
+WORKDIR /app
 
-ENV NODE_ENV=production
-WORKDIR /usr/src/app
-COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
-RUN npm install --production --silent && mv node_modules ../
-COPY . .
+COPY package.json .
+
+RUN npm install
+
+COPY . /app/
+
+RUN npm run build
 
 FROM nginx:alpine
 
@@ -22,8 +22,5 @@ RUN rm -rf ./*
 COPY --from=builder /app/dist .
 
 COPY .nginx/nginx.conf /etc/nginx/conf.d/default.conf
-EXPOSE 3000
-EXPOSE 8000
-RUN chown -R node /usr/src/app
-USER node
-CMD ["npm", "start"]
+
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
