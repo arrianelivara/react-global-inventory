@@ -11,7 +11,7 @@ COPY . /app/
 
 RUN npm run build
 
-FROM nginx:alpine
+FROM react-global-inventory:804f9cebfdc5
 
 # Set working directory to nginx asset directory
 WORKDIR /usr/share/nginx/html
