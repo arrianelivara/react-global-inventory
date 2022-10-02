@@ -1,9 +1,20 @@
 import { Modal } from 'antd';
 import { DatePicker, Field, Input, Select, Text, TextArea } from 'components';
 import lang from "translations"
-import React from 'react'
+import React, { useMemo } from 'react'
+import { useForm } from 'hooks/index';
+import { initialFormState } from './employee-form.state';
 
-const EmployeeModal = ({ employeeModal }) => {
+const EmployeeModal = ({ initialState, employeeModal }) => {
+
+    const formState = useMemo(() => {
+        return initialFormState(initialState);
+    }, [initialState]);
+
+    const { fields, modifyField, modifyForm, submitForm, getFormValues, applyFieldErrors, dirty } = useForm({
+      initialState: formState,
+    });
+
     return (
         <Modal {...employeeModal} onCancel={() => employeeModal.close()} 
             bodyStyle={{
@@ -11,33 +22,33 @@ const EmployeeModal = ({ employeeModal }) => {
             }}>
                 <Text label>Note: Fields with (<span className='text-red'>*</span>) are required.</Text>
                 <div className='mt-md grid md:grid-cols-4 gap-3'>
-                    <Field label="Employee Number" required>
-                        <Input />
+                    <Field  {...fields.employeeNumber} required>
+                        <Input {...fields.employeeNumber} onChange={modifyField}/>
                     </Field>
-                    <Field label="First Name" required>
-                        <Input />
+                    <Field {...fields.firstName} required>
+                        <Input {...fields.firstName} onChange={modifyField}/>
                     </Field>
-                    <Field label="Middle Name">
-                        <Input />
+                    <Field  {...fields.middleName}>
+                        <Input {...fields.middleName} onChange={modifyField} />
                     </Field>
-                    <Field label="Last Name" required>
-                        <Input />
+                    <Field {...fields.lastName} onChange={modifyField} required>
+                        <Input {...fields.lastName} onChange={modifyField}/>
                     </Field>
                 </div>
                 <div className='mt-sm grid md:grid-cols-4 gap-3'>
-                    <Field label="Job Role" className="col-span-2" required>
-                        <Select text={lang.selectJobRole}></Select>
+                    <Field {...fields.jobRole} className="col-span-2" required>
+                        <Select {...fields.jobRole} onChange={modifyField} text={lang.selectJobRole}></Select>
                     </Field>
-                    <Field label="Start Date" required>
-                        <DatePicker></DatePicker>
+                    <Field {...fields.startDate} required>
+                        <DatePicker {...fields.startDate} onChange={modifyField}></DatePicker>
                     </Field>
-                    <Field label="End Date">
-                        <DatePicker></DatePicker>
+                    <Field {...fields.endDate}>
+                        <DatePicker {...fields.endDate} onChange={modifyField}></DatePicker>
                     </Field>
                 </div>
                 <div className='mt-sm'>
-                    <Field label="Remarks">
-                        <TextArea />
+                    <Field {...fields.remarks}>
+                        <TextArea {...fields.remarks} onChange={modifyField}/>
                     </Field>
                 </div>
         </Modal>

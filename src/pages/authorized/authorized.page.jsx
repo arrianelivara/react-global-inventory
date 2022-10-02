@@ -2,7 +2,7 @@ import React, { useMemo} from "react";
 import { Routes, Route } from "react-router-dom";
 import { Menu } from "modules";
 import { Path } from "paths";
-import { EmployeeList, JobRoles, Parts, Brands, Units, Supplier, Warehouse, Inbound, Outbound, Administration, Reports } from "modules";
+import { InventorySummary, EmployeeList, JobRoles, Parts, Brands, Units, Supplier, Warehouse, Inbound, Outbound, Administration, Reports } from "modules";
 
 const AuthorizedPage = () => {
   
@@ -39,6 +39,10 @@ const AuthorizedPage = () => {
       [Path.WAREHOUSE]: {
         exact: true,
         element: <Warehouse />,
+      },
+      [Path.INVENTORY]: {
+        exact: true,
+        element: <InventorySummary />,
       },
       [Path.INBOUND]: {
         exact: true,

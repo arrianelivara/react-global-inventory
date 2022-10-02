@@ -121,3 +121,24 @@
     outline: none !important;
   }
 }
+
+.tertiary {
+  font-weight: bold;
+  color: #ffffff;
+  background: lightseagreen;
+}
+
+.tertiary:hover {
+  color: #161717;
+  border: 1px solid rgb(146, 229, 225);
+  background: rgb(146, 229, 225);
+  box-shadow: none;
+}
+
+.tertiary:focus {
+  color: #161717;
+  outline: none;
+  --tw-border-opacity: 1;
+  border: 1px solid rgba(229, 231, 235, var(--tw-border-opacity));
+  box-shadow: none;
+}

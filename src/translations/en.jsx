@@ -69,5 +69,13 @@ export const locale = {
     addNewUnit: "Add New Unit",
     updateExistingUnit: "Update Existing Unit",
     addNewWarehouse: "Add New Warehouse",
-    updateExistingWarehouse: "Update Existing Warehouse"
+    updateExistingWarehouse: "Update Existing Warehouse",
+    invoiceDate: "Invoice Date",
+    invoiceNumber: "Invoice Number",
+    transactionHistory: "Transaction History",
+    filterBy: "Filter by",
+    search: "Search",
+    searchAndView: "Search and view the updated quantity of your stocks here.",
+    employeeNumber: "Employee Number",
+    remarks: "Remarks"
 }; export default Object.freeze(locale);

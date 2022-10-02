@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { Pagination as AntPagination } from "antd";
-import { Select } from "..";
+import { Select } from "../../components";
 import classnames from "classnames";
 
 const Pagination = ({

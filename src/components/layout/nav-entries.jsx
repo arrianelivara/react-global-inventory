@@ -7,7 +7,7 @@ export const main_menus = [
         key: "menu",
         description: "Main Menu",
         children: [],
-        path: "/menu",
+        path: Path.MENU,
       },
       {
         name: "MASTER DATA",
@@ -62,6 +62,7 @@ export const main_menus = [
         name: "INVENTORY",
         key: "inventory",
         description: "Inventory",
+        path: Path.INVENTORY,
         children: [
           {
             name: "Inbound",

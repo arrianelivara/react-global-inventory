@@ -1,7 +1,7 @@
 import React from 'react'
 import { Logo } from 'images';
 import { Text, Button } from "components"
-import { formatDate } from "services";
+import { formatDate, redirectTo } from "services";
 import lang from 'translations';
 import { Path } from 'paths';
 import { LogoutOutlined } from "@ant-design/icons";

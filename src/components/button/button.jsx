@@ -25,6 +25,8 @@ const Button = ({
           [`px-md py-sm border rounded border-solid`]: type === StyleType.Primary,
           [`px-md py-sm border rounded border-solid text-pelorous bg-white border-gray-200`]:
             type === StyleType.Secondary,
+          [`px-md py-sm border rounded border-solid border-green-200`]:
+            type === StyleType.Tertiary,
           [`px-md py-sm border rounded border-solid text-white`]: type === StyleType.Danger,
           [`px-sm py-xs sm:px-md py-sm text-pelorous bg-transparent border-0`]:
             type === StyleType.Link,
@@ -34,6 +36,7 @@ const Button = ({
         {
           [`${styles.primary}`]: type === StyleType.Primary,
           [`${styles.secondary}`]: type === StyleType.Secondary,
+          [`${styles.tertiary}`]: type === StyleType.Tertiary,
           [`${styles.danger}`]: type === StyleType.Danger,
           [`${styles.link}`]: type === StyleType.Link,
           [`${styles.filter}`]: type === StyleType.Filter,

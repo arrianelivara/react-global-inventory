@@ -1,7 +1,8 @@
 export { default as SignIn } from "./auth/sign-in.module";
 export { default as Administration } from "./administration/administration.module";
-export { default as Inbound } from "./inventory/inbound.module";
-export { default as Outbound } from "./inventory/outbound.module";
+export { default as Inbound } from "./inventory/inbound/inbound.module";
+export { default as Outbound } from "./inventory/outbound/outbound.module";
+export { default as InventorySummary } from "./inventory/inventory-summary/inventory-summary.module";
 export { default as EmployeeList } from "./master-data/employee/list-employee/employee-list.module";
 export { default as JobRoles } from "./master-data/job-roles/list-job-role/job-role.module";
 export { default as Parts } from "./master-data/parts/list-parts/parts.module";

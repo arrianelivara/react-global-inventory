@@ -4,16 +4,16 @@ import { CheckboxField, Field, Input, Text, Button, Navigation } from "../../com
 import { useApi, useForm } from "hooks";
 import { signIn } from "apis";
 import { initialFormState } from "./sign-in-form.state";
+import { useNavigate } from "react-router-dom";
 import { Path } from "paths";
 import lang from "translations";
-import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
   const navigate = useNavigate();
-
   const { request: signInRequest, loading } = useApi({
     api: signIn
   });
+
   const {
     fields,
     modifyField,
