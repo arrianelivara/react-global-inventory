@@ -1,3 +1,3 @@
 export const authPaths = {
-  SIGN_IN: "",
+  SIGN_IN: "user/login",
 };
