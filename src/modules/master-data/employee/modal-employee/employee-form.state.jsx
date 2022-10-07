@@ -1,23 +1,25 @@
 import { Field } from "enums";
 import Validation from "services/validation.service";
 import lang from "translations";
+import moment from "moment";
 
 export const initialFormState = (initialState = {}) => {
   const {
-    employeeNumber,
+    employeeNo,
     firstName,
     middleName,
     lastName,
     jobRole,
-    startDate,
-    endDate,
+    startDate = moment(),
+    endDate = moment(),
     remarks
   } = initialState;
+  console.log(startDate)
   return {
-    employeeNumber: {
-      name: "employeeNumber",
+    employeeNo: {
+      name: "employeeNo",
       label: lang.employeeNumber,
-      value: employeeNumber,
+      value: employeeNo,
       type: Field.INPUT,
       maxLength: 75,
       validations: [Validation.required({})],
@@ -38,7 +40,7 @@ export const initialFormState = (initialState = {}) => {
       maxLength: 75,
     },
     lastName: {
-      name: "middleName",
+      name: "lastName",
       label: lang.lastName,
       value: lastName,
       type: Field.INPUT,
@@ -57,7 +59,7 @@ export const initialFormState = (initialState = {}) => {
       name: "startDate",
       label: lang.startDate,
       value: startDate,
-      type: Field.ANY,
+      type: Field.DATE_RANGE,
     },
     endDate: {
       name: "endDate",

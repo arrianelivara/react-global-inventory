@@ -48,6 +48,10 @@ const EmployeeList = () => {
         setData(sampleData);
     });
 
+    const updatedData = useMemo(() => {
+        return data;
+    }, [data]);
+    console.log(updatedData);
     return (
         <WrapperA
             title={lang.employees}
@@ -80,9 +84,9 @@ const EmployeeList = () => {
             filterButtons={
                 <WarehouseSelection field={fields.warehouse} modifyField={modifyField}/>
             }>
-            <DataTable columns={columns} data={data} pageSize={10} total={sampleData.length}/>
-            <AddEmployeeModal addEmployeeModal={addEmployeeModal}/>
-            <EditEmployeeModal editEmployeeModal={editEmployeeModal} />
+            <DataTable columns={columns} data={updatedData} pageSize={10} total={sampleData.length}/>
+            <AddEmployeeModal addEmployeeModal={addEmployeeModal} data={data} setData={setData}/>
+            <EditEmployeeModal editEmployeeModal={editEmployeeModal} data={data} setData={setData} />
         </WrapperA>
     );
 }

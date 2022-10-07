@@ -5,13 +5,13 @@ import React, { useMemo } from 'react'
 import { useForm } from 'hooks/index';
 import { initialFormState } from './employee-form.state';
 
-const EmployeeModal = ({ initialState, employeeModal }) => {
+const EmployeeModal = ({ initialState, employeeModal, handleSubmit }) => {
 
     const formState = useMemo(() => {
         return initialFormState(initialState);
     }, [initialState]);
 
-    const { fields, modifyField, modifyForm, submitForm, getFormValues, applyFieldErrors, dirty } = useForm({
+    const { fields, modifyField, getFormValues, clearForm } = useForm({
       initialState: formState,
     });
 
@@ -19,11 +19,23 @@ const EmployeeModal = ({ initialState, employeeModal }) => {
         <Modal {...employeeModal} onCancel={() => employeeModal.close()} 
             bodyStyle={{
                 paddingInline: '2rem'
+            }}
+            onOk={() => {
+                const params = getFormValues();
+                
+                const obj = {
+                    ...params,
+                    startDate: params.startDate?.format("YYYY-DD-MM"),
+                    endDate: params.endDate?.format("YYYY-DD-MM"),
+                }
+                handleSubmit(obj);
+                employeeModal.close();
+                clearForm();
             }}>
                 <Text label>Note: Fields with (<span className='text-red'>*</span>) are required.</Text>
                 <div className='mt-md grid md:grid-cols-4 gap-3'>
-                    <Field  {...fields.employeeNumber} required>
-                        <Input {...fields.employeeNumber} onChange={modifyField}/>
+                    <Field  {...fields.employeeNo} required>
+                        <Input {...fields.employeeNo} onChange={modifyField}/>
                     </Field>
                     <Field {...fields.firstName} required>
                         <Input {...fields.firstName} onChange={modifyField}/>
@@ -40,7 +52,9 @@ const EmployeeModal = ({ initialState, employeeModal }) => {
                         <Select {...fields.jobRole} onChange={modifyField} text={lang.selectJobRole}></Select>
                     </Field>
                     <Field {...fields.startDate} required>
-                        <DatePicker {...fields.startDate} onChange={modifyField}></DatePicker>
+                        <DatePicker {...fields.startDate} onChange={(name, value) => {
+                            modifyField("startDate", { value: value });
+                        }}></DatePicker>
                     </Field>
                     <Field {...fields.endDate}>
                         <DatePicker {...fields.endDate} onChange={modifyField}></DatePicker>
