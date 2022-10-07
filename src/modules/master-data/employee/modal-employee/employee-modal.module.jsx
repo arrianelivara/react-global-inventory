@@ -15,6 +15,17 @@ const EmployeeModal = ({ initialState, employeeModal, handleSubmit }) => {
       initialState: formState,
     });
 
+    const jobRole = [
+        {
+           value: "Manager",
+           text: "Manager" 
+        },
+        {
+            value: "Staff",
+            text: "Staff" 
+        }
+    ]
+
     return (
         <Modal {...employeeModal} onCancel={() => employeeModal.close()} 
             bodyStyle={{
@@ -49,7 +60,7 @@ const EmployeeModal = ({ initialState, employeeModal, handleSubmit }) => {
                 </div>
                 <div className='mt-sm grid md:grid-cols-4 gap-3'>
                     <Field {...fields.jobRole} className="col-span-2" required>
-                        <Select {...fields.jobRole} onChange={modifyField} text={lang.selectJobRole}></Select>
+                        <Select {...fields.jobRole} onChange={modifyField} text={lang.selectJobRole} options={jobRole}></Select>
                     </Field>
                     <Field {...fields.startDate} required>
                         <DatePicker {...fields.startDate} onChange={(name, value) => {
