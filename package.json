@@ -21,7 +21,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "npx http-server ./dist --port 8000 --host 0.0.0.0",
+    "start": "npx http-server --port 8000 --host 0.0.0.0 ./dist ",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"

@@ -10,10 +10,8 @@ export default defineConfig({
   //   outDir: 'build',
   // },
   server: {
-    open: true,
     port: 8000,
-    https: true, 
-    host: "0.0.0.0"
+    host: '0.0.0.0'
   },
   // resolve: {
   //   alias: {
