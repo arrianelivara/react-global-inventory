@@ -9,10 +9,10 @@ export default defineConfig({
   // build: {
   //   outDir: 'build',
   // },
-  // server: {
-  //   open: true,
-  //   port: 8000
-  // },
+  server: {
+    open: true,
+    port: 8000
+  },
   // resolve: {
   //   alias: {
   //     '~': path.resolve(__dirname, 'src'),

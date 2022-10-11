@@ -26,7 +26,7 @@ const SignIn = () => {
   const handleSignIn = useCallback(async () => {
     const { email, password } = getFormValues();
     try {
-      const res = await signInRequest({ username: email, password });  
+      const res = await signInRequest({ email: email, password });  
       if (res) {
         localStorage.setItem("accessToken", res.access);
         navigate(Path.MENU);

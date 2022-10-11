@@ -1,1 +1,2 @@
-export { getUsers, signIn } from "./user.api";
+export { getUsers } from "./user.api";
+export { signIn } from "./auth.api";
