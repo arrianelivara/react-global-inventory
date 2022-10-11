@@ -4,13 +4,12 @@ import { CheckboxField, Field, Input, Text, Button, Navigation } from "../../com
 import { useApi, useForm } from "hooks";
 import { signIn } from "apis";
 import { initialFormState } from "./sign-in-form.state";
-import { useNavigate } from "react-router-dom";
 import { Path } from "paths";
 import lang from "translations";
+import { redirectTo } from "services/index";
 
 const SignIn = () => {
-  const navigate = useNavigate();
-  const { request: signInRequest, loading } = useApi({
+  const { request: signInRequest, loading, result } = useApi({
     api: signIn
   });
 
@@ -26,10 +25,10 @@ const SignIn = () => {
   const handleSignIn = useCallback(async () => {
     const { email, password } = getFormValues();
     try {
-      const res = await signInRequest({ email: email, password });  
+      const res = await signInRequest({ email, password }); 
       if (res) {
         localStorage.setItem("accessToken", res.access);
-        navigate(Path.MENU);
+        redirectTo(Path.MENU);
       }
     } catch (e) {
       console.log(e);
@@ -57,7 +56,7 @@ const SignIn = () => {
             <Text color="text-red" fontWeight="font-semibold" className="text-right">{lang.forgotPassword}</Text>
             <CheckboxField {...fields.rememberMe} onChange={modifyField}>{lang.rememberMe}</CheckboxField>
             <div className="mt-lg text-right">
-              <Button onClick={signInCb} loading={loading}>
+              <Button onClick={handleSignIn} loading={loading}>
                 {loading ? <Text size="text-sm" color="text-white" fontWeight="font-semibold">{lang.loading}</Text> : 
                 <Text size="text-sm" color="text-white" fontWeight="font-semibold">{lang.signIn}</Text>
                 }
