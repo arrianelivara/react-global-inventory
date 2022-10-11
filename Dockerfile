@@ -5,11 +5,11 @@ WORKDIR /app
 
 COPY package.json .
 
-RUN npm install
+RUN yarn install
 
 COPY . /app/
 
-RUN npm run build
+RUN yarn build
 
 FROM nginx:alpine
 
