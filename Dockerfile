@@ -3,11 +3,11 @@ FROM node:14-alpine AS builder
 # Add a work directory
 WORKDIR /app
 
-COPY package.json .
+COPY package*.json /app/
 
 RUN yarn install
 
-COPY . /app/
+COPY ./ /app/
 
 RUN yarn build
 
