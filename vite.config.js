@@ -11,7 +11,9 @@ export default defineConfig({
   // },
   server: {
     open: true,
-    port: 8000
+    port: 8000,
+    https: true, 
+    host: "0.0.0.0"
   },
   // resolve: {
   //   alias: {
