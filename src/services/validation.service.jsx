@@ -1,3 +1,4 @@
+import { isEmailValid } from "./email.service";
 import { formatNumberToMoney, parseMoneyToNumber } from "./money.service";
 import { capitalize } from "./text.service";
 
@@ -8,7 +9,7 @@ const Validation = {
       const value = field?.value?.toString().trim();
       if (!value && !field.disabled) {
         if (noMessage) return { error: true };
-        return { error: true, message: customMessage ? customMessage : "This field is required" };
+        return { error: true, message: customMessage ? customMessage : "This field is required." };
       }
       return { error: false, message: null };
     };
@@ -164,6 +165,18 @@ const Validation = {
           error: true,
           message: customMessage ? customMessage : `Minimum ${min} values`,
         };
+      }
+      return { error: false, message: null };
+    };
+  },
+  validEmail: (custom = {}) => {
+    const { customMessage = null, noMessage = false } = custom;
+    return (field) => {
+      const value = field?.value?.toString().trim();
+      console.log()
+      if (!isEmailValid(value)) {
+        if (noMessage) return { error: true };
+        return { error: true, message: customMessage ? customMessage : "Entered email is invalid." };
       }
       return { error: false, message: null };
     };

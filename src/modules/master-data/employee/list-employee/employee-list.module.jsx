@@ -51,7 +51,7 @@ const EmployeeList = () => {
     const updatedData = useMemo(() => {
         return data;
     }, [data]);
-    console.log(updatedData);
+    
     return (
         <WrapperA
             title={lang.employees}

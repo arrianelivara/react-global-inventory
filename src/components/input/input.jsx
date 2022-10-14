@@ -3,6 +3,7 @@ import { Input as AntInput } from "antd";
 import { Icon } from "components";
 import classnames from "classnames";
 import styles from "./input.module.scss";
+import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 
 const Input = (
   {
@@ -114,6 +115,24 @@ const Input = (
     }
   }, [onChange, onClear, name]);
 
+  if (inputType === "password") {
+      <AntInput.Password 
+          iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+          ref={inputRef}
+          disabled={disabled}
+          readOnly={readOnly}
+          placeholder={placeholder}
+          maxLength={maxLength}
+          minLength={minLength}
+          value={value}
+          onChange={onChangeCb}
+          onFocus={onFocusCb}
+          onBlur={onBlurCb}
+          onKeyUp={onKeyUpCb}
+          onPaste={onPasteCb} />
+
+  }
+
   return (
     <div
       className={classnames(
@@ -134,27 +153,48 @@ const Input = (
       ) : (
         iconPrefix
       )}
-      <AntInput
-        ref={inputRef}
-        type={inputType}
-        inputMode={inputMode}
-        disabled={disabled}
-        className={classnames(
-          `w-full h-8 p-0 border-0 rounded bg-transparent ${valueSize}`,
-          { "text-center": center, "text-right": right, "pr-xs md:pr-sm": iconSuffix },
-          styles.input
-        )}
-        readOnly={readOnly}
-        placeholder={placeholder}
-        maxLength={maxLength}
-        minLength={minLength}
-        value={value}
-        onChange={onChangeCb}
-        onFocus={onFocusCb}
-        onBlur={onBlurCb}
-        onKeyUp={onKeyUpCb}
-        onPaste={onPasteCb}
-      />
+      {inputType === "password" ?
+        <AntInput.Password 
+          iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+          ref={inputRef}
+          disabled={disabled}
+          readOnly={readOnly}
+          placeholder={placeholder}
+          maxLength={maxLength}
+          minLength={minLength}
+          value={value}
+          onChange={onChangeCb}
+          onFocus={onFocusCb}
+          onBlur={onBlurCb}
+          onKeyUp={onKeyUpCb}
+          onPaste={onPasteCb}
+          className={classnames(
+            `w-full h-8 p-0 border-0 rounded bg-transparent ${valueSize}`,
+            { "text-center": center, "text-right": right, "pr-xs md:pr-sm": iconSuffix },
+            styles.input
+          )} /> :
+        <AntInput
+          ref={inputRef}
+          type={inputType}
+          inputMode={inputMode}
+          disabled={disabled}
+          className={classnames(
+            `w-full h-8 p-0 border-0 rounded bg-transparent ${valueSize}`,
+            { "text-center": center, "text-right": right, "pr-xs md:pr-sm": iconSuffix },
+            styles.input
+          )}
+          readOnly={readOnly}
+          placeholder={placeholder}
+          maxLength={maxLength}
+          minLength={minLength}
+          value={value}
+          onChange={onChangeCb}
+          onFocus={onFocusCb}
+          onBlur={onBlurCb}
+          onKeyUp={onKeyUpCb}
+          onPaste={onPasteCb}
+        />
+      }
       {loading && (
         <Icon className={classnames("h-4 w-4", { "text-gray-lighter": !error })} loading />
       )}

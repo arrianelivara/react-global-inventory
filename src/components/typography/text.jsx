@@ -28,7 +28,6 @@ const Text = ({
       "font-semibold": strong,
       italic: italic,
       underline: underline,
-
       uppercase: uppercase,
       capitalize: capitalize,
       "font-mono font-bold": fontMono,

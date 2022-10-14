@@ -35,6 +35,7 @@ const DataTable = ({
   pageable = true,
   ...props
 }) => {
+  console.log(total);
   const changePageCb = useCallback(
     (page) => {
       const { filterState, requestState } = onChangePage({ page });

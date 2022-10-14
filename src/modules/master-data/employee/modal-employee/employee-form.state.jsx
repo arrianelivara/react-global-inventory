@@ -14,7 +14,7 @@ export const initialFormState = (initialState = {}) => {
     endDate = moment(),
     remarks
   } = initialState;
-  console.log(startDate)
+
   return {
     employeeNo: {
       name: "employeeNo",

@@ -1,10 +1,6 @@
 
 export const columns = [
   {
-    key: "warehouseNo",
-    text: "Warehouse No.",
-  },
-  {
     key: "warehouseName",
     text: "Warehouse Name",
   },

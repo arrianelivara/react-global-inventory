@@ -70,6 +70,8 @@ export const locale = {
     updateExistingUnit: "Update Existing Unit",
     addNewWarehouse: "Add New Warehouse",
     updateExistingWarehouse: "Update Existing Warehouse",
+    addNewSupplier: "Add New Supplier",
+    updateExistingSupplier: "Update Existing Supplier",
     invoiceDate: "Invoice Date",
     invoiceNumber: "Invoice Number",
     transactionHistory: "Transaction History",
@@ -77,5 +79,12 @@ export const locale = {
     search: "Search",
     searchAndView: "Search and view the updated quantity of your stocks here.",
     employeeNumber: "Employee Number",
-    remarks: "Remarks"
+    remarks: "Remarks",
+    credentialsError: "You have entered an invalid username or password.",
+    brandName: "Brand Name",
+    partName: "Part Name",
+    supplierName: "Supplier Name",
+    unitName: "Unit Name",
+    warehouseName: "Warehouse Name",
+
 }; export default Object.freeze(locale);

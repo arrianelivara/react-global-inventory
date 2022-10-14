@@ -2,24 +2,64 @@ import { DataTable, WrapperA, Button } from 'components';
 import { useForm, useModal } from 'hooks';
 import initialFormState from 'modules/master-data/common/warehouse-state.module';
 import WarehouseSelection from 'modules/master-data/common/warehouse.module';
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import lang from 'translations';
 import { PlusOutlined, EditOutlined } from "@ant-design/icons";
 import { StyleType } from 'enums';
 import AddUnitModal from '../add-unit/add-unit-modal.module';
 import EditUnitModal from '../edit-unit/edit-unit-modal.module';
 import { columns } from './columns';
+import { useApi, useFilter, useMount, useSelectItems } from 'hooks/index';
+import { searchUnit } from 'apis/unit.api';
+import { unitResponse } from 'mappers/unit.mapper';
 
 const Units = () => {
     const addUnitModal = useModal();
     const editUnitModal = useModal();
+
+    const { request, loading ,
+        result: searchUnitResult = { metadata: [], total: 0, numPages: 0 },
+        mappedData } = useApi({
+        api: searchUnit,
+        isArray: true,
+        mapper: unitResponse
+    });
+
+    const { modifyFilters, filterState, requestState } = useFilter({
+        pageSize: 10,
+        currentPage: 1
+    });
+
+    useMount(() => {
+        fetchUnits(requestState);
+    });
+
+    const fetchUnits = useCallback(
+        (requestState) => {
+            request(requestState);
+        },
+        [request]
+    );
+
+    const prepareUnitList = useCallback(() => {
+        return mappedData;
+    }, [mappedData]);
+
+    const units = useMemo(() => {
+        return prepareUnitList();
+    }, [prepareUnitList]);
+
+    const { selected, selectedCount, setSelected, isAllSelected, setSelectAll, clearSelected } =
+        useSelectItems({
+        items: units,
+    });
 
     const formState = useMemo(() => {
         return initialFormState();
     }, []);
 
     const { fields, modifyField } = useForm({ initialState: formState })
-
+    console.log(selected)
     return (
         <WrapperA title={lang.units} 
             description={lang.listOfUnits}
@@ -50,9 +90,19 @@ const Units = () => {
             filterButtons={
                 <WarehouseSelection field={fields.warehouse} modifyField={modifyField}/>
             }>
-            <DataTable data={[]} columns={columns} />
+            <DataTable 
+                loading={loading} 
+                total={searchUnitResult.metadata.total}
+                data={mappedData} 
+                columns={columns}
+                selected={selected}
+                setSelected={setSelected}
+                isAllSelected={isAllSelected}
+                setSelectAll={setSelectAll}
+                page={filterState.currentPage}
+                pageSize={filterState.pageSize} />
             <AddUnitModal addUnitModal={addUnitModal} />
-            <EditUnitModal editUnitModal={editUnitModal} />
+            <EditUnitModal editUnitModal={editUnitModal} selected={selected}/>
         </WrapperA>);
 }
  

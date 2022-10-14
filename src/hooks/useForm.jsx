@@ -73,7 +73,7 @@ const useForm = ({ initialState = {}, validation = null }) => {
     setDirty(false);
     setError(false);
     setFields(initialState);
-
+    console.log(initialState)
     return { fields: initialState, dirty, error };
   }, [initialState, dirty, error]);
 

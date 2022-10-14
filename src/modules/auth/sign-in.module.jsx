@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import { Card } from "antd"
 import { CheckboxField, Field, Input, Text, Button, Navigation } from "../../components";
 import { useApi, useForm } from "hooks";
@@ -6,17 +6,17 @@ import { signIn } from "apis";
 import { initialFormState } from "./sign-in-form.state";
 import { Path } from "paths";
 import lang from "translations";
-import { redirectTo } from "services/index";
+import { isEmailValid, redirectTo } from "services/index";
+import Validation from "services/validation.service";
 
 const SignIn = () => {
-  const { request: signInRequest, loading, result } = useApi({
+  const { request: signInRequest, loading, error } = useApi({
     api: signIn
   });
 
   const {
     fields,
     modifyField,
-    submitForm,
     getFormValues
   } = useForm({
     initialState: initialFormState,
@@ -36,9 +36,9 @@ const SignIn = () => {
     
   }, [signInRequest, getFormValues]);
 
-  const signInCb = useCallback(async () => {
-    submitForm(handleSignIn);
-  }, [submitForm, handleSignIn]);
+  const showError = useMemo(() => {
+    return error ? <Text error strong className="text-center">{lang.credentialsError}</Text> : null;
+  }, [error]);
 
   return (
     <React.Fragment>
@@ -47,8 +47,11 @@ const SignIn = () => {
         <Card bordered={false} className="drop-shadow-md p-md bg-white m-auto rounded-md border-b-2 border-indigo-600 w-3/4 sm:w-1/2  xl:w-1/4">
           <Text title size="text-lg">{lang.signInToAccount}</Text>
           <div className="mt-xl">
+            {showError}
             <Field label={lang.email} {...fields.email}>
-              <Input {...fields.email} onChange={modifyField}/>
+              <Input {...fields.email} onChange={modifyField} onBlur={() => {
+                modifyField("email", { validations: [Validation.required(), Validation.validEmail()]})
+              }}/>
             </Field>
             <Field label={lang.password} className="mt-lg" {...fields.password}>
               <Input {...fields.password} onChange={modifyField}/>

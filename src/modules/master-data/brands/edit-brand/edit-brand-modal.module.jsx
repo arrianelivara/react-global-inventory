@@ -1,7 +1,29 @@
+import { updateBrand } from 'apis/brand.api';
+import { useApi } from 'hooks/index';
 import React from 'react';
 import BrandModal from '../modal-brand/brand-modal.module';
-const EditBrandModal = ({ editBrandModal }) => {
-    return (<BrandModal brandModal={editBrandModal}/>);
+const EditBrandModal = ({ editBrandModal, selected }) => {
+
+    const { request } = useApi({
+        api: updateBrand
+    });
+
+    const handleSubmit = async (params) => {
+        try {
+            const id = params.id;
+            console.log(id, params)
+            await request({ id, body: params });
+            console.log("updated")
+        } catch (e) {
+
+        }
+    };
+
+    return (<BrandModal 
+        brandModal={editBrandModal} 
+        initialState={selected}
+        handleSubmit={handleSubmit}
+        />);
 }
  
 export default EditBrandModal;

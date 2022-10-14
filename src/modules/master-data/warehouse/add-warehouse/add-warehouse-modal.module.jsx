@@ -1,7 +1,27 @@
+import { createWarehouse } from 'apis/warehouse.api';
+import { useApi } from 'hooks/index';
 import React from 'react';
 import WarehouseModal from '../modal-warehouse/warehouse-modal.module';
 const AddWarehouseModal = ({ addWarehouseModal }) => {
-    return (<WarehouseModal warehouseModal={addWarehouseModal}/>);
+    
+    const { request } = useApi({
+        api: createWarehouse
+    });
+
+    const handleSubmit = async (params) => {
+        try {
+            console.log(params);
+            await request(params);
+            console.log("created")
+        } catch (e) {
+
+        }
+    };
+
+    return (<WarehouseModal 
+        warehouseModal={addWarehouseModal}
+        handleSubmit={handleSubmit}
+        />);
 }
  
 export default AddWarehouseModal;
