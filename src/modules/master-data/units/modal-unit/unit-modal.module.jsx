@@ -29,8 +29,8 @@ const UnitModal = ({ unitModal, initialState, handleSubmit }) => {
                 const obj = {
                     id: params.id,
                     unit: params.unitName,
-                    startDate: params.startDate?.format('YYYY-DD-MM'),
-                    endDate: params.endDate?.format('YYYY-DD-MM'),
+                    startDate: params.startDate?.format('YYYY-MM-DD'),
+                    endDate: params.endDate?.format('YYYY-MM-DD'),
                 }
                 handleSubmit(obj);
                 unitModal.close();

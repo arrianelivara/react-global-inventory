@@ -26,8 +26,8 @@ const PartsModal = ({ partsModal, handleSubmit, initialState }) => {
                 const obj = {
                     description: params.description,
                     job_role: params.jobRoleName,
-                    start_date: params.startDate?.format('YYYY-DD-MM'),
-                    end_date: params.endDate?.format('YYYY-DD-MM'),
+                    start_date: params.startDate?.format('YYYY-MM-DD'),
+                    end_date: params.endDate?.format('YYYY-MM-DD'),
                 }
                 handleSubmit(obj);
                 partsModal.close();

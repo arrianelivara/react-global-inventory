@@ -60,6 +60,14 @@ const Parts = () => {
 
     const { fields, modifyField } = useForm({ initialState: formState })
 
+    const changePageConfigCb = useCallback(
+        (pageProps) => {
+          clearSelected();
+          return modifyFilters(pageProps);
+        },
+        [modifyFilters, clearSelected]
+    );
+
     return (
         <WrapperA title={lang.parts} 
             description={lang.listOfParts}
@@ -98,10 +106,16 @@ const Parts = () => {
                 setSelected={setSelected}
                 isAllSelected={isAllSelected}
                 setSelectAll={setSelectAll}
-                page={filterState.currentPage}
+                currentPage={filterState.currentPage}
                 pageSize={filterState.pageSize}
+                onChangePage={changePageConfigCb}
+                fetchList={fetchParts}
             />
-            <AddPartsModal addPartsModal={addPartsModal} />
+            <AddPartsModal 
+                addPartsModal={addPartsModal}
+                refreshList={fetchParts}
+                requestState={requestState}
+            />
             <EditPartsModal editPartsModal={editPartsModal} selected={selected}/>
         </WrapperA>);
 }

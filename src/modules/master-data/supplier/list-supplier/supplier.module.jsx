@@ -31,10 +31,10 @@ const Supplier = () => {
     });
 
     useMount(() => {
-        fetchBrands(requestState);
+        fetchSupplier(requestState);
     });
 
-    const fetchBrands = useCallback(
+    const fetchSupplier = useCallback(
         (requestState) => {
             request(requestState);
         },
@@ -59,6 +59,14 @@ const Supplier = () => {
     }, []);
 
     const { fields, modifyField } = useForm({ initialState: formState })
+
+    const changePageConfigCb = useCallback(
+        (pageProps) => {
+          clearSelected();
+          return modifyFilters(pageProps);
+        },
+        [modifyFilters, clearSelected]
+    );
 
     return (
         <WrapperA title={lang.supplier} 
@@ -99,10 +107,15 @@ const Supplier = () => {
                 setSelected={setSelected}
                 isAllSelected={isAllSelected}
                 setSelectAll={setSelectAll}
-                page={filterState.currentPage}
+                currentPage={filterState.currentPage}
                 pageSize={filterState.pageSize}
+                onChangePage={changePageConfigCb}
+                fetchList={fetchSupplier}
             />
-            <AddSupplierModal addSupplierModal={addSupplierModal} />
+            <AddSupplierModal 
+                addSupplierModal={addSupplierModal}
+                refreshList={fetchSupplier} 
+                requestState={requestState}/>
             <EditSupplierModal editSupplierModal={editSupplierModal} selected={selected} />
         </WrapperA>);
 }

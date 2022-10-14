@@ -5,5 +5,6 @@ export const brandListResponse = {
     endDate: { key: "end_date" },
     description: { key: "description "}
 };
+
   
   

@@ -30,8 +30,8 @@ const SupplierModal = ({ supplierModal, initialState, handleSubmit }) => {
                     id: params.id,
                     description: params.description,
                     supplier: params.supplierName,
-                    start_date: params.startDate?.format('YYYY-DD-MM'),
-                    end_date: params.endDate?.format('YYYY-DD-MM'),
+                    start_date: params.startDate?.format('YYYY-MM-DD'),
+                    end_date: params.endDate?.format('YYYY-MM-DD'),
                 }
                 handleSubmit(obj);
                 supplierModal.close();

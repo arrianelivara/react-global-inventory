@@ -59,7 +59,15 @@ const Units = () => {
     }, []);
 
     const { fields, modifyField } = useForm({ initialState: formState })
-    console.log(selected)
+    
+    const changePageConfigCb = useCallback(
+        (pageProps) => {
+          clearSelected();
+          return modifyFilters(pageProps);
+        },
+        [modifyFilters, clearSelected]
+    );
+
     return (
         <WrapperA title={lang.units} 
             description={lang.listOfUnits}
@@ -99,9 +107,15 @@ const Units = () => {
                 setSelected={setSelected}
                 isAllSelected={isAllSelected}
                 setSelectAll={setSelectAll}
-                page={filterState.currentPage}
-                pageSize={filterState.pageSize} />
-            <AddUnitModal addUnitModal={addUnitModal} />
+                currentPage={filterState.currentPage}
+                pageSize={filterState.pageSize}
+                onChangePage={changePageConfigCb}
+                fetchList={fetchUnits} />
+            <AddUnitModal 
+                addUnitModal={addUnitModal}
+                refreshList={fetchUnits}
+                requestState={requestState} 
+            />
             <EditUnitModal editUnitModal={editUnitModal} selected={selected}/>
         </WrapperA>);
 }

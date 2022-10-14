@@ -49,7 +49,7 @@ const Brands = () => {
         return prepareBrandList();
     }, [prepareBrandList]);
 
-    const { selected, selectedCount, setSelected, isAllSelected, setSelectAll, clearSelected } =
+    const { selected, setSelected, isAllSelected, setSelectAll, clearSelected } =
         useSelectItems({
         items: brands,
     });
@@ -59,6 +59,14 @@ const Brands = () => {
     }, []);
 
     const { fields, modifyField } = useForm({ initialState: formState })
+
+    const changePageConfigCb = useCallback(
+        (pageProps) => {
+          clearSelected();
+          return modifyFilters(pageProps);
+        },
+        [modifyFilters, clearSelected]
+    );
 
     return (
         <WrapperA title={lang.brands} 
@@ -99,10 +107,12 @@ const Brands = () => {
                 setSelected={setSelected}
                 isAllSelected={isAllSelected}
                 setSelectAll={setSelectAll}
-                page={filterState.currentPage}
+                currentPage={filterState.currentPage}
                 pageSize={filterState.pageSize}
+                onChangePage={changePageConfigCb}
+                fetchList={fetchBrands}
             />
-            <AddBrandModal addBrandModal={addBrandModal} /> 
+            <AddBrandModal addBrandModal={addBrandModal} refreshList={fetchBrands} requestState={requestState}/> 
             <EditBrandModal editBrandModal={editBrandModal} selected={selected}/>
         </WrapperA>);
 }

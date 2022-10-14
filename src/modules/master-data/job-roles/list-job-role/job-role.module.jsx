@@ -60,6 +60,14 @@ const JobRoles = () => {
 
     const { fields, modifyField } = useForm({ initialState: formState })
 
+    const changePageConfigCb = useCallback(
+        (pageProps) => {
+          clearSelected();
+          return modifyFilters(pageProps);
+        },
+        [modifyFilters, clearSelected]
+    );
+    
     return (<WrapperA 
         title={lang.jobRoles} 
         description={lang.listOfJobRoles}
@@ -100,10 +108,16 @@ const JobRoles = () => {
             setSelected={setSelected}
             isAllSelected={isAllSelected}
             setSelectAll={setSelectAll}
-            page={filterState.currentPage}
+            currentPage={filterState.currentPage}
             pageSize={filterState.pageSize}
+            onChangePage={changePageConfigCb}
+            fetchList={fetchJobRoles}
         />
-        <AddJobRoleModal addJobRoleModal={addJobRoleModal}/>
+        <AddJobRoleModal 
+            addJobRoleModal={addJobRoleModal} 
+            refreshList={fetchJobRoles} 
+            requestState={requestState}
+        />
         <EditJobRoleModal  editJobRoleModal={editJobRoleModal} selected={selected}/>
     </WrapperA>);
 }

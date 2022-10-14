@@ -24,10 +24,10 @@ const BrandModal = ({ brandModal, initialState, handleSubmit }) => {
             onOk={() => {
                 const params = getFormValues();
                 const obj = {
-                    ...params,
-                    brand: params.brand,
-                    startDate: params.startDate?.format('YYYY-DD-MM'),
-                    endDate: params.endDate?.format('YYYY-DD-MM'),
+                    id: params.id,
+                    brand: params.brandName,
+                    start_date: params.startDate?.format('YYYY-MM-DD'),
+                    end_date: params.endDate?.format('YYYY-MM-DD'),
                 }
                 handleSubmit(obj);
                 brandModal.close();

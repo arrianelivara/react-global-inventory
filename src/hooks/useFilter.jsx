@@ -8,13 +8,11 @@ import * as moment from "moment";
  * A hook for easier handling / processing of Table filter logic
  */
 const useFilter = (initialState = undefined, defaultState = {}) => {
-  const { location } = useRouter();
-  const { state: locationState } = location || {};
 
-  const [filterState, setFilterState] = useState({ ...initialState, locationState });
+  const [filterState, setFilterState] = useState({ ...initialState });
 
   const [requestState, setRequestState] = useState(
-    convertFilterStateToRequest({ ...initialState, locationState })
+    convertFilterStateToRequest({ ...initialState })
   );
 
   // const [isFilterDirty, setIsFilterDirty] = useState(
@@ -52,6 +50,7 @@ const useFilter = (initialState = undefined, defaultState = {}) => {
         setRequestState(newRequestFilters);
         return { filterState: newFilters, requestState: newRequestFilters };
       }
+      console.log(filterState)
       return { filterState: newFilters, requestState: null };
     },
     [filterState, initialState]
@@ -112,9 +111,9 @@ const validateFilterState = (filterState) => {
 };
 
 const validatePaginationState = (state) => {
-  if (state.hasOwnProperty("page") || state.hasOwnProperty("pageSize")) {
-    if (!state?.page || typeof state?.page !== "number" || state?.page <= 0) {
-      throw new Error(`Invalid page state with value ${state.page}`);
+  if (state.hasOwnProperty("currentPage") || state.hasOwnProperty("pageSize")) {
+    if (!state?.currentPage || typeof state?.currentPage !== "number" || state?.currentPage <= 0) {
+      throw new Error(`Invalid page state with value ${state.currentPage}`);
     }
     if (!state?.pageSize || typeof state?.pageSize !== "number" || state?.pageSize <= 0) {
       throw new Error(`Invalid page size state with value of ${state.pageSize}`);

@@ -2,7 +2,7 @@ import React from 'react';
 import { createSupplier } from 'apis/supplier.api';
 import { useApi } from 'hooks/index';
 import SupplierModal from '../modal-supplier/supplier-modal.module';
-const AddSupplierModal = ({ addSupplierModal }) => {
+const AddSupplierModal = ({ addSupplierModal, refreshList, requestState }) => {
     const { request } = useApi({
         api: createSupplier
     });
@@ -12,6 +12,7 @@ const AddSupplierModal = ({ addSupplierModal }) => {
             console.log(params);
             await request(params);
             console.log("created")
+            await refreshList(requestState);
         } catch (e) {
 
         }

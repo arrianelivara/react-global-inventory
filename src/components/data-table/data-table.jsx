@@ -14,7 +14,7 @@ const DataTable = ({
   error,
   onChangePage,
   fetchList,
-  page,
+  currentPage,
   pageSize,
   total,
   loading,
@@ -35,10 +35,10 @@ const DataTable = ({
   pageable = true,
   ...props
 }) => {
-  console.log(total);
+
   const changePageCb = useCallback(
-    (page) => {
-      const { filterState, requestState } = onChangePage({ page });
+    (currentPage) => {
+      const { filterState, requestState } = onChangePage({ currentPage });
       fetchList(filterState, requestState);
     },
     [onChangePage, fetchList]
@@ -46,14 +46,14 @@ const DataTable = ({
 
   const changePageSizeCb = useCallback(
     (pageSize) => {
-      const { filterState, requestState } = onChangePage({ page: 1, pageSize });
+      const { filterState, requestState } = onChangePage({ currentPage: 1, pageSize });
       fetchList(requestState, filterState);
     },
     [onChangePage, fetchList]
   );
 
   const endListText = useMemo(() => {
-    const index = page;
+    const index = currentPage;
     const size = pageSize;
 
     const last = total / size;
@@ -67,7 +67,7 @@ const DataTable = ({
       );
     }
     return null;
-  }, [page, pageSize, total]);
+  }, [currentPage, pageSize, total]);
 
   if (!data.length && !loading && !error) {
     if (hasAppliedFilter) {
@@ -143,7 +143,7 @@ const DataTable = ({
                   className={addMarginToPagination ? "mr-md" : null}
                   onChangePage={changePageCb}
                   onChangePageSize={changePageSizeCb}
-                  page={page}
+                  currentPage={currentPage}
                   pageSize={pageSize}
                   total={total}
                 />

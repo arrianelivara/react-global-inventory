@@ -5,7 +5,7 @@ import classnames from "classnames";
 
 const Pagination = ({
   className,
-  page = 1,
+  currentPage = 1,
   pageSize = 20,
   total = 50,
   onChangePage,
@@ -14,9 +14,9 @@ const Pagination = ({
   size = "default",
 }) => {
   const onChangePageCb = useCallback(
-    (page) => {
+    (currentPage) => {
       if (onChangePage) {
-        onChangePage(page);
+        onChangePage(currentPage);
       }
     },
     [onChangePage]
@@ -44,7 +44,7 @@ const Pagination = ({
         {total >= pageSize && (
           <AntPagination
             className="text-right bg-none flex justify-center mt-md md:mt-0"
-            current={page}
+            current={currentPage}
             pageSize={pageSize}
             total={total}
             onChange={onChangePageCb}

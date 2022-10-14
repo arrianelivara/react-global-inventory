@@ -3,7 +3,7 @@ import { useApi } from 'hooks/index';
 import React from 'react';
 import JobRoleModal from '../modal-job-role/job-role-modal.module';
 
-const AddJobRoleModal = ({ addJobRoleModal }) => {
+const AddJobRoleModal = ({ addJobRoleModal, refreshList, requestState }) => {
     const { request } = useApi({
         api: createJobRole
     });
@@ -13,6 +13,7 @@ const AddJobRoleModal = ({ addJobRoleModal }) => {
             console.log(params);
             await request(params);
             console.log("created")
+            await refreshList(requestState);
         } catch (e) {
 
         }

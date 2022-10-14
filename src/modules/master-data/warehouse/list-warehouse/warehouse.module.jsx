@@ -60,6 +60,14 @@ const Warehouse = () => {
 
     const { fields, modifyField } = useForm({ initialState: formState })
 
+    const changePageConfigCb = useCallback(
+        (pageProps) => {
+          clearSelected();
+          return modifyFilters(pageProps);
+        },
+        [modifyFilters, clearSelected]
+    );
+
     return (
         <WrapperA title={lang.warehouse} 
             description={lang.listOfWarehouse}
@@ -99,9 +107,16 @@ const Warehouse = () => {
                 setSelected={setSelected}
                 isAllSelected={isAllSelected}
                 setSelectAll={setSelectAll}
-                page={filterState.currentPage}
-                pageSize={filterState.pageSize} />
-            <AddWarehouseModal addWarehouseModal={addWarehouseModal} />
+                currentPage={filterState.currentPage}
+                pageSize={filterState.pageSize}
+                onChangePage={changePageConfigCb}
+                fetchList={fetchWarehouses} 
+            />
+            <AddWarehouseModal 
+                addWarehouseModal={addWarehouseModal}
+                refreshList={fetchWarehouses}
+                requestState={requestState}
+            />
             <EditWarehouseModal editWarehouseModal={editWarehouseModal} selected={selected} />
         </WrapperA>);
 }

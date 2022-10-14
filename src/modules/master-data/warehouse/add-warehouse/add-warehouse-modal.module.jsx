@@ -2,7 +2,7 @@ import { createWarehouse } from 'apis/warehouse.api';
 import { useApi } from 'hooks/index';
 import React from 'react';
 import WarehouseModal from '../modal-warehouse/warehouse-modal.module';
-const AddWarehouseModal = ({ addWarehouseModal }) => {
+const AddWarehouseModal = ({ addWarehouseModal, refreshList, requestState }) => {
     
     const { request } = useApi({
         api: createWarehouse
@@ -12,7 +12,8 @@ const AddWarehouseModal = ({ addWarehouseModal }) => {
         try {
             console.log(params);
             await request(params);
-            console.log("created")
+            console.log("created");
+            await refreshList(requestState);
         } catch (e) {
 
         }
