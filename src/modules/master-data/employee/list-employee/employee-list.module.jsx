@@ -1,6 +1,6 @@
 import { Button, DataTable, WrapperA } from 'components';
 import { StyleType } from 'enums';
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { columns } from './columns';
 import { PlusOutlined, EditOutlined } from "@ant-design/icons";
 import { useForm, useModal } from "hooks";
@@ -10,33 +10,50 @@ import EditEmployeeModal from '../edit-employee/edit-employee-modal.module';
 import WarehouseSelection from '../../common/warehouse.module';
 import { useMemo } from 'react';
 import initialFormState from '../../common/warehouse-state.module';
-import { useMount } from 'hooks/index';
+import { useApi, useFilter, useMount, useSelectItems } from 'hooks/index';
+import { employeeResponse } from 'mappers/employee.mapper';
+import { searchEmployees } from 'apis/employee.api';
 
 const EmployeeList = () => {
     const addEmployeeModal = useModal();
     const editEmployeeModal = useModal();
-    const [data, setData] = useState([]);
 
-    const sampleData = [
-        {
-            employeeNo: '000000001',
-            lastName: 'Kathryn',
-            middleName: 'Chandria',
-            firstName: 'Bernardo',
-            jobRole: 'Manager',
-            startDate: '06/07/22 11:00AM',
-            endDate: '06/07/22 11:00AM'
+    const { request, loading ,
+        result: searchEmployeeResult = { metadata: [], total: 0, numPages: 0 },
+        mappedData } = useApi({
+        api: searchEmployees,
+        isArray: true,
+        mapper: employeeResponse
+    });
+
+    const { modifyFilters, filterState, requestState } = useFilter({
+        pageSize: 10,
+        currentPage: 1
+    });
+
+    useMount(() => {
+        fetchEmployees(requestState);
+    });
+
+    const fetchEmployees = useCallback(
+        (requestState) => {
+            request(requestState);
         },
-        {
-            employeeNo: '000000002',
-            lastName: 'Padilla',
-            middleName: 'Ford',
-            firstName: 'Daniel',
-            jobRole: 'Manager',
-            startDate: '06/07/22 11:00AM',
-            endDate: '-'
-        },
-    ]
+        [request]
+    );
+
+    const prepareEmployeeList = useCallback(() => {
+        return mappedData;
+    }, [mappedData]);
+
+    const employees = useMemo(() => {
+        return prepareEmployeeList();
+    }, [prepareEmployeeList]);
+
+    const { selected, setSelected, isAllSelected, setSelectAll, clearSelected } =
+        useSelectItems({
+        items: employees,
+    });
 
     const formState = useMemo(() => {
         return initialFormState();
@@ -44,13 +61,13 @@ const EmployeeList = () => {
 
     const { fields, modifyField } = useForm({ initialState: formState })
 
-    useMount(() => {
-        setData(sampleData);
-    });
-
-    const updatedData = useMemo(() => {
-        return data;
-    }, [data]);
+    const changePageConfigCb = useCallback(
+        (pageProps) => {
+          clearSelected();
+          return modifyFilters(pageProps);
+        },
+        [modifyFilters, clearSelected]
+    );
     
     return (
         <WrapperA
@@ -84,9 +101,21 @@ const EmployeeList = () => {
             filterButtons={
                 <WarehouseSelection field={fields.warehouse} modifyField={modifyField}/>
             }>
-            <DataTable columns={columns} data={updatedData} pageSize={10} total={sampleData.length}/>
-            <AddEmployeeModal addEmployeeModal={addEmployeeModal} data={data} setData={setData}/>
-            <EditEmployeeModal editEmployeeModal={editEmployeeModal} data={data} setData={setData} />
+            <DataTable 
+               loading={loading} 
+                total={searchEmployeeResult.metadata.total}
+                data={mappedData} 
+                columns={columns}
+                selected={selected}
+                setSelected={setSelected}
+                isAllSelected={isAllSelected}
+                setSelectAll={setSelectAll}
+                currentPage={filterState.currentPage}
+                pageSize={filterState.pageSize}
+                onChangePage={changePageConfigCb}
+                fetchList={fetchEmployees}/>
+            <AddEmployeeModal addEmployeeModal={addEmployeeModal} refreshList={fetchEmployees} requestState={requestState}/>
+            <EditEmployeeModal editEmployeeModal={editEmployeeModal} selected={selected} />
         </WrapperA>
     );
 }

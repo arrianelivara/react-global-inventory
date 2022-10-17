@@ -7,7 +7,7 @@ import { initialFormState } from './brand.form.state';
 import moment from 'moment';
 
 const BrandModal = ({ brandModal, initialState, handleSubmit }) => {
-    console.log(initialState ? Object.values(initialState)[0] : {});
+
     const formState = useMemo(() => {
         return initialFormState(initialState ? Object.values(initialState)[0] : {});
     }, [initialState]);
@@ -26,6 +26,7 @@ const BrandModal = ({ brandModal, initialState, handleSubmit }) => {
                 const obj = {
                     id: params.id,
                     brand: params.brandName,
+                    description: params.description,
                     start_date: params.startDate?.format('YYYY-MM-DD'),
                     end_date: params.endDate?.format('YYYY-MM-DD'),
                 }

@@ -24,6 +24,7 @@ const PartsModal = ({ partsModal, handleSubmit, initialState }) => {
             onOk={() => {
                 const params = getFormValues();
                 const obj = {
+                    id: params.id,
                     description: params.description,
                     job_role: params.jobRoleName,
                     start_date: params.startDate?.format('YYYY-MM-DD'),

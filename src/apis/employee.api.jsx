@@ -6,17 +6,17 @@ export const getEmployeeById = async ({ id }) => {
   return res;
 };
 
-export const searchEmployees = async () => {
-  const res = await Post(ApiPath.USERS);
+export const searchEmployees = async (body) => {
+  const res = await Post(ApiPath.SEARCH_EMPLOYEE, body);
   return res;
 };
 
-export const createEmployee = async ({ username, password }) => {
-  const res = await Post("token/", { username, password });
+export const createEmployee = async (body) => {
+  const res = await Post(`${ApiPath.CREATE_EMPLOYEE}`, body);
   return res;
 };
 
-export const updateEmployee = async ({ username, password }) => {
-  const res = await Put("token/", { username, password });
+export const updateEmployee = async ({ id, body }) => {
+  const res = await Put(`${ApiPath.UPDATE_EMPLOYEE(id)}`, body);
   return res;
 };

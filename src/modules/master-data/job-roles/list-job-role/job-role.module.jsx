@@ -24,7 +24,7 @@ const JobRoles = () => {
         isArray: true,
         mapper: jobRolesResponse
     });
-    console.log(mappedData);
+    
     const { modifyFilters, filterState, requestState } = useFilter({
         pageSize: 10,
         currentPage: 1

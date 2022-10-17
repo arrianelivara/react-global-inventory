@@ -33,11 +33,14 @@ const EmployeeModal = ({ initialState, employeeModal, handleSubmit }) => {
             }}
             onOk={() => {
                 const params = getFormValues();
-                
                 const obj = {
-                    ...params,
-                    startDate: params.startDate?.format("YYYY-DD-MM"),
-                    endDate: params.endDate?.format("YYYY-DD-MM"),
+                    employee_id: params.employeeNo,
+                    first_name: params.firstName,
+                    middle_name: params.middleName,
+                    last_name: params.lastName,
+                    remarks: params.remarks,
+                    start_date: params.startDate?.format('YYYY-MM-DD'),
+                    end_date: params.endDate?.format('YYYY-MM-DD'),
                 }
                 handleSubmit(obj);
                 employeeModal.close();

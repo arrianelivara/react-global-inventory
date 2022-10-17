@@ -10,8 +10,8 @@ export const initialFormState = (initialState = {}) => {
     middleName,
     lastName,
     jobRole,
-    startDate = moment(),
-    endDate = moment(),
+    startDate = null,
+    endDate = null,
     remarks
   } = initialState;
 
@@ -58,13 +58,13 @@ export const initialFormState = (initialState = {}) => {
     startDate: {
       name: "startDate",
       label: lang.startDate,
-      value: startDate,
+      value: startDate ? moment(startDate) : null,
       type: Field.DATE_RANGE,
     },
     endDate: {
       name: "endDate",
       label: lang.endDate,
-      value: endDate,
+      value: endDate ? moment(endDate) : null,
       type: Field.ANY,
     },
     remarks: {

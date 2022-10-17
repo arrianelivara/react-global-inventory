@@ -33,7 +33,7 @@ const preparePaths = ({ prefix, paths }) => {
 const ApiPath = {
   ...preparePaths({ prefix: "auth", paths: authPaths }),
   ...preparePaths({ prefix: "inventory", paths: inventoryPaths }),
-  ...preparePaths({ prefix: "users", paths: userPaths }),
+  ...preparePaths({ prefix: "user", paths: userPaths }),
   ...preparePaths({ prefix: "brand", paths: brandPaths }),
   ...preparePaths({ prefix: "employee", paths: employeePaths }),
   ...preparePaths({ prefix: "job_role", paths: jobRolePaths }),
