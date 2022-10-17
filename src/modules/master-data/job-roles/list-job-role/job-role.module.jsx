@@ -24,7 +24,7 @@ const JobRoles = () => {
         isArray: true,
         mapper: jobRolesResponse
     });
-    
+
     const { modifyFilters, filterState, requestState } = useFilter({
         pageSize: 10,
         currentPage: 1
@@ -118,7 +118,12 @@ const JobRoles = () => {
             refreshList={fetchJobRoles} 
             requestState={requestState}
         />
-        <EditJobRoleModal  editJobRoleModal={editJobRoleModal} selected={selected}/>
+        <EditJobRoleModal  
+            editJobRoleModal={editJobRoleModal} 
+            selected={selected}
+            refreshList={fetchJobRoles} 
+            requestState={requestState}
+        />
     </WrapperA>);
 }
  

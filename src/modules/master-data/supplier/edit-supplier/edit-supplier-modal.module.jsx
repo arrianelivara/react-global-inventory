@@ -2,7 +2,7 @@ import { updateSupplier } from 'apis/supplier.api';
 import { useApi } from 'hooks/index';
 import React from 'react';
 import SupplierModal from '../modal-supplier/supplier-modal.module';
-const EditSupplierModal = ({ editSupplierModal, selected }) => {
+const EditSupplierModal = ({ editSupplierModal, selected, refreshList, requestState }) => {
     
     const { request } = useApi({
         api: updateSupplier
@@ -23,6 +23,8 @@ const EditSupplierModal = ({ editSupplierModal, selected }) => {
         supplierModal={editSupplierModal}
         handleSubmit={handleSubmit}
         initialState={selected}
+        refreshList={refreshList}
+        requestState={requestState}
     />);
 }
  

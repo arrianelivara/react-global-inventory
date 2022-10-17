@@ -5,7 +5,7 @@ import React, { useMemo } from 'react'
 import { initialFormState } from './job-role.form.state';
 import moment from "moment";
 
-const JobRoleModal = ({ jobRoleModal, initialState, handleSubmit }) => {
+const JobRoleModal = ({ jobRoleModal, initialState, handleSubmit,refreshList, requestState }) => {
     const formState = useMemo(() => {
         return initialFormState(initialState ? Object.values(initialState)[0] : {});
     }, [initialState]);
@@ -31,6 +31,7 @@ const JobRoleModal = ({ jobRoleModal, initialState, handleSubmit }) => {
                 handleSubmit(obj);
                 jobRoleModal.close();
                 clearForm();
+                refreshList(requestState);
             }}>
                 <Text label>Note: Fields with (<span className='text-red'>*</span>) are required.</Text>
                 <div className='mt-md'>

@@ -19,7 +19,7 @@ const Brands = () => {
 
     const { request, loading ,
         result: searchBrandResult = { metadata: [], total: 0, numPages: 0 },
-        mappedData } = useApi({
+        mappedData, error } = useApi({
         api: searchBrand,
         isArray: true,
         mapper:brandListResponse
@@ -111,9 +111,14 @@ const Brands = () => {
                 pageSize={filterState.pageSize}
                 onChangePage={changePageConfigCb}
                 fetchList={fetchBrands}
+                error={error}
             />
             <AddBrandModal addBrandModal={addBrandModal} refreshList={fetchBrands} requestState={requestState}/> 
-            <EditBrandModal editBrandModal={editBrandModal} selected={selected}/>
+            <EditBrandModal editBrandModal={editBrandModal} 
+                selected={selected}
+                refreshList={fetchBrands} 
+                requestState={requestState}
+            />
         </WrapperA>);
 }
  

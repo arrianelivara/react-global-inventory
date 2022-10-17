@@ -3,7 +3,7 @@ import { useApi } from 'hooks/index';
 import React from 'react';
 import JobRoleModal from '../modal-job-role/job-role-modal.module';
 
-const EditJobRoleModal = ({ editJobRoleModal, selected }) => {
+const EditJobRoleModal = ({ editJobRoleModal, selected, refreshList, requestState }) => {
     const { request } = useApi({
         api: updateJobRole
     });
@@ -22,7 +22,9 @@ const EditJobRoleModal = ({ editJobRoleModal, selected }) => {
     return (<JobRoleModal 
         jobRoleModal={editJobRoleModal}
         handleSubmit={handleSubmit}
-        initialState={selected} />);
+        initialState={selected}
+        refreshList={refreshList} 
+        requestState={requestState} />);
 }
  
 export default EditJobRoleModal;

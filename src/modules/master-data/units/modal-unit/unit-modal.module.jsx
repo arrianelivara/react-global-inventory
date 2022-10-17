@@ -6,7 +6,7 @@ import { initialFormState } from './unit.form.state';
 import moment from "moment";
 import { DatePicker } from 'components/index';
 
-const UnitModal = ({ unitModal, initialState, handleSubmit }) => {
+const UnitModal = ({ unitModal, initialState, handleSubmit, refreshList, requestState }) => {
 
     const formState = useMemo(() => {
         return initialFormState(initialState ? Object.values(initialState)[0] : {});
@@ -35,6 +35,7 @@ const UnitModal = ({ unitModal, initialState, handleSubmit }) => {
                 handleSubmit(obj);
                 unitModal.close();
                 clearForm();
+                refreshList(requestState);
             }}
            >
                 <Text label>Note: Fields with (<span className='text-red'>*</span>) are required.</Text>

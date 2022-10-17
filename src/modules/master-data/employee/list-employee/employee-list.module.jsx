@@ -20,7 +20,7 @@ const EmployeeList = () => {
 
     const { request, loading ,
         result: searchEmployeeResult = { metadata: [], total: 0, numPages: 0 },
-        mappedData } = useApi({
+        mappedData, error } = useApi({
         api: searchEmployees,
         isArray: true,
         mapper: employeeResponse
@@ -102,7 +102,8 @@ const EmployeeList = () => {
                 <WarehouseSelection field={fields.warehouse} modifyField={modifyField}/>
             }>
             <DataTable 
-               loading={loading} 
+                error={error}
+                loading={loading} 
                 total={searchEmployeeResult.metadata.total}
                 data={mappedData} 
                 columns={columns}
@@ -115,7 +116,11 @@ const EmployeeList = () => {
                 onChangePage={changePageConfigCb}
                 fetchList={fetchEmployees}/>
             <AddEmployeeModal addEmployeeModal={addEmployeeModal} refreshList={fetchEmployees} requestState={requestState}/>
-            <EditEmployeeModal editEmployeeModal={editEmployeeModal} selected={selected} />
+            <EditEmployeeModal editEmployeeModal={editEmployeeModal} 
+                selected={selected} 
+                refreshList={fetchEmployees} 
+                requestState={requestState}
+            />
         </WrapperA>
     );
 }

@@ -116,7 +116,11 @@ const Units = () => {
                 refreshList={fetchUnits}
                 requestState={requestState} 
             />
-            <EditUnitModal editUnitModal={editUnitModal} selected={selected}/>
+            <EditUnitModal 
+                editUnitModal={editUnitModal} 
+                refreshList={fetchUnits}
+                requestState={requestState}
+                selected={selected}/>
         </WrapperA>);
 }
  

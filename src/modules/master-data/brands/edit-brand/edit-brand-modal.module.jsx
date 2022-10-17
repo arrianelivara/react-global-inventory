@@ -2,7 +2,7 @@ import { updateBrand } from 'apis/brand.api';
 import { useApi } from 'hooks/index';
 import React from 'react';
 import BrandModal from '../modal-brand/brand-modal.module';
-const EditBrandModal = ({ editBrandModal, selected }) => {
+const EditBrandModal = ({ editBrandModal, selected, refreshList, requestState }) => {
 
     const { request } = useApi({
         api: updateBrand
@@ -23,6 +23,8 @@ const EditBrandModal = ({ editBrandModal, selected }) => {
         brandModal={editBrandModal} 
         initialState={selected}
         handleSubmit={handleSubmit}
+        refreshList={refreshList}
+        requestState={requestState}
         />);
 }
  

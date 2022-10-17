@@ -3,7 +3,7 @@ import { useApi } from 'hooks/index';
 import React from 'react';
 import PartsModal from '../modal-parts/parts-modal.module';
 
-const EditPartsModal = ({ editPartsModal, selected }) => {
+const EditPartsModal = ({ editPartsModal, selected, refreshList, requestState }) => {
     const { request } = useApi({
         api: updatePart
     });
@@ -22,6 +22,8 @@ const EditPartsModal = ({ editPartsModal, selected }) => {
         partsModal={editPartsModal}
         handleSubmit={handleSubmit}
         initialState={selected}
+        refreshList={refreshList}
+        requestState={requestState}
     />);
 }
  

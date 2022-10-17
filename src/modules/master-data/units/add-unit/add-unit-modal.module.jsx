@@ -12,13 +12,15 @@ const AddUnitModal = ({ addUnitModal, refreshList, requestState }) => {
         try {
             console.log(params);
             await request(params);
-            console.log("created");
-            await refreshList(requestState);
         } catch (e) {
 
         }
     };
-    return (<UnitModal unitModal={addUnitModal} handleSubmit={handleSubmit}/>);
+    return (<UnitModal 
+        unitModal={addUnitModal} 
+        refreshList={refreshList}
+        requestState={requestState}
+        handleSubmit={handleSubmit}/>);
 }
  
 export default AddUnitModal;

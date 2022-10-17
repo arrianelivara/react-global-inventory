@@ -6,7 +6,7 @@ import React, { useMemo } from 'react'
 import { initialFormState } from './brand.form.state';
 import moment from 'moment';
 
-const BrandModal = ({ brandModal, initialState, handleSubmit }) => {
+const BrandModal = ({ brandModal, initialState, handleSubmit, refreshList, requestState }) => {
 
     const formState = useMemo(() => {
         return initialFormState(initialState ? Object.values(initialState)[0] : {});
@@ -33,6 +33,7 @@ const BrandModal = ({ brandModal, initialState, handleSubmit }) => {
                 handleSubmit(obj);
                 brandModal.close();
                 clearForm();
+                refreshList(requestState);
             }}
             >
                 <Text label>Note: Fields with (<span className='text-red'>*</span>) are required.</Text>

@@ -5,10 +5,10 @@ import React, { useMemo } from 'react'
 import { useForm } from 'hooks/index';
 import { initialFormState } from './employee-form.state';
 
-const EmployeeModal = ({ initialState, employeeModal, handleSubmit }) => {
+const EmployeeModal = ({ initialState, employeeModal, handleSubmit, refreshList, requestState }) => {
 
     const formState = useMemo(() => {
-        return initialFormState(initialState);
+        return initialFormState(initialState ? Object.values(initialState)[0] : {});
     }, [initialState]);
 
     const { fields, modifyField, getFormValues, clearForm } = useForm({
@@ -45,6 +45,7 @@ const EmployeeModal = ({ initialState, employeeModal, handleSubmit }) => {
                 handleSubmit(obj);
                 employeeModal.close();
                 clearForm();
+                refreshList(requestState);
             }}>
                 <Text label>Note: Fields with (<span className='text-red'>*</span>) are required.</Text>
                 <div className='mt-md grid md:grid-cols-4 gap-3'>

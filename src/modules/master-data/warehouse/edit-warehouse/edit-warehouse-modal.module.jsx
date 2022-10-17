@@ -2,7 +2,7 @@ import { updateWarehouse } from 'apis/warehouse.api';
 import { useApi } from 'hooks/index';
 import React from 'react';
 import WarehouseModal from '../modal-warehouse/warehouse-modal.module';
-const EditWarehouseModal = ({ editWarehouseModal, selected }) => {
+const EditWarehouseModal = ({ editWarehouseModal, selected, refreshList, requestState }) => {
 
     const { request } = useApi({
         api: updateWarehouse
@@ -22,7 +22,10 @@ const EditWarehouseModal = ({ editWarehouseModal, selected }) => {
     return (<WarehouseModal 
         warehouseModal={editWarehouseModal}
         handleSubmit={handleSubmit}
-        initialState={selected}/>);
+        initialState={selected}
+        refreshList={refreshList}
+        requestState={requestState}
+    />);
 }
  
 export default EditWarehouseModal;

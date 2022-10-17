@@ -116,7 +116,11 @@ const Parts = () => {
                 refreshList={fetchParts}
                 requestState={requestState}
             />
-            <EditPartsModal editPartsModal={editPartsModal} selected={selected}/>
+            <EditPartsModal 
+                editPartsModal={editPartsModal} 
+                selected={selected}
+                refreshList={fetchParts}
+                requestState={requestState}/>
         </WrapperA>);
 }
  

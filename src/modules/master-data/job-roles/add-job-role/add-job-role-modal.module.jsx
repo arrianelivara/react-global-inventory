@@ -22,6 +22,8 @@ const AddJobRoleModal = ({ addJobRoleModal, refreshList, requestState }) => {
         jobRoleModal={addJobRoleModal} 
         handleSubmit={handleSubmit} 
         initialState={null}
+        refreshList={refreshList}
+        requestState={requestState}
         />);
 }
  

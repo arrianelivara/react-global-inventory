@@ -13,7 +13,6 @@ const AddWarehouseModal = ({ addWarehouseModal, refreshList, requestState }) => 
             console.log(params);
             await request(params);
             console.log("created");
-            await refreshList(requestState);
         } catch (e) {
 
         }

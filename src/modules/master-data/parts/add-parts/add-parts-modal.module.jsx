@@ -12,7 +12,6 @@ const AddPartsModal = ({ addPartsModal, refreshList, requestState }) => {
             console.log(params);
             await request(params);
             console.log("created");
-            await refreshList(requestState);
         } catch (e) {
 
         }
@@ -22,6 +21,8 @@ const AddPartsModal = ({ addPartsModal, refreshList, requestState }) => {
         partsModal={addPartsModal}
         handleSubmit={handleSubmit}
         initialState={null}
+        refreshList={refreshList}
+        requestState={requestState}
     />);
 }
  

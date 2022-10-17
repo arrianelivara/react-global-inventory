@@ -6,7 +6,7 @@ import { initialFormState } from './warehouse.form.state';
 import moment from "moment";
 import { DatePicker } from 'components/index';
 
-const WarehouseModal = ({ warehouseModal, initialState, handleSubmit }) => {
+const WarehouseModal = ({ warehouseModal, initialState, handleSubmit, refreshList, requestState }) => {
 
     const formState = useMemo(() => {
         return initialFormState(initialState ? Object.values(initialState)[0] : {});
@@ -36,6 +36,7 @@ const WarehouseModal = ({ warehouseModal, initialState, handleSubmit }) => {
                 handleSubmit(obj);
                 supplierModal.close();
                 clearForm();
+                refreshList(requestState);
             }}>
                 <Text label>Note: Fields with (<span className='text-red'>*</span>) are required.</Text>
                 <div className='mt-md'>

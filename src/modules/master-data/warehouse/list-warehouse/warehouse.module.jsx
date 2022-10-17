@@ -117,7 +117,11 @@ const Warehouse = () => {
                 refreshList={fetchWarehouses}
                 requestState={requestState}
             />
-            <EditWarehouseModal editWarehouseModal={editWarehouseModal} selected={selected} />
+            <EditWarehouseModal 
+                editWarehouseModal={editWarehouseModal} 
+                selected={selected}
+                refreshList={fetchWarehouses}
+                requestState={requestState} />
         </WrapperA>);
 }
  

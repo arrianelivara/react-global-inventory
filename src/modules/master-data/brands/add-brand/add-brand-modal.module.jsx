@@ -11,13 +11,18 @@ const AddBrandModal = ({ addBrandModal, refreshList, requestState }) => {
     const handleSubmit = async (params) => {
         try {
             await request(params);
-            await refreshList(requestState);
         } catch (e) {
             console.log("errorrr");
         }
     };
 
-    return (<BrandModal brandModal={addBrandModal} handleSubmit={handleSubmit} initialState={null}/>);
+    return (<BrandModal 
+        brandModal={addBrandModal} 
+        handleSubmit={handleSubmit} 
+        initialState={null}
+        refreshList={refreshList}
+        requestState={requestState}
+        />);
 }
  
 export default AddBrandModal;

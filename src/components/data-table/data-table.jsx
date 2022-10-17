@@ -100,7 +100,11 @@ const DataTable = ({
   return (
     <div>
       {error ? (
-        <div>Error</div>
+        <Container className="my-md bg-white text-center min-h-page flex items-center border rounded">
+          <div className="m-auto p-lg">
+            <Empty description="Error fetching the list" />
+          </div>
+        </Container>
       ) : (
         <Fragment>
           {resultContent && hasAppliedFilter && (

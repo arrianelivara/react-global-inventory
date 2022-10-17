@@ -116,7 +116,11 @@ const Supplier = () => {
                 addSupplierModal={addSupplierModal}
                 refreshList={fetchSupplier} 
                 requestState={requestState}/>
-            <EditSupplierModal editSupplierModal={editSupplierModal} selected={selected} />
+            <EditSupplierModal 
+                editSupplierModal={editSupplierModal} 
+                refreshList={fetchSupplier} 
+                requestState={requestState}
+                selected={selected} />
         </WrapperA>);
 }
  

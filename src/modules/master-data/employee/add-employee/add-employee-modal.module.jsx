@@ -12,7 +12,6 @@ const AddEmployeeModal = ({ addEmployeeModal, refreshList, requestState }) => {
     const handleSubmit = async (params) => {
         try {
             await request(params);
-            await refreshList(requestState);
         } catch (e) {
             console.log("errorrr");
         }
@@ -22,6 +21,9 @@ const AddEmployeeModal = ({ addEmployeeModal, refreshList, requestState }) => {
         <EmployeeModal 
             employeeModal={addEmployeeModal} 
             handleSubmit={handleSubmit} 
+            refreshList={refreshList} 
+            requestState={requestState}
+            initialState={null}
         />
      );
 }

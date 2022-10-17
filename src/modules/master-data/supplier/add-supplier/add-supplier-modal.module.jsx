@@ -11,14 +11,16 @@ const AddSupplierModal = ({ addSupplierModal, refreshList, requestState }) => {
         try {
             console.log(params);
             await request(params);
-            console.log("created")
-            await refreshList(requestState);
         } catch (e) {
 
         }
     };
 
-    return (<SupplierModal supplierModal={addSupplierModal} handleSubmit={handleSubmit} />);
+    return (<SupplierModal 
+        supplierModal={addSupplierModal} 
+        refreshList={refreshList}
+        requestState={requestState}
+        handleSubmit={handleSubmit} />);
 }
  
 export default AddSupplierModal;
