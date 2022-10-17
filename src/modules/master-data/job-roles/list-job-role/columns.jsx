@@ -1,7 +1,7 @@
 
 export const columns = [
   {
-    key: "jobRole",
+    key: "jobRoleName",
     text: "Job Role",
   },
   {
