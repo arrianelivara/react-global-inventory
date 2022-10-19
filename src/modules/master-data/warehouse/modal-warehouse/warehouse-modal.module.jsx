@@ -34,7 +34,7 @@ const WarehouseModal = ({ warehouseModal, initialState, handleSubmit, refreshLis
                     end_date: params.endDate?.format('YYYY-MM-DD'),
                 }
                 handleSubmit(obj);
-                supplierModal.close();
+                warehouseModal.close();
                 clearForm();
                 refreshList(requestState);
             }}>
