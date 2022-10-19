@@ -1,4 +1,4 @@
-import { Get, Post } from "services";
+import { Get, Post, Put } from "services";
 import { ApiPath } from "paths";
 
 export const getJobRole = async (id) => {

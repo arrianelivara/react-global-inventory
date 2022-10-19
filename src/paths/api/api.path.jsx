@@ -37,7 +37,7 @@ const ApiPath = {
   ...preparePaths({ prefix: "brand", paths: brandPaths }),
   ...preparePaths({ prefix: "employee", paths: employeePaths }),
   ...preparePaths({ prefix: "job_role", paths: jobRolePaths }),
-  ...preparePaths({ prefix: "part_no", paths: partPaths }),
+  ...preparePaths({ prefix: "part", paths: partPaths }),
   ...preparePaths({ prefix: "unit", paths: unitPaths }),
   ...preparePaths({ prefix: "warehouse", paths: warehousePaths }),
   ...preparePaths({ prefix: "supplier", paths: supplierPaths }),
