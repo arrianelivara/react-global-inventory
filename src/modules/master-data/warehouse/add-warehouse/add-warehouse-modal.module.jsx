@@ -21,6 +21,8 @@ const AddWarehouseModal = ({ addWarehouseModal, refreshList, requestState }) => 
     return (<WarehouseModal 
         warehouseModal={addWarehouseModal}
         handleSubmit={handleSubmit}
+        refreshList={refreshList}
+        requestState={requestState}
         />);
 }
  
