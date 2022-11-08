@@ -5,6 +5,22 @@ import { PlusOutlined, EditOutlined, SaveOutlined } from "@ant-design/icons";
 import { StyleType } from 'enums/index';
 
 const Inbound = () => {
+
+    const filterByList = [
+        {
+            text: "Invoice No.",
+            value: 1,
+        },
+        {
+            text: "Date",
+            value: 2,
+        },
+        {
+            text: "User",
+            value: 3,
+        }
+    ];
+
     return (<WrapperA title={lang.inbound}
         actionButtons={
             <div className="mt-md">
@@ -39,7 +55,7 @@ const Inbound = () => {
         <Title>{lang.transactionHistory}</Title>
         <div className='my-md grid grid-cols-6 gap-2 '>
             <Field label={lang.filterBy}>
-                <Select options={[]}/>
+                <Select options={filterByList} value={1}/>
             </Field>
             <Field label={lang.search} className="col-span-2">
                 <Input />

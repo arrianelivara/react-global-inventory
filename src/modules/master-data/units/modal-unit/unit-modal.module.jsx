@@ -24,7 +24,7 @@ const UnitModal = ({ unitModal, initialState, handleSubmit, refreshList, request
             bodyStyle={{
                 paddingInline: '2rem'
             }}
-            onOk={() => {
+            onOk={async () => {
                 const params = getFormValues();
                 const obj = {
                     id: params.id,
@@ -32,7 +32,7 @@ const UnitModal = ({ unitModal, initialState, handleSubmit, refreshList, request
                     startDate: params.startDate?.format('YYYY-MM-DD'),
                     endDate: params.endDate?.format('YYYY-MM-DD'),
                 }
-                handleSubmit(obj);
+                await handleSubmit(obj);
                 unitModal.close();
                 clearForm();
                 refreshList(requestState);

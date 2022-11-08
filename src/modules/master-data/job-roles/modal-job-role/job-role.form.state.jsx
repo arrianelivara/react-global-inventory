@@ -5,6 +5,7 @@ import moment from "moment";
 
 export const initialFormState = (initialState = {}) => {
   const {
+    id = '',
     jobRoleName = '',
     description = '',
     startDate = null,
@@ -12,6 +13,11 @@ export const initialFormState = (initialState = {}) => {
   } = initialState;
 
   return {
+    id: {
+      name: "id",
+      value: id,
+      type: Field.INPUT,
+    },
     jobRoleName: {
         name: "jobRoleName",
         value: jobRoleName,

@@ -40,7 +40,7 @@ const AuthorizedPage = () => {
         exact: true,
         element: <Warehouse />,
       },
-      [Path.INVENTORY]: {
+      [Path.INVENTORY_SUMMARY]: {
         exact: true,
         element: <InventorySummary />,
       },

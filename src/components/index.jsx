@@ -20,3 +20,5 @@ export { default as Modal } from "./modal/modal";
 export { default as WrapperA } from "./wrapper/wrapper-a";
 export { default as DatePicker } from "./date-picker/date-picker";
 export { default as TextArea } from "./text-area/text-area";
+export { default as Loader } from "./loader/loader";
+export { default as Error } from "./error/error";

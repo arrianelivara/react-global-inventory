@@ -1,5 +1,5 @@
 export const inventoryPaths = {
-    INVENTORY: "",
+    INVENTORY_SUMMARY: "/summary",
     INBOUND: "/inbound",
     OUTBOUND: "/outbound"
   };

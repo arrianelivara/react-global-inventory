@@ -21,7 +21,7 @@ const BrandModal = ({ brandModal, initialState, handleSubmit, refreshList, reque
             bodyStyle={{
                 paddingInline: '2rem'
             }}
-            onOk={() => {
+            onOk={async () => {
                 const params = getFormValues();
                 const obj = {
                     id: params.id,
@@ -30,7 +30,8 @@ const BrandModal = ({ brandModal, initialState, handleSubmit, refreshList, reque
                     start_date: params.startDate?.format('YYYY-MM-DD'),
                     end_date: params.endDate?.format('YYYY-MM-DD'),
                 }
-                handleSubmit(obj);
+                await handleSubmit(obj);
+                console.log("nulling")
                 brandModal.close();
                 clearForm();
                 refreshList(requestState);

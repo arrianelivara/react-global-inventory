@@ -4,6 +4,7 @@ import lang from "translations"
 import React, { useMemo } from 'react'
 import { useForm } from 'hooks/index';
 import { initialFormState } from './employee-form.state';
+import moment from "moment";
 
 const EmployeeModal = ({ initialState, employeeModal, handleSubmit, refreshList, requestState }) => {
 
@@ -67,12 +68,14 @@ const EmployeeModal = ({ initialState, employeeModal, handleSubmit, refreshList,
                         <Select {...fields.jobRole} onChange={modifyField} text={lang.selectJobRole} options={jobRole}></Select>
                     </Field>
                     <Field {...fields.startDate} required>
-                        <DatePicker {...fields.startDate} onChange={(name, value) => {
-                            modifyField("startDate", { value: value });
+                    <DatePicker {...fields.startDate} onChange={(name, value) => {
+                            modifyField("startDate", { value: moment(value) });
                         }}></DatePicker>
                     </Field>
                     <Field {...fields.endDate}>
-                        <DatePicker {...fields.endDate} onChange={modifyField}></DatePicker>
+                        <DatePicker {...fields.endDate} onChange={(name, value) => {
+                            modifyField("endDate", { value: moment(value) });
+                        }}></DatePicker>
                     </Field>
                 </div>
                 <div className='mt-sm'>

@@ -19,7 +19,7 @@ const JobRoleModal = ({ jobRoleModal, initialState, handleSubmit,refreshList, re
             bodyStyle={{
                 paddingInline: '2rem'
             }}
-            onOk={() => {
+            onOk={async () => {
                 const params = getFormValues();
                 const obj = {
                     id: params.id,
@@ -28,7 +28,7 @@ const JobRoleModal = ({ jobRoleModal, initialState, handleSubmit,refreshList, re
                     start_date: params.startDate?.format('YYYY-MM-DD'),
                     end_date: params.endDate?.format('YYYY-MM-DD'),
                 }
-                handleSubmit(obj);
+                await handleSubmit(obj);
                 jobRoleModal.close();
                 clearForm();
                 refreshList(requestState);

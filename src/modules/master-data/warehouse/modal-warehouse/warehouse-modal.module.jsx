@@ -24,7 +24,7 @@ const WarehouseModal = ({ warehouseModal, initialState, handleSubmit, refreshLis
             bodyStyle={{
                 paddingInline: '2rem'
             }}
-            onOk={() => {
+            onOk={async () => {
                 const params = getFormValues();
                 const obj = {
                     id: params.id,
@@ -33,7 +33,7 @@ const WarehouseModal = ({ warehouseModal, initialState, handleSubmit, refreshLis
                     start_date: params.startDate?.format('YYYY-MM-DD'),
                     end_date: params.endDate?.format('YYYY-MM-DD'),
                 }
-                handleSubmit(obj);
+                await handleSubmit(obj);
                 warehouseModal.close();
                 clearForm();
                 refreshList(requestState);

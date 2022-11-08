@@ -1,12 +1,12 @@
 import React, { useCallback, useMemo } from "react";
 import { Card } from "antd"
-import { CheckboxField, Field, Input, Text, Button, Navigation } from "../../components";
+import { CheckboxField, Field, Input, Text, Button, Navigation } from "components";
 import { useApi, useForm } from "hooks";
 import { signIn } from "apis";
 import { initialFormState } from "./sign-in-form.state";
 import { Path } from "paths";
 import lang from "translations";
-import { isEmailValid, redirectTo } from "services/index";
+import { redirectTo } from "services/index";
 import Validation from "services/validation.service";
 
 const SignIn = () => {

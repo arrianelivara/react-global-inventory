@@ -24,7 +24,7 @@ const SupplierModal = ({ supplierModal, initialState, handleSubmit, refreshList,
             bodyStyle={{
                 paddingInline: '2rem'
             }}
-            onOk={() => {
+            onOk={async () => {
                 const params = getFormValues();
                 const obj = {
                     id: params.id,
@@ -33,7 +33,7 @@ const SupplierModal = ({ supplierModal, initialState, handleSubmit, refreshList,
                     start_date: params.startDate?.format('YYYY-MM-DD'),
                     end_date: params.endDate?.format('YYYY-MM-DD'),
                 }
-                handleSubmit(obj);
+                await handleSubmit(obj);
                 supplierModal.close();
                 clearForm();
                 refreshList(requestState);

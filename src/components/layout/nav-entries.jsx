@@ -62,7 +62,7 @@ export const main_menus = [
         name: "INVENTORY",
         key: "inventory",
         description: "Inventory",
-        path: Path.INVENTORY,
+        path: Path.INVENTORY_SUMMARY,
         children: [
           {
             name: "Inbound",
