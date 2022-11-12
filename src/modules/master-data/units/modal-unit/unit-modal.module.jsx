@@ -29,8 +29,9 @@ const UnitModal = ({ unitModal, initialState, handleSubmit, refreshList, request
                 const obj = {
                     id: params.id,
                     unit: params.unitName,
-                    startDate: params.startDate?.format('YYYY-MM-DD'),
-                    endDate: params.endDate?.format('YYYY-MM-DD'),
+                    description: params.description,
+                    start_date: params.startDate?.format('YYYY-MM-DD'),
+                    end_date: params.endDate?.format('YYYY-MM-DD'),
                 }
                 await handleSubmit(obj);
                 unitModal.close();
