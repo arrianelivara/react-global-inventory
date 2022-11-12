@@ -26,7 +26,7 @@ const PartsModal = ({ partsModal, handleSubmit, initialState, refreshList, reque
                 const obj = {
                     id: params.id,
                     description: params.description,
-                    job_role: params.jobRoleName,
+                    part: params.partName,
                     start_date: params.startDate?.format('YYYY-MM-DD'),
                     end_date: params.endDate?.format('YYYY-MM-DD'),
                 }
@@ -43,7 +43,7 @@ const PartsModal = ({ partsModal, handleSubmit, initialState, refreshList, reque
                     </Field>
                 </div>
                 <div className='mt-sm flex gap-2'>
-                    <Field {...fields.startDate} required>
+                    <Field {...fields.startDate}>
                         <DatePicker {...fields.startDate} onChange={(name, value) => {
                             modifyField("startDate", { value: moment(value) });
                         }}></DatePicker>
@@ -56,7 +56,7 @@ const PartsModal = ({ partsModal, handleSubmit, initialState, refreshList, reque
                 </div>
                 <div className='mt-sm'>
                     <Field {...fields.description}>
-                        <TextArea {...field.description} onChange={modifyField} />
+                        <TextArea {...fields.description} onChange={modifyField} />
                     </Field>
                 </div>
         </Modal>
