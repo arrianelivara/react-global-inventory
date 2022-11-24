@@ -21,7 +21,8 @@ const useApi = ({
     (res, params) => {
       let obj = null;
       if (isArray) {
-        obj = mapObjects([...res.data], mapper, { ...params });
+        obj = mapObjects(res.data ? [...res.data] : [...res], mapper, { ...params });
+        console.log(obj)
       } else {
         obj = mapObject({ ...res.data }, mapper, { ...params });
       }

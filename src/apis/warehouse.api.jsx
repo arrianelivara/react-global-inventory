@@ -21,5 +21,7 @@ export const updateWarehouse = async ({ id, body }) => {
   return res;
 };
 
-
-
+export const getAllWarehouse = async () => {
+  const res = await Get(`${ApiPath.WAREHOUSE}`);
+  return res;
+};

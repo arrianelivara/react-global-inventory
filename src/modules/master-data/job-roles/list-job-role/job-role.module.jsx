@@ -96,9 +96,7 @@ const JobRoles = () => {
                 </Button>
             </div>
         }
-        filterButtons={
-            <WarehouseSelection field={fields.warehouse} modifyField={modifyField}/>
-        }>
+        >
         <DataTable 
             data={mappedData} 
             columns={columns}

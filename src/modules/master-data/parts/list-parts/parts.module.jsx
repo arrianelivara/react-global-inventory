@@ -95,9 +95,7 @@ const Parts = () => {
                         >{lang.update}
                     </Button>
                 </div>}
-            filterButtons={
-                <WarehouseSelection field={fields.warehouse} modifyField={modifyField}/>
-            }>
+            >
             <DataTable 
                 data={mappedData} 
                 columns={columns}

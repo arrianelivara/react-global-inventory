@@ -95,9 +95,7 @@ const Units = () => {
                         >{lang.update}
                     </Button>
                 </div>}
-            filterButtons={
-                <WarehouseSelection field={fields.warehouse} modifyField={modifyField}/>
-            }>
+            >
             <DataTable 
                 loading={loading} 
                 total={searchUnitResult.metadata.total}

@@ -22,5 +22,8 @@ export const updateSupplier = async ({ id, body }) => {
   return res;
 };
 
-
+export const getAllSupplier = async () => {
+  const res = await Get(ApiPath.SUPPLIER);
+  return res;
+};
 

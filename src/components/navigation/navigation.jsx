@@ -7,14 +7,28 @@ import { Path } from 'paths';
 import { LogoutOutlined } from "@ant-design/icons";
 import { StyleType } from 'enums';
 import { useNavigate } from "react-router-dom";
+import { useModal } from 'hooks/index';
+import { Modal } from "antd";
 
 const Navigation = ({ isLoggedIn }) => {
     const navigate = useNavigate();
+    const logoutModal = useModal();
 
     const logoutCallback = () => {
-      localStorage.clear();
-      navigate(Path.AUTH);
+      console.log(logoutModal)
+      logoutModal.show({
+        onOk: () => {
+          localStorage.clear();
+          logoutModal.close()
+          navigate(Path.AUTH);
+        },
+        onCancel: () => {
+          logoutModal.close()
+        }
+      })
+
     }
+
     return <React.Fragment>
       <div className="w-full py-2 border-b bg-white px-5">
         <div className="flex justify-between items-center">
@@ -29,6 +43,11 @@ const Navigation = ({ isLoggedIn }) => {
           </div>
         </div>
       </div>
+      <Modal {...logoutModal} 
+        title='Are you sure you want to logout?'
+        content='You will be redirected to Sign in Page.'
+        okText='Yes, I am sure.'
+        cancelText='No, go back.'/>
     </React.Fragment>
 }
 
