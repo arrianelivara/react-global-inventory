@@ -138,19 +138,19 @@ const Outbound = () => {
         </div>
         {parts.value.length > 0  ?
             parts.value.map((field, index) => {
-                const onChange = (changes) => {
-                    const v = parts.value;
-                    const indexValue = v[index];
-                    v[index] = {
-                        ...indexValue,
-                        ...changes,
-                    };
-                    modifyForm({
-                        [parts.name]: {
-                            value: v,
-                        }
-                    });
+            const onChange = (changes) => {
+                const v = parts.value;
+                const indexValue = v[index];
+                v[index] = {
+                    ...indexValue,
+                    ...changes,
                 };
+                modifyForm({
+                    [parts.name]: {
+                        value: v,
+                    }
+                });
+            };
             return <div key={index} className='flex content-center justify-between gap-2 drop-shadow-md my-sm bg-white p-md rounded-md border-slate-400'>
                 <div>
                     <Title className="mt-lg">{index + 1}</Title>

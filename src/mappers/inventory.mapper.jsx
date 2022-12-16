@@ -6,5 +6,7 @@ export const inventorySummaryListResponse = {
     brand: { key: "brand"},
     unit: { key: "unit"},
     otherPart: { key: "other_part"},
-    dateUpdated: { key: "updated_at"}
+    dateUpdated: { key: "updated_at"},
+    warehouse: { key: "warehouse"},
+    supplier: { key: "supplier"}
 };
