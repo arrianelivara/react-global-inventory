@@ -1,7 +1,5 @@
 import { DataTable, WrapperA, Button } from 'components';
-import { useForm, useModal } from 'hooks';
-import initialFormState from 'modules/master-data/common/warehouse-state.module';
-import WarehouseSelection from 'modules/master-data/common/warehouse.module';
+import { useModal } from 'hooks';
 import React, { useMemo, useCallback } from 'react';
 import lang from 'translations';
 import { PlusOutlined, EditOutlined } from "@ant-design/icons";
@@ -12,6 +10,7 @@ import { columns } from './columns';
 import { useApi, useFilter, useMount, useSelectItems } from 'hooks/index';
 import { searchBrand } from 'apis/brand.api';
 import { brandListResponse } from 'mappers/brand.mapper';
+import { brandFilterState } from './filters';
 
 const Brands = () => {
     const addBrandModal = useModal();
@@ -22,13 +21,10 @@ const Brands = () => {
         mappedData, error } = useApi({
         api: searchBrand,
         isArray: true,
-        mapper:brandListResponse
+        mapper: brandListResponse
     });
 
-    const { modifyFilters, filterState, requestState } = useFilter({
-        pageSize: 10,
-        currentPage: 1
-    });
+    const { modifyFilters, filterState, requestState } = useFilter(brandFilterState("start_date"));
 
     useMount(() => {
         fetchBrands(requestState);
@@ -53,12 +49,6 @@ const Brands = () => {
         useSelectItems({
         items: brands,
     });
-
-    const formState = useMemo(() => {
-        return initialFormState();
-    }, []);
-
-    const { fields, modifyField } = useForm({ initialState: formState })
 
     const changePageConfigCb = useCallback(
         (pageProps) => {

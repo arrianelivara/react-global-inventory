@@ -26,7 +26,7 @@ const PartsModal = ({ partsModal, handleSubmit, initialState, refreshList, reque
                 const obj = {
                     id: params.id,
                     description: params.description,
-                    part: params.partName,
+                    part: params.partNo,
                     start_date: params.startDate?.format('YYYY-MM-DD'),
                     end_date: params.endDate?.format('YYYY-MM-DD'),
                 }
@@ -38,8 +38,8 @@ const PartsModal = ({ partsModal, handleSubmit, initialState, refreshList, reque
             >
                 <Text label>Note: Fields with (<span className='text-red'>*</span>) are required.</Text>
                 <div className='mt-md'>
-                    <Field {...fields.partName} required>
-                        <Input {...fields.partName} onChange={modifyField}/>
+                    <Field {...fields.partNo} required>
+                        <Input {...fields.partNo} onChange={modifyField}/>
                     </Field>
                 </div>
                 <div className='mt-sm flex gap-2'>

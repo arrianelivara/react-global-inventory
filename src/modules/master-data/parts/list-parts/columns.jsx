@@ -1,8 +1,8 @@
 
 export const columns = [
   {
-    key: "partName",
-    text: "Part Name",
+    key: "partNo",
+    text: "Part No.",
   },
   {
     key: "description",

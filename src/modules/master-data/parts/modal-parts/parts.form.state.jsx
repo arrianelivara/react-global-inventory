@@ -6,7 +6,7 @@ import moment from "moment";
 export const initialFormState = (initialState = {}) => {
   const {
     id = '',
-    partName = '',
+    partNo = '',
     description = '',
     startDate = null,
     endDate = null,
@@ -18,12 +18,12 @@ export const initialFormState = (initialState = {}) => {
       value: id,
       type: Field.INPUT,
     },
-    partName: {
-        name: "partName",
-        value: partName,
+    partNo: {
+        name: "partNo",
+        value: partNo,
         type: Field.INPUT,
         validations: [Validation.required({})],
-        label: lang.partName
+        label: lang.partNo
     },
     description: {
         name: "description",

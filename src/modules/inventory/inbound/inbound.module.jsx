@@ -125,7 +125,7 @@ const Inbound = () => {
                 </Field>
                 <div key={index}>
                     <Button className="bottom-0" onClick={() => {
-                        console.log("Delete")
+                        console.log("delete")
                     }}>Delete</Button>
                 </div>
             </div>

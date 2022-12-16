@@ -1,3 +1,5 @@
 export const inventoryPaths = {
-  INVENTORY: ""
+  INVENTORY: "",
+  SEARCH_INVENTORY: "search",
+  UPDATE_INVENTORY: (inventoryId) => `update/${inventoryId}`
 };
