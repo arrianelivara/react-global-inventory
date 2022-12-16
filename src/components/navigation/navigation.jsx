@@ -15,7 +15,6 @@ const Navigation = ({ isLoggedIn }) => {
     const logoutModal = useModal();
 
     const logoutCallback = () => {
-      console.log(logoutModal)
       logoutModal.show({
         onOk: () => {
           localStorage.clear();

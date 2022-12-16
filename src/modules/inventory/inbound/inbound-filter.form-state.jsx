@@ -39,37 +39,44 @@ export const PartField = {
   id: {
     name: "id",
     type: Field.ANY,
+    value: null,
   },
   partNo: {
     name: "partNo",
     type: Field.INPUT,
     validations: [Validation.required()],
-    label: "Part No."
+    label: "Part No.",
+    value: null,
   },
   description: {
     name: "description",
     type: Field.INPUT,
-    label: "Description"
+    label: "Description",
+    value: null,
   },
   brand: {
     name: "brand",
     type: Field.DROPDOWN,
-    label: "Brand"
+    label: "Brand",
+    value: null,
   },
   remainingStocks: {
     name: "remainingStocks",
     type: Field.INPUT,
-    label: "Remaining Stocks"
+    label: "Remaining Stocks",
+    value: null,
   },
   quantity: {
     name: "quantity",
     type: Field.INPUT,
-    label: "Quantity"
+    label: "Quantity",
+    value: null,
   },
   unit: {
     name: "unit",
     type: Field.DROPDOWN,
-    label: "Unit"
+    label: "Unit",
+    value: null,
   },
 }
 

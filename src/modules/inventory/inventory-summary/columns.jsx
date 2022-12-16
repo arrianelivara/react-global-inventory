@@ -22,7 +22,7 @@ export const columns = [
         text: "Unit",
     },
     {
-        key: "otherPartNo",
+        key: "otherPart",
         text: "Other Part No.",
     },
     {

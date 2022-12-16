@@ -70,6 +70,8 @@ const InventorySummary = () => {
         }>
         <DataTable 
             data={mappedData}
+            error={error}
+            loading={loading}
             columns={columns}
             total={searchInventoryResult.metadata.total}
             selected={selected}

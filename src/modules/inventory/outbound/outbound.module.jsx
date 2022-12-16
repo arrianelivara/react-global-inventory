@@ -1,15 +1,15 @@
 import { Button, Container, DataTable, DatePicker, Field, Input, Select, Text, Title, WrapperA } from 'components/index';
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import lang from "translations";
 import { PlusOutlined, EditOutlined, SaveOutlined } from "@ant-design/icons";
 import { StyleType } from 'enums/index';
-import { useApi, useForm, useMount } from 'hooks/index';
+import { useApi, useForm, useModal, useMount } from 'hooks/index';
 import { getAllSupplier, getAllWarehouse } from 'apis/index';
 import { initialFormState, PartField } from './outbound-filter.form-state';
-import { useMemo } from 'react';
+import { Modal } from "antd";
 
 const Outbound = () => {
-
+    const updateModal = useModal();
     const { request, mappedData, loading } = useApi({
         api: getAllWarehouse,
         mapper: {
@@ -67,21 +67,31 @@ const Outbound = () => {
     return (<WrapperA title={lang.outbound}
         actionButtons={
             <div className="mt-md">
-                    <Button iconPrefix={<PlusOutlined className="mr-sm" />} className="mr-sm"
-                        onClick={() => {
-                            const existingParts = fields.parts.value;
-                            modifyField("parts", { value: [...existingParts, PartField] });
-                        }}>
-                        {lang.add}
-                    </Button>
-                    <Button iconPrefix={<EditOutlined className="mr-sm"/>} className="mr-sm" 
-                            type={StyleType.Secondary}
-                        >{lang.update}
-                    </Button>
-                    <Button iconPrefix={<SaveOutlined className="mr-sm"/>} 
-                            type={StyleType.Tertiary}
-                        >{lang.save}
-                    </Button>
+                <Button iconPrefix={<PlusOutlined className="mr-sm" />} className="mr-sm"
+                    onClick={() => {
+                        const existingParts = fields.parts.value;
+                        modifyField("parts", { value: [...existingParts, PartField] });
+                    }}>
+                    {lang.add}
+                </Button>
+                <Button iconPrefix={<EditOutlined className="mr-sm"/>} className="mr-sm" 
+                    type={StyleType.Secondary}
+                    onClick={() => {
+                        updateModal.show({
+                            onOk: () => {
+                                updateModal.close();
+                            },
+                            onCancel: () => {
+                                updateModal.close()
+                            }
+                        })
+                    }}
+                >{lang.update}
+                </Button>
+                <Button iconPrefix={<SaveOutlined className="mr-sm"/>} 
+                        type={StyleType.Tertiary}
+                    >{lang.save}
+                </Button>
             </div>
         }>
         <div className='my-md grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2'>
@@ -100,32 +110,33 @@ const Outbound = () => {
         </div>
         {fields.parts.value.length > 0  ?
             fields.parts.value.map((field, index) => {
-            return <div className='flex content-center justify-between gap-2 drop-shadow-md my-sm bg-white p-md rounded-md border-slate-400'>
+            return <div key={index} className='flex content-center justify-between gap-2 drop-shadow-md my-sm bg-white p-md rounded-md border-slate-400'>
                 <div>
                     <Text>{index + 1}</Text>
                 </div>
                 <Field {...field.partNo}>
-                    <Input {...field.partNo} />
+                    <Input {...field.partNo} onChange={modifyField}/>
                 </Field>
                 <Field {...field.description}>
-                    <Input {...field.description}/>
+                    <Input {...field.description} onChange={modifyField}/>
                 </Field>
                 <Field  {...field.brand}>
-                    <Select  {...field.brand}/>
+                    <Select  {...field.brand} onChange={modifyField}/>
                 </Field>
                 <Field  {...field.remainingStocks}>
-                    <Input {...field.remainingStocks} inputType="number"/>
+                    <Input {...field.remainingStocks} inputType="number" onChange={modifyField}/>
                 </Field>
                 <Field {...field.quantity}>
-                    <Input {...field.quantity} inputType="number"/>
+                    <Input {...field.quantity} inputType="number" onChange={modifyField}/>
                 </Field>
                 <Field {...field.unit}>
-                    <Select {...field.unit}/>
+                    <Select {...field.unit} onChange={modifyField}/>
                 </Field>
-                <div>
-                    <Button className="bottom-0">Delete</Button>
+                <div key={index}>
+                    <Button className="bottom-0" onClick={() => {
+                        console.log("delete")
+                    }}>Delete</Button>
                 </div>
-                
             </div>
         }) : 
         <Container className="my-md bg-white text-center min-h-page flex items-center border rounded">
@@ -144,6 +155,13 @@ const Outbound = () => {
         </div>
 
         <DataTable data={[]}/>
+        <Modal {...updateModal} 
+            title='Enter Invoice Number'
+            okText='Submit'
+            cancelText='Cancel'
+        >
+            <Input className="mt-md" />
+        </Modal>
     </WrapperA>);
 }
  
