@@ -1,7 +1,6 @@
 import { Button, DataTable, WrapperA } from 'components';
 import { useForm, useModal } from 'hooks';
-import { PlusOutlined, EditOutlined } from "@ant-design/icons";
-import WarehouseSelection from 'modules/master-data/common/warehouse.module';
+import { PlusOutlined, EditOutlined,DeleteOutlined } from "@ant-design/icons";
 import React, { useCallback, useMemo } from 'react';
 import lang from "translations";
 import { StyleType } from 'enums';
@@ -85,6 +84,7 @@ const JobRoles = () => {
                 </Button>
                 <Button iconPrefix={<EditOutlined className="mr-sm"/>} 
                         type={StyleType.Secondary}
+                        disabled={Object.keys(selected).length === 0}
                         onClick={() => {
                             editJobRoleModal.show({
                                 title: lang.updateExistingJobRole,
@@ -93,6 +93,11 @@ const JobRoles = () => {
                             })
                         }}
                     >{lang.update}
+                </Button>
+                <Button iconPrefix={<DeleteOutlined className="mr-sm" />} className="mx-sm"
+                        disabled={Object.keys(selected).length === 0}
+                        type={StyleType.Danger}>
+                        {lang.delete}
                 </Button>
             </div>
         }

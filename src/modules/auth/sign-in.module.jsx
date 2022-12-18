@@ -45,7 +45,7 @@ const SignIn = () => {
       <Navigation />
       <div className="mt-xxl h-full">
         <Card bordered={false} className="drop-shadow-md p-md bg-white m-auto rounded-md border-b-2 border-indigo-600 w-3/4 sm:w-1/2  xl:w-1/4">
-          <Text title size="text-lg">{lang.signInToAccount}</Text>
+          <Text title size="text-lg">{lang.loginToAccount}</Text>
           <div className="mt-xl">
             {showError}
             <Field label={lang.email} {...fields.email}>
@@ -61,7 +61,7 @@ const SignIn = () => {
             <div className="mt-lg text-right">
               <Button onClick={handleSignIn} loading={loading}>
                 {loading ? <Text size="text-sm" color="text-white" fontWeight="font-semibold">{lang.loading}</Text> : 
-                <Text size="text-sm" color="text-white" fontWeight="font-semibold">{lang.signIn}</Text>
+                <Text size="text-sm" color="text-white" fontWeight="font-semibold">{lang.login}</Text>
                 }
               </Button>
             </div>

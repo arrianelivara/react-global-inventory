@@ -1,10 +1,9 @@
 import { DataTable, WrapperA, Button } from 'components';
 import { useForm, useModal } from 'hooks';
 import initialFormState from 'modules/master-data/common/warehouse-state.module';
-import WarehouseSelection from 'modules/master-data/common/warehouse.module';
 import React, { useCallback, useMemo } from 'react';
 import lang from 'translations';
-import { PlusOutlined, EditOutlined } from "@ant-design/icons";
+import { PlusOutlined, EditOutlined,DeleteOutlined } from "@ant-design/icons";
 import AddPartsModal from '../add-parts/add-parts-modal.module';
 import EditPartsModal from '../edit-parts/edit-parts-modal.module';
 import { StyleType } from 'enums';
@@ -85,6 +84,7 @@ const Parts = () => {
                     </Button>
                     <Button iconPrefix={<EditOutlined className="mr-sm"/>} 
                             type={StyleType.Secondary}
+                            disabled={Object.keys(selected).length === 0}
                             onClick={() => {
                                 editPartsModal.show({
                                     title: lang.updateExistingPart,
@@ -93,6 +93,11 @@ const Parts = () => {
                                 })
                             }}
                         >{lang.update}
+                    </Button>
+                    <Button iconPrefix={<DeleteOutlined className="mr-sm" />} className="mx-sm"
+                        disabled={Object.keys(selected).length === 0}
+                        type={StyleType.Danger}>
+                        {lang.delete}
                     </Button>
                 </div>}
             >

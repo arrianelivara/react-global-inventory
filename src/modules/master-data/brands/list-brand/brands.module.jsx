@@ -2,7 +2,7 @@ import { DataTable, WrapperA, Button } from 'components';
 import { useModal } from 'hooks';
 import React, { useMemo, useCallback } from 'react';
 import lang from 'translations';
-import { PlusOutlined, EditOutlined } from "@ant-design/icons";
+import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { StyleType } from 'enums';
 import AddBrandModal from '../add-brand/add-brand-modal.module';
 import EditBrandModal from '../edit-brand/edit-brand-modal.module';
@@ -57,7 +57,7 @@ const Brands = () => {
         },
         [modifyFilters, clearSelected]
     );
-
+    
     return (
         <WrapperA title={lang.brands} 
             description={lang.listOfBrands}
@@ -75,6 +75,7 @@ const Brands = () => {
                     </Button>
                     <Button iconPrefix={<EditOutlined className="mr-sm"/>} 
                             type={StyleType.Secondary}
+                            disabled={Object.keys(selected).length === 0}
                             onClick={() => {
                                 editBrandModal.show({
                                     title: lang.updateExistingBrand,
@@ -83,6 +84,11 @@ const Brands = () => {
                                 })
                             }}
                         >{lang.update}
+                    </Button>
+                    <Button iconPrefix={<DeleteOutlined className="mr-sm" />} className="mx-sm"
+                        disabled={Object.keys(selected).length === 0}
+                        type={StyleType.Danger}>
+                        {lang.delete}
                     </Button>
                 </div>}
             >

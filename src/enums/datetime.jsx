@@ -11,7 +11,8 @@ const DateTime = {
   H: "MMMM D, YYYY h:mm A", // January 22, 2021 3:49 PM
   I: "MMM D, YYYY h:mm A", // Jan 22, 2021 3:49 PM
   J: "MMM D, YYYY hh:mm:ss A", //
-  K: "DD MMM YYYY h:mm A", // 22 Jan 2021 08:00 AM
+  K: "DD MMM YYYY h:mm A", // 22 Jan 2021 08:00 AM,
+  L: "DD MMMM YYYY", //  22 January 2021
 };
 
 export default enumeration(DateTime);

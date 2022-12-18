@@ -1,8 +1,8 @@
 import { Button, DataTable, WrapperA } from 'components';
 import { StyleType } from 'enums';
-import React, { useCallback, useState } from 'react'
+import React, { useCallback } from 'react'
 import { columns } from './columns';
-import { PlusOutlined, EditOutlined } from "@ant-design/icons";
+import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useForm, useModal } from "hooks";
 import lang from "translations";
 import AddEmployeeModal from '../add-employee/add-employee-modal.module';
@@ -87,6 +87,7 @@ const EmployeeList = () => {
                     </Button>
                     <Button iconPrefix={<EditOutlined className="mr-sm"/>} 
                             type={StyleType.Secondary}
+                            disabled={Object.keys(selected).length === 0}
                             onClick={() => {
                                 editEmployeeModal.show({
                                     title: lang.updateEmployeeInfo,
@@ -95,6 +96,11 @@ const EmployeeList = () => {
                                 })
                             }}
                         >{lang.update}
+                    </Button>
+                    <Button iconPrefix={<DeleteOutlined className="mr-sm" />} className="mx-sm"
+                        disabled={Object.keys(selected).length === 0}
+                        type={StyleType.Danger}>
+                        {lang.delete}
                     </Button>
                 </div>
             }

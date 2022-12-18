@@ -18,7 +18,7 @@ const Navigation = ({ isLoggedIn }) => {
       logoutModal.show({
         onOk: () => {
           localStorage.clear();
-          logoutModal.close()
+          logoutModal.close();
           navigate(Path.AUTH);
         },
         onCancel: () => {
