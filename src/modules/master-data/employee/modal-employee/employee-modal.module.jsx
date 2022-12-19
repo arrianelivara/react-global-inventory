@@ -86,7 +86,7 @@ const EmployeeModal = ({ initialState, employeeModal, handleSubmit, refreshList,
                         <Select {...fields.jobRole} onChange={modifyField} text={lang.selectJobRole} options={mappedData}></Select>
                     </Field>
                     <Field {...fields.startDate} required>
-                    <DatePicker {...fields.startDate} onChange={(name, value) => {
+                    <DatePicker {...fields.startDate} disabled onChange={(name, value) => {
                             let startD = value;
                             if (!value) {
                                 startD = null;
