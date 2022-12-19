@@ -91,20 +91,25 @@ const EmployeeModal = ({ initialState, employeeModal, handleSubmit, refreshList,
                             if (!value) {
                                 startD = null;
                             } else {
-                                startD = moment(startD)
+                                startD = moment(value)
                             }
-                            modifyField("startDate", { value: startD });
+                            modifyField("startDate", { value: value });
                         }}></DatePicker>
                     </Field>
                     <Field {...fields.endDate}>
                         <DatePicker {...fields.endDate} onChange={(name, value) => {
+                            let startD = fields.startDate.value;
                             let endD = value;
                             if (!value) {
                                 endD = null;
                             } else {
-                                endD = moment(endD)
+                                endD = moment(value);
+                                if (endD.diff(startD, "days") < 1) {
+                                    return;
+                                } else {
+                                    modifyField("endDate", { value: endD });
+                                }
                             }
-                            modifyField("endDate", { value: endD });
                         }}></DatePicker>
                     </Field>
                 </div>

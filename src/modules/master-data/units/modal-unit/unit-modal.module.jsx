@@ -52,7 +52,7 @@ const UnitModal = ({ unitModal, initialState, handleSubmit, refreshList, request
                             if (!value) {
                                 startD = null;
                             } else {
-                                startD = moment(startD)
+                                startD = moment(value)
                             }
                             modifyField("startDate", { value: startD });
                         }}></DatePicker>
@@ -63,7 +63,7 @@ const UnitModal = ({ unitModal, initialState, handleSubmit, refreshList, request
                             if (!value) {
                                 endD = null;
                             } else {
-                                endD = moment(endD)
+                                endD = moment(value)
                             }
                             modifyField("endDate", { value: endD });
                         }}></DatePicker>
