@@ -7,27 +7,43 @@ import { initialFormState } from './employee-form.state';
 import moment from "moment";
 import { searchJobRole } from 'apis/job-role.api';
 import { jobRolesOptions } from 'mappers/job-role.mapper';
+import { searchWarehouse } from 'apis/warehouse.api';
+import { warehouseOptions } from 'mappers/warehouse.mapper';
 
 const EmployeeModal = ({ initialState, employeeModal, handleSubmit, refreshList, requestState }) => {
 
     const formState = useMemo(() => {
-        return initialFormState(initialState ? Object.values(initialState)[0] : {});
+        return initialFormState(initialState || {});
     }, [initialState]);
-
+  
     const { fields, modifyField, getFormValues, clearForm } = useForm({
       initialState: formState,
     });
 
-    const { request, loading ,
-        result: searchJobRolesResult = { metadata: [], total: 0, numPages: 0 },
-        mappedData } = useApi({
+    const { request,
+        mappedData, loading } = useApi({
         api: searchJobRole,
         isArray: true,
         mapper: jobRolesOptions
     });
 
+    const { request: requestWarehouses, loading: loadingWarehouse ,
+        mappedData: warehouseData } = useApi({
+        api: searchWarehouse,
+        isArray: true,
+        mapper: warehouseOptions
+    });
+
+    const fetchWarehouses = useCallback(
+        (requestState) => {
+            requestWarehouses(requestState);
+        },
+        [request]
+    );
+
     useMount(() => {
         fetchJobRoles(requestState);
+        fetchWarehouses(requestState);
     });
 
     const fetchJobRoles = useCallback(
@@ -37,22 +53,15 @@ const EmployeeModal = ({ initialState, employeeModal, handleSubmit, refreshList,
         [request]
     );
 
-    const prepareJobRoles = useCallback(() => {
-        return mappedData;
-    }, [mappedData]);
-
-    const jobRoles = useMemo(() => {
-        return prepareJobRoles();
-    }, [prepareJobRoles]);
-
     return (
         <Modal {...employeeModal} onCancel={() => employeeModal.close()} 
             bodyStyle={{
                 paddingInline: '2rem'
             }}
-            onOk={() => {
+            onOk={async() => {
                 const params = getFormValues();
                 const obj = {
+                    id: params.id,
                     employee_id: params.employeeNo,
                     first_name: params.firstName,
                     middle_name: params.middleName,
@@ -60,8 +69,11 @@ const EmployeeModal = ({ initialState, employeeModal, handleSubmit, refreshList,
                     remarks: params.remarks,
                     start_date: params.startDate?.format('YYYY-MM-DD'),
                     end_date: params.endDate?.format('YYYY-MM-DD'),
+                    email: params.email,
+                    job_role: params.jobRole,
+                    warehouse: params.warehouse
                 }
-                handleSubmit(obj);
+                await handleSubmit(obj);
                 employeeModal.close();
                 clearForm();
                 refreshList(requestState);
@@ -83,41 +95,50 @@ const EmployeeModal = ({ initialState, employeeModal, handleSubmit, refreshList,
                 </div>
                 <div className='mt-sm grid md:grid-cols-4 gap-3'>
                     <Field {...fields.jobRole} className="col-span-2" required>
-                        <Select {...fields.jobRole} onChange={modifyField} text={lang.selectJobRole} options={mappedData}></Select>
+                        <Select loading={loading} {...fields.jobRole} onChange={modifyField} text={lang.selectJobRole} options={mappedData}></Select>
                     </Field>
-                    <Field {...fields.startDate} required>
-                    <DatePicker {...fields.startDate} disabled onChange={(name, value) => {
-                            let startD = value;
-                            if (!value) {
-                                startD = null;
-                            } else {
-                                startD = moment(value)
-                            }
-                            modifyField("startDate", { value: value });
-                        }}></DatePicker>
-                    </Field>
-                    <Field {...fields.endDate}>
-                        <DatePicker {...fields.endDate} onChange={(name, value) => {
-                            let startD = fields.startDate.value;
-                            let endD = value;
-                            if (!value) {
-                                endD = null;
-                            } else {
-                                endD = moment(value);
-                                if (endD.diff(startD, "days") < 1) {
-                                    return;
-                                } else {
-                                    modifyField("endDate", { value: endD });
-                                }
-                            }
-                        }}></DatePicker>
+                    <Field {...fields.warehouse} className="col-span-2" required>
+                        <Select loading={loadingWarehouse} {...fields.warehouse} onChange={modifyField} text={lang.selectWarehouse} options={warehouseData}></Select>
                     </Field>
                 </div>
+                <Field {...fields.email} className="mt-sm" required>
+                    <Input {...fields.email} onChange={modifyField}/>
+                </Field>
                 <div className='mt-sm'>
-                    <Field {...fields.remarks}>
+                    <Field {...fields.remarks} >
                         <TextArea {...fields.remarks} onChange={modifyField}/>
                     </Field>
                 </div>
+                <div className='mt-sm grid md:grid-cols-2 gap-3'>
+                    <Field {...fields.startDate} required>
+                        <DatePicker {...fields.startDate} disabled onChange={(name, value) => {
+                                let startD = value;
+                                if (!value) {
+                                    startD = null;
+                                } else {
+                                    startD = moment(value)
+                                }
+                                modifyField("startDate", { value: value });
+                            }}/>
+                        </Field>
+                        <Field {...fields.endDate}>
+                            <DatePicker {...fields.endDate} onChange={(name, value) => {
+                                let startD = fields.startDate.value;
+                                let endD = value;
+                                if (!value) {
+                                    endD = null;
+                                } else {
+                                    endD = moment(value);
+                                    if (endD.diff(startD, "days") < 1) {
+                                        return;
+                                    } else {
+                                        modifyField("endDate", { value: endD });
+                                    }
+                                }
+                            }}/>
+                    </Field>
+                </div>
+                
         </Modal>
      );
 }

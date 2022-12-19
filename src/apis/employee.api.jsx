@@ -2,12 +2,13 @@ import { Get, Post, Put, Delete } from "services";
 import { ApiPath } from "paths";
 
 export const getEmployeeById = async ({ id }) => {
-  const res = await Get(ApiPath.USERS);
+  const res = await Get(ApiPath.EMPLOYEE_ID(id));
   return res;
 };
 
 export const searchEmployees = async (body) => {
   const res = await Post(ApiPath.SEARCH_EMPLOYEE, body);
+  console.log(res)
   return res;
 };
 

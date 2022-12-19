@@ -1,15 +1,17 @@
-import { updateEmployee } from 'apis/employee.api';
+import { getEmployeeById, updateEmployee } from 'apis/employee.api';
 import { useApi } from 'hooks/index';
-import React from 'react'
+import { employeeData } from 'mappers/employee.mapper';
+import React, { useEffect } from 'react'
 import EmployeeModal from '../modal-employee/employee-modal.module';
 
-const EditEmployeeModal = ({ editEmployeeModal, selected, refreshList, requestState }) => {
-
+const EditEmployeeModal = ({ editEmployeeModal, refreshList, requestState, initialState = {}, ...props }) => {
+    
     const { request } = useApi({
         api: updateEmployee
     });
 
     const handleSubmit = async (params) => {
+        console.log(params)
         try {
             const id = params.id;
             console.log(id, params)
@@ -19,13 +21,15 @@ const EditEmployeeModal = ({ editEmployeeModal, selected, refreshList, requestSt
 
         }
     };
+    
     return (
         <EmployeeModal 
             employeeModal={editEmployeeModal} 
-            initialState={selected}
+            initialState={initialState}
             handleSubmit={handleSubmit}
             refreshList={refreshList} 
             requestState={requestState}
+            {...props}
         />
      );
 }

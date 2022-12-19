@@ -5,6 +5,7 @@ import moment from "moment";
 
 export const initialFormState = (initialState = {}) => {
   const {
+    id,
     employeeNo,
     firstName,
     middleName,
@@ -12,10 +13,17 @@ export const initialFormState = (initialState = {}) => {
     jobRole,
     startDate = null,
     endDate = null,
-    remarks
+    remarks,
+    email,
+    warehouse
   } = initialState;
 
   return {
+    id: {
+      name: "id",
+      value: id,
+      type: Field.INPUT,
+    },
     employeeNo: {
       name: "employeeNo",
       label: lang.employeeNumber,
@@ -55,6 +63,14 @@ export const initialFormState = (initialState = {}) => {
       validations: [Validation.required({})],
       maxLength: 75,
     },
+    warehouse: {
+      name: "warehouse",
+      label: lang.warehouse,
+      value: warehouse,
+      type: Field.INPUT,
+      validations: [Validation.required({})],
+      maxLength: 75,
+    },
     startDate: {
       name: "startDate",
       label: lang.startDate,
@@ -72,6 +88,13 @@ export const initialFormState = (initialState = {}) => {
       value: remarks,
       label: lang.remarks,
       type: Field.INPUT,
+    },
+    email: {
+      name: "email",
+      value: email,
+      label: lang.email,
+      type: Field.INPUT,
+      validations: [Validation.required({}), Validation.validEmail()],
     },
   }
 

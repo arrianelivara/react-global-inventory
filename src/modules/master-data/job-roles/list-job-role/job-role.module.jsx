@@ -4,7 +4,6 @@ import { PlusOutlined, EditOutlined,DeleteOutlined } from "@ant-design/icons";
 import React, { useCallback, useMemo } from 'react';
 import lang from "translations";
 import { StyleType } from 'enums';
-import initialFormState from 'modules/master-data/common/warehouse-state.module';
 import AddJobRoleModal from '../add-job-role/add-job-role-modal.module';
 import EditJobRoleModal from '../edit-job-role/edit-job-role-modal.module';
 import { columns } from './columns';
@@ -48,16 +47,10 @@ const JobRoles = () => {
         return prepareJobRoles();
     }, [prepareJobRoles]);
 
-    const { selected, selectedCount, setSelected, isAllSelected, setSelectAll, clearSelected } =
+    const { selected, setSelected, isAllSelected, setSelectAll, clearSelected } =
         useSelectItems({
         items: jobRoles,
     });
-
-    const formState = useMemo(() => {
-        return initialFormState();
-    }, []);
-
-    const { fields, modifyField } = useForm({ initialState: formState })
 
     const changePageConfigCb = useCallback(
         (pageProps) => {

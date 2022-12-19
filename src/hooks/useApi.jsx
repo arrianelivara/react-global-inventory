@@ -24,7 +24,11 @@ const useApi = ({
         obj = mapObjects(res.data ? [...res.data] : [...res], mapper, { ...params });
         console.log(obj)
       } else {
-        obj = mapObject({ ...res.data }, mapper, { ...params });
+        if (res.data) {
+          obj = mapObject({ ...res.data }, mapper, { ...params });
+        } else {
+          obj = mapObject({ ...res }, mapper, { ...params });
+        }
       }
       setMappedData(obj);
       return obj;

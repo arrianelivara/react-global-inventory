@@ -22,7 +22,7 @@ export const jobRolesResponse = {
 };
 
 export const jobRolesOptions = {
-    value: { key: "id" },
+    value: { key: "job_role" },
     text: { key: "job_role" },
 };
   

@@ -20,3 +20,8 @@ export const warehouseResponse = {
         },
     }
 };
+
+export const warehouseOptions = {
+    value: { key: "warehouse" },
+    text: { key: "warehouse" },
+};

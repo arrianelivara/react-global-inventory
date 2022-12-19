@@ -11,8 +11,9 @@ import WarehouseSelection from '../../common/warehouse.module';
 import { useMemo } from 'react';
 import initialFormState from '../../common/warehouse-state.module';
 import { useApi, useFilter, useMount, useSelectItems } from 'hooks/index';
-import { employeeResponse } from 'mappers/employee.mapper';
-import { searchEmployees } from 'apis/employee.api';
+import { employeeData, employeeResponse } from 'mappers/employee.mapper';
+import { getEmployeeById, searchEmployees } from 'apis/employee.api';
+import { mapObject } from 'services/index';
 
 const EmployeeList = () => {
     const addEmployeeModal = useModal();
@@ -68,7 +69,12 @@ const EmployeeList = () => {
         },
         [modifyFilters, clearSelected]
     );
-    
+
+    const { request: requestEmployee, loading: requestingEmployee, mappedData: employeeMapped } = useApi({
+        api: getEmployeeById,
+        mapper: employeeData
+    });
+
     return (
         <WrapperA
             title={lang.employees}
@@ -88,12 +94,18 @@ const EmployeeList = () => {
                     <Button iconPrefix={<EditOutlined className="mr-sm"/>} 
                             type={StyleType.Secondary}
                             disabled={Object.keys(selected).length === 0}
-                            onClick={() => {
-                                editEmployeeModal.show({
-                                    title: lang.updateEmployeeInfo,
-                                    okText: lang.save,
-                                    width: "50%"
-                                })
+                            onClick={async () => {
+                                let id = Object.values(selected)[0]?.id || null;
+                                if (id) {
+                                    const res = await requestEmployee({ id });
+                                    // const initState = await mapObject({ ...res }, employeeData);
+                                    editEmployeeModal.show({
+                                        title: lang.updateEmployeeInfo,
+                                        okText: lang.save,
+                                        width: "50%",
+                                    })
+                                }
+                                
                             }}
                         >{lang.update}
                     </Button>
@@ -123,9 +135,10 @@ const EmployeeList = () => {
                 fetchList={fetchEmployees}/>
             <AddEmployeeModal addEmployeeModal={addEmployeeModal} refreshList={fetchEmployees} requestState={requestState}/>
             <EditEmployeeModal editEmployeeModal={editEmployeeModal} 
-                selected={selected} 
                 refreshList={fetchEmployees} 
                 requestState={requestState}
+                loading={requestingEmployee}
+                initialState={employeeMapped}
             />
         </WrapperA>
     );

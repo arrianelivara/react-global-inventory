@@ -44,33 +44,42 @@ const WarehouseModal = ({ warehouseModal, initialState, handleSubmit, refreshLis
                         <Input {...fields.warehouseName} onChange={modifyField}/>
                     </Field>
                 </div>
-                <div className='mt-sm flex gap-2'>
-                    <Field {...fields.startDate} required>
-                        <DatePicker {...fields.startDate} onChange={(name, value) => {
-                            let startD = value;
-                            if (!value) {
-                                startD = null;
-                            } else {
-                                startD = moment(startD)
-                            }
-                            modifyField("startDate", { value: startD });
-                        }}></DatePicker>
-                    </Field>
-                    <Field {...fields.endDate}>
-                        <DatePicker {...fields.endDate} onChange={(name, value) => {
-                            let endD = value;
-                            if (!value) {
-                                endD = null;
-                            } else {
-                                endD = moment(endD)
-                            }
-                            modifyField("endDate", { value: endD });
-                        }}></DatePicker>
-                    </Field>
-                </div>
                 <div className='mt-sm'>
                     <Field {...fields.description}>
                         <TextArea {...fields.description} onChange={modifyField}/>
+                    </Field>
+                </div>
+                <div className='mt-sm grid md:grid-cols-2 gap-3'>
+                    <Field {...fields.startDate} required>
+                        <DatePicker {...fields.startDate} onChange={(name, value) => {
+                                let startD = value;
+                                if (!value) {
+                                    startD = null;
+                                } else {
+                                    startD = moment(startD)
+                                }
+                                modifyField("startDate", { value: startD });
+                            }}/>
+                        </Field>
+                        <Field {...fields.endDate}>
+                            <DatePicker {...fields.endDate} onChange={(name, value) => {
+                                let startD = fields.startDate.value;
+                                let endD = value;
+
+                                if (!value) {
+                                    endD = null;
+                                    modifyField("endDate", { value: null });
+                                } else {
+                                    endD = moment(value);
+                                    console.log("here", endD.diff(startD, "days"))
+                                    const num = endD.diff(startD, "days");
+                                    if (num < 1 || isNaN(num)) {
+                                        modifyField("endDate", { value: null });
+                                    } else {
+                                        modifyField("endDate", { value: endD });
+                                    }
+                                }
+                            }}/>
                     </Field>
                 </div>
         </Modal>
