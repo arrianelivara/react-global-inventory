@@ -8,6 +8,7 @@ const DatePicker = ({ onChange, className, value, ...props }) => {
             onChange={onChange} 
             className={classnames(className, styles.date)}
             value={value}
+            format={"MMMM D, YYYY"}
             {...props}
         ></AntDatePicker>);
 }

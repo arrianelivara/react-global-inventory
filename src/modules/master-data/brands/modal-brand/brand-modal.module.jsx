@@ -31,7 +31,6 @@ const BrandModal = ({ brandModal, initialState, handleSubmit, refreshList, reque
                     end_date: params.endDate?.format('YYYY-MM-DD'),
                 }
                 await handleSubmit(obj);
-                console.log("nulling")
                 brandModal.close();
                 clearForm();
                 refreshList(requestState);

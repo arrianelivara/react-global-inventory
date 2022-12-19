@@ -1,4 +1,4 @@
-import { Get, Post, Put } from "services";
+import { Get, Post, Put, Delete } from "services";
 import { ApiPath } from "paths";
 
 export const getBrand = async (id) => {
@@ -19,4 +19,15 @@ export const searchBrand = async (body) => {
 export const updateBrand = async ({ id, body }) => {
   const res = await Put(`${ApiPath.UPDATE_BRAND(id)}`, body);
   return res;
+};
+
+export const deleteBrand = async ({ brandId }) => {
+  const res = await Delete(`${ApiPath.BRAND_ID(brandId)}`);
+  return res.data;
+};
+
+
+export const batchDeleteBrand = async (body) => {
+  const res = await Post(`${ApiPath.BATCH_BRAND}`, body);
+  return res.data;
 };

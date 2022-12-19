@@ -25,3 +25,8 @@ export const getAllWarehouse = async () => {
   const res = await Get(`${ApiPath.WAREHOUSE}`);
   return res;
 };
+
+export const deleteWarehouse = async ({ warehouseId }) => {
+  const res = await Delete(`${ApiPath.WAREHOUSE_ID(warehouseId)}`);
+  return res.data;
+};

@@ -1,4 +1,4 @@
-import { Get, Post, Put } from "services";
+import { Get, Post, Put, Delete } from "services";
 import { ApiPath } from "paths";
 
 export const getSupplier = async (id) => {
@@ -25,5 +25,16 @@ export const updateSupplier = async ({ id, body }) => {
 export const getAllSupplier = async () => {
   const res = await Get(ApiPath.SUPPLIER);
   return res;
+};
+
+export const deleteSupplier = async ({ supplierId }) => {
+  const res = await Delete(`${ApiPath.SUPPLIER_ID(supplierId)}`);
+  return res.data;
+};
+
+
+export const batchDeleteSupplier= async (body) => {
+  const res = await Post(`${ApiPath.BATCH_SUPPLIER}`, body);
+  return res.data;
 };
 

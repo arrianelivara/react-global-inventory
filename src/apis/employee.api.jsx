@@ -1,4 +1,4 @@
-import { Get, Post, Put } from "services";
+import { Get, Post, Put, Delete } from "services";
 import { ApiPath } from "paths";
 
 export const getEmployeeById = async ({ id }) => {
@@ -19,4 +19,15 @@ export const createEmployee = async (body) => {
 export const updateEmployee = async ({ id, body }) => {
   const res = await Put(`${ApiPath.UPDATE_EMPLOYEE(id)}`, body);
   return res;
+};
+
+export const deleteEmployee = async ({ employeeId }) => {
+  const res = await Delete(`${ApiPath.EMPLOYEE_ID(employeeId)}`);
+  return res.data;
+};
+
+
+export const batchDeleteEmployee = async (body) => {
+  const res = await Post(`${ApiPath.BATCH_EMPLOYEE}`, body);
+  return res.data;
 };

@@ -1,4 +1,4 @@
-import { Get, Post, Put } from "services";
+import { Get, Post, Put, Delete } from "services";
 import { ApiPath } from "paths";
 
 export const getPart = async (id) => {
@@ -21,5 +21,13 @@ export const updatePart = async ({ id, body }) => {
   return res;
 };
 
+export const deletePart = async ({ partId }) => {
+  const res = await Delete(`${ApiPath.PART_ID(partId)}`);
+  return res.data;
+};
 
 
+export const batchDeletePart= async (body) => {
+  const res = await Post(`${ApiPath.BATCH_PART}`, body);
+  return res.data;
+};

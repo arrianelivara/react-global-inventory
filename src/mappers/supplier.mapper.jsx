@@ -6,12 +6,12 @@ export const supplierResponse = {
     supplierName: { key: "supplier" },
     startDate: { 
         transform: ({ src }) => {
-            return formatDate(src.start_date, DateTime.L) || "-";
+            return formatDate(src.start_date, DateTime.A) || "-";
          },
      },
     endDate: { 
         transform: ({ src }) => {
-            return formatDate(src.end_date, DateTime.L) || "-";
+            return formatDate(src.end_date, DateTime.A) || "-";
         },
     },
     description: { 

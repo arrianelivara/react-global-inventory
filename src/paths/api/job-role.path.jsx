@@ -3,6 +3,7 @@ export const jobRolePaths = {
     SEARCH_JOBROLE: "search",
     JOBROLE_ID: (jobRoleId) => jobRoleId,
     CREATE_JOBROLE: "create",
-    UPDATE_JOBROLE: (jobRoleId) => `update/${jobRoleId}`
+    UPDATE_JOBROLE: (jobRoleId) => `update/${jobRoleId}`,
+    BATCH_JOBROLE: "batch-jobrole"
 };
   

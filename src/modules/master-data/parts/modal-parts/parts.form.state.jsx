@@ -27,19 +27,19 @@ export const initialFormState = (initialState = {}) => {
     },
     description: {
         name: "description",
-        value: description,
+        value: description === "-" ? null : description,
         type: Field.INPUT,
         label: lang.description
     },
     startDate: {
         name: "startDate",
-        value: startDate ? moment(startDate) : null,
+        value: startDate === "-" || startDate === null ? null : moment(startDate),
         type: Field.DATE_RANGE,
         label: lang.startDate
     },
     endDate: {
         name: "endDate",
-        value: endDate ? moment(endDate) : null,
+        value: endDate === "-" || endDate === null ? null : moment(endDate),
         type: Field.DATE_RANGE,
         label: lang.endDate
     },
