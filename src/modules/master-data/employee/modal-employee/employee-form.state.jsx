@@ -58,7 +58,7 @@ export const initialFormState = (initialState = {}) => {
     startDate: {
       name: "startDate",
       label: lang.startDate,
-      value: startDate === "-" || startDate === null ? null : moment(startDate),
+      value: startDate === "-" || startDate === null ? moment() : moment(startDate),
       type: Field.DATE_RANGE,
     },
     endDate: {

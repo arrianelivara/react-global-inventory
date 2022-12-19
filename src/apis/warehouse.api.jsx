@@ -30,3 +30,8 @@ export const deleteWarehouse = async ({ warehouseId }) => {
   const res = await Delete(`${ApiPath.WAREHOUSE_ID(warehouseId)}`);
   return res.data;
 };
+
+export const batchDeleteWarehouse= async (body) => {
+  const res = await Post(`${ApiPath.BATCH_WAREHOUSE}`, body);
+  return res.data;
+};

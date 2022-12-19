@@ -45,12 +45,23 @@ const PartsModal = ({ partsModal, handleSubmit, initialState, refreshList, reque
                 <div className='mt-sm flex gap-2'>
                     <Field {...fields.startDate}>
                         <DatePicker {...fields.startDate} onChange={(name, value) => {
-                            modifyField("startDate", { value: moment(value) });
+                            if (!value) {
+                                startD = null;
+                            } else {
+                                startD = moment(startD)
+                            }
+                            modifyField("startDate", { value: startD });
                         }}></DatePicker>
                     </Field>
                     <Field {...fields.endDate}>
                         <DatePicker {...fields.endDate} onChange={(name, value) => {
-                            modifyField("endDate", { value: moment(value) });
+                            let endD = value;
+                            if (!value) {
+                                endD = null;
+                            } else {
+                                endD = moment(endD)
+                            }
+                            modifyField("endDate", { value: endD });
                         }}></DatePicker>
                     </Field>
                 </div>

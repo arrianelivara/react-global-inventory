@@ -4,7 +4,6 @@ import { formatDate } from "services";
 export const jobRolesResponse = {
     id: { key: "id" },
     jobRoleName: { key: "job_role" },
-    startDate: { key: "start_date" },
     startDate: { 
         transform: ({ src }) => {
             return formatDate(src.start_date, DateTime.A) || "-";
@@ -20,6 +19,11 @@ export const jobRolesResponse = {
             return src.description || "-";
         },
     }
+};
+
+export const jobRolesOptions = {
+    value: { key: "id" },
+    text: { key: "job_role" },
 };
   
   

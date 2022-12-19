@@ -1,10 +1,12 @@
 import { Modal } from 'antd';
 import { DatePicker, Field, Input, Select, Text, TextArea } from 'components';
 import lang from "translations"
-import React, { useMemo } from 'react'
-import { useForm } from 'hooks/index';
+import React, { useMemo, useCallback } from 'react'
+import { useForm, useApi,useMount } from 'hooks/index';
 import { initialFormState } from './employee-form.state';
 import moment from "moment";
+import { searchJobRole } from 'apis/job-role.api';
+import { jobRolesOptions } from 'mappers/job-role.mapper';
 
 const EmployeeModal = ({ initialState, employeeModal, handleSubmit, refreshList, requestState }) => {
 
@@ -16,16 +18,32 @@ const EmployeeModal = ({ initialState, employeeModal, handleSubmit, refreshList,
       initialState: formState,
     });
 
-    const jobRole = [
-        {
-           value: "Manager",
-           text: "Manager" 
+    const { request, loading ,
+        result: searchJobRolesResult = { metadata: [], total: 0, numPages: 0 },
+        mappedData } = useApi({
+        api: searchJobRole,
+        isArray: true,
+        mapper: jobRolesOptions
+    });
+
+    useMount(() => {
+        fetchJobRoles(requestState);
+    });
+
+    const fetchJobRoles = useCallback(
+        (requestState) => {
+            request(requestState);
         },
-        {
-            value: "Staff",
-            text: "Staff" 
-        }
-    ]
+        [request]
+    );
+
+    const prepareJobRoles = useCallback(() => {
+        return mappedData;
+    }, [mappedData]);
+
+    const jobRoles = useMemo(() => {
+        return prepareJobRoles();
+    }, [prepareJobRoles]);
 
     return (
         <Modal {...employeeModal} onCancel={() => employeeModal.close()} 
@@ -65,16 +83,28 @@ const EmployeeModal = ({ initialState, employeeModal, handleSubmit, refreshList,
                 </div>
                 <div className='mt-sm grid md:grid-cols-4 gap-3'>
                     <Field {...fields.jobRole} className="col-span-2" required>
-                        <Select {...fields.jobRole} onChange={modifyField} text={lang.selectJobRole} options={jobRole}></Select>
+                        <Select {...fields.jobRole} onChange={modifyField} text={lang.selectJobRole} options={mappedData}></Select>
                     </Field>
                     <Field {...fields.startDate} required>
                     <DatePicker {...fields.startDate} onChange={(name, value) => {
-                            modifyField("startDate", { value: moment(value) });
+                            let startD = value;
+                            if (!value) {
+                                startD = null;
+                            } else {
+                                startD = moment(startD)
+                            }
+                            modifyField("startDate", { value: startD });
                         }}></DatePicker>
                     </Field>
                     <Field {...fields.endDate}>
                         <DatePicker {...fields.endDate} onChange={(name, value) => {
-                            modifyField("endDate", { value: moment(value) });
+                            let endD = value;
+                            if (!value) {
+                                endD = null;
+                            } else {
+                                endD = moment(endD)
+                            }
+                            modifyField("endDate", { value: endD });
                         }}></DatePicker>
                     </Field>
                 </div>
