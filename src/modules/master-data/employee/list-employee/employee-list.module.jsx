@@ -13,7 +13,6 @@ import initialFormState from '../../common/warehouse-state.module';
 import { useApi, useFilter, useMount, useSelectItems } from 'hooks/index';
 import { employeeData, employeeResponse } from 'mappers/employee.mapper';
 import { getEmployeeById, searchEmployees } from 'apis/employee.api';
-import { mapObject } from 'services/index';
 
 const EmployeeList = () => {
     const addEmployeeModal = useModal();
@@ -29,7 +28,9 @@ const EmployeeList = () => {
 
     const { modifyFilters, filterState, requestState } = useFilter({
         pageSize: 10,
-        currentPage: 1
+        currentPage: 1,
+        filterBy: "warehouse",
+        filterId: null
     });
 
     useMount(() => {
@@ -75,6 +76,15 @@ const EmployeeList = () => {
         mapper: employeeData
     });
 
+    const handleWarehouseChange = (params) => {
+        const obj = {
+            filterBy: "warehouse",
+            filterId: params === "All" ? null : params
+        }
+        modifyFilters({...requestState, ...obj});
+        fetchEmployees({...requestState, ...obj});
+    };
+
     return (
         <WrapperA
             title={lang.employees}
@@ -98,7 +108,6 @@ const EmployeeList = () => {
                                 let id = Object.values(selected)[0]?.id || null;
                                 if (id) {
                                     const res = await requestEmployee({ id });
-                                    // const initState = await mapObject({ ...res }, employeeData);
                                     editEmployeeModal.show({
                                         title: lang.updateEmployeeInfo,
                                         okText: lang.save,
@@ -117,7 +126,11 @@ const EmployeeList = () => {
                 </div>
             }
             filterButtons={
-                <WarehouseSelection field={fields.warehouse} modifyField={modifyField}/>
+                <WarehouseSelection 
+                    field={fields.warehouse} 
+                    modifyField={modifyField} 
+                    handleChange={handleWarehouseChange}
+                />
             }>
             <DataTable 
                 error={error}

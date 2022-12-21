@@ -65,13 +65,10 @@ const WarehouseModal = ({ warehouseModal, initialState, handleSubmit, refreshLis
                             <DatePicker {...fields.endDate} onChange={(name, value) => {
                                 let startD = fields.startDate.value;
                                 let endD = value;
-
                                 if (!value) {
-                                    endD = null;
                                     modifyField("endDate", { value: null });
                                 } else {
                                     endD = moment(value);
-                                    console.log("here", endD.diff(startD, "days"))
                                     const num = endD.diff(startD, "days");
                                     if (num < 1 || isNaN(num)) {
                                         modifyField("endDate", { value: null });
@@ -80,7 +77,7 @@ const WarehouseModal = ({ warehouseModal, initialState, handleSubmit, refreshLis
                                     }
                                 }
                             }}/>
-                    </Field>
+                        </Field>
                 </div>
         </Modal>
      );
