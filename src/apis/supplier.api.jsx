@@ -12,7 +12,6 @@ export const createSupplier = async (body) => {
 };
 
 export const searchSupplier = async (body) => {
-  console.log(ApiPath.SEARCH_SUPPLIER);
   const res = await Post(`${ApiPath.SEARCH_SUPPLIER}`, body);
   return res;
 };

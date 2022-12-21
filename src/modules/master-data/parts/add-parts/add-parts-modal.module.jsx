@@ -9,9 +9,7 @@ const AddPartsModal = ({ addPartsModal, refreshList, requestState }) => {
 
     const handleSubmit = async (params) => {
         try {
-            console.log(params);
             await request(params);
-            console.log("created");
         } catch (e) {
 
         }

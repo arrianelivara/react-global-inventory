@@ -50,7 +50,6 @@ const useFilter = (initialState = undefined, defaultState = {}) => {
         setRequestState(newRequestFilters);
         return { filterState: newFilters, requestState: newRequestFilters };
       }
-      console.log(filterState)
       return { filterState: newFilters, requestState: null };
     },
     [filterState, initialState]

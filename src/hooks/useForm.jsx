@@ -55,7 +55,6 @@ const useForm = ({ initialState = {}, validation = null }) => {
 
   const modifyField = useCallback(
     async (name, obj) => {
-      console.log("modify field", name, obj)
       const { fields: modified } = await modifyForm(
         { [name]: obj },
         obj.hasOwnProperty("dirty") && !obj.dirty ? false : true
@@ -74,7 +73,6 @@ const useForm = ({ initialState = {}, validation = null }) => {
     setDirty(false);
     setError(false);
     setFields(initialState);
-    console.log(initialState)
     return { fields: initialState, dirty, error };
   }, [initialState, dirty, error]);
 

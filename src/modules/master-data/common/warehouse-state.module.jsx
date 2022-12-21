@@ -4,7 +4,7 @@ const initialFormState = () => {
   return {
     warehouse: {
       name: "warehouse",
-      value: "All",
+      value: null,
       type: Field.DROPDOWN,
       tooltipMsg: "Filter out the result by Warehouse Name"
     },

@@ -79,7 +79,7 @@ const EmployeeList = () => {
     const handleWarehouseChange = (params) => {
         const obj = {
             filterBy: "warehouse",
-            filterId: params === "All" ? null : params
+            filterId: params
         }
         modifyFilters({...requestState, ...obj});
         fetchEmployees({...requestState, ...obj});

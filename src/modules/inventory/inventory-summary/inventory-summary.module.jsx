@@ -26,7 +26,9 @@ const InventorySummary = () => {
 
     const { modifyFilters, filterState, requestState } = useFilter({
         pageSize: 10,
-        currentPage: 1
+        currentPage: 1,
+        filterBy: "warehouse",
+        filterId: null
     });
 
     useMount(() => {
@@ -61,12 +63,22 @@ const InventorySummary = () => {
         [modifyFilters, clearSelected]
     );
 
+    const handleWarehouseChange = (params) => {
+        const obj = {
+            filterBy: "warehouse",
+            filterId: params
+        }
+        modifyFilters({...requestState, ...obj});
+        fetchInventorySummaryList({...requestState, ...obj});
+    };
+
     return (<WrapperA title={lang.inventory} description={lang.searchAndView}
         actionButtons={
             <Button>Export to Excel</Button>
         }
         filterButtons={
-            <WarehouseSelection field={fields.warehouse} modifyField={modifyField}/>           
+            <WarehouseSelection field={fields.warehouse} modifyField={modifyField}
+                handleChange={handleWarehouseChange}/>           
         }>
         <DataTable 
             data={mappedData}

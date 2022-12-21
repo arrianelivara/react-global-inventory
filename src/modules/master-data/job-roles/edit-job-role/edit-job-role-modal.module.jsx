@@ -11,9 +11,7 @@ const EditJobRoleModal = ({ editJobRoleModal, selected, refreshList, requestStat
     const handleSubmit = async (params) => {
         try {
             const id = params.id;
-            console.log(id, params)
             await request({ id, body: params });
-            console.log("updated")
         } catch (e) {
 
         }

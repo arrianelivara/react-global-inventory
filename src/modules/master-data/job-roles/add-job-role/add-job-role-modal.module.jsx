@@ -10,9 +10,7 @@ const AddJobRoleModal = ({ addJobRoleModal, refreshList, requestState }) => {
 
     const handleSubmit = async (params) => {
         try {
-            console.log(params);
             await request(params);
-            console.log("created")
             await refreshList(requestState);
         } catch (e) {
 

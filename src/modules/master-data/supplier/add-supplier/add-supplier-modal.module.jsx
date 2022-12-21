@@ -9,7 +9,6 @@ const AddSupplierModal = ({ addSupplierModal, refreshList, requestState }) => {
 
     const handleSubmit = async (params) => {
         try {
-            console.log(params);
             await request(params);
         } catch (e) {
 

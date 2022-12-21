@@ -8,7 +8,6 @@ export const getEmployeeById = async ({ id }) => {
 
 export const searchEmployees = async (body) => {
   const res = await Post(ApiPath.SEARCH_EMPLOYEE, body);
-  console.log(res)
   return res;
 };
 

@@ -173,7 +173,6 @@ const Validation = {
     const { customMessage = null, noMessage = false } = custom;
     return (field) => {
       const value = field?.value?.toString().trim();
-      console.log()
       if (!isEmailValid(value)) {
         if (noMessage) return { error: true };
         return { error: true, message: customMessage ? customMessage : "Entered email is invalid." };
