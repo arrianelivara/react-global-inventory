@@ -24,11 +24,13 @@ export const columns = [
   {
     key: "startDate",
     text: "Start Date",
+    sortKey: "start_date",
     sort: true
   },
   {
     key: "endDate",
     text: "End Date",
+    sortKey: "end_date",
     sort: true
   },
 ];

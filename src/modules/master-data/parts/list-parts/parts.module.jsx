@@ -26,7 +26,9 @@ const Parts = () => {
 
     const { modifyFilters, filterState, requestState } = useFilter({
         pageSize: 10,
-        currentPage: 1
+        currentPage: 1,
+        sortBy: "updated_at",
+        sort: { value: "desc", key: "updated_at"} 
     });
 
     useMount(() => {
@@ -48,7 +50,7 @@ const Parts = () => {
         return prepareParts();
     }, [prepareParts]);
 
-    const { selected, selectedCount, setSelected, isAllSelected, setSelectAll, clearSelected } =
+    const { selected, setSelected, isAllSelected, setSelectAll, clearSelected } =
         useSelectItems({
         items: parts,
     });
@@ -57,14 +59,20 @@ const Parts = () => {
         return initialFormState();
     }, []);
 
-    const { fields, modifyField } = useForm({ initialState: formState })
-
     const changePageConfigCb = useCallback(
         (pageProps) => {
           clearSelected();
           return modifyFilters(pageProps);
         },
         [modifyFilters, clearSelected]
+    );
+
+    const sortCb = useCallback(
+        ({ value, key }) => {
+          const { requestState } = modifyFilters({ sort: { key, value } });
+          fetchParts({ ...requestState, sortBy: value === "desc" ? `-${key}` : key });
+        },
+        [fetchParts, modifyFilters]
     );
 
     return (
@@ -113,6 +121,9 @@ const Parts = () => {
                 pageSize={filterState.pageSize}
                 onChangePage={changePageConfigCb}
                 fetchList={fetchParts}
+                sort={filterState.sort}
+                setSort={sortCb}
+                loading={loading}
             />
             <AddPartsModal 
                 addPartsModal={addPartsModal}

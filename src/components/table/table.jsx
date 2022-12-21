@@ -184,7 +184,7 @@ const Table = ({
             if (!column) {
               return null;
             }
-            const columnKey = column.key;
+            const columnKey = column.sortKey;
             return (
               <th
                 className={classnames(

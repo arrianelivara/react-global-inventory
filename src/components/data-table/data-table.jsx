@@ -1,7 +1,6 @@
 import React, { Fragment, useCallback, useMemo } from "react";
 import {
   Container,
-  Icon,
   Pagination,
   SimpleDropdown,
   Table,

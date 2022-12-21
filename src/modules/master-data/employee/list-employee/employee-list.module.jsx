@@ -30,7 +30,9 @@ const EmployeeList = () => {
         pageSize: 10,
         currentPage: 1,
         filterBy: "warehouse",
-        filterId: null
+        filterId: null,
+        sortBy: "updated_at",
+        sort: { value: "desc", key: "updated_at"} 
     });
 
     useMount(() => {
@@ -84,6 +86,14 @@ const EmployeeList = () => {
         modifyFilters({...requestState, ...obj});
         fetchEmployees({...requestState, ...obj});
     };
+
+    const sortCb = useCallback(
+        ({ value, key }) => {
+          const { requestState } = modifyFilters({ sort: { key, value } });
+          fetchEmployees({ ...requestState, sortBy: value === "desc" ? `-${key}` : key });
+        },
+        [fetchEmployees, modifyFilters]
+    );
 
     return (
         <WrapperA
@@ -145,7 +155,10 @@ const EmployeeList = () => {
                 currentPage={filterState.currentPage}
                 pageSize={filterState.pageSize}
                 onChangePage={changePageConfigCb}
-                fetchList={fetchEmployees}/>
+                fetchList={fetchEmployees}
+                sort={filterState.sort}
+                setSort={sortCb}
+            />
             <AddEmployeeModal addEmployeeModal={addEmployeeModal} refreshList={fetchEmployees} requestState={requestState}/>
             <EditEmployeeModal editEmployeeModal={editEmployeeModal} 
                 refreshList={fetchEmployees} 

@@ -26,7 +26,9 @@ const Warehouse = () => {
 
     const { modifyFilters, filterState, requestState } = useFilter({
         pageSize: 10,
-        currentPage: 1
+        currentPage: 1,
+        sortBy: "updated_at",
+        sort: { value: "desc", key: "updated_at"} 
     });
 
     useMount(() => {
@@ -48,16 +50,10 @@ const Warehouse = () => {
         return prepareWarehouseList();
     }, [prepareWarehouseList]);
 
-    const { selected, selectedCount, setSelected, isAllSelected, setSelectAll, clearSelected } =
+    const { selected, setSelected, isAllSelected, setSelectAll, clearSelected } =
         useSelectItems({
         items: warehouse,
     });
-
-    const formState = useMemo(() => {
-        return initialFormState();
-    }, []);
-
-    const { fields, modifyField } = useForm({ initialState: formState })
 
     const changePageConfigCb = useCallback(
         (pageProps) => {
@@ -65,6 +61,14 @@ const Warehouse = () => {
           return modifyFilters(pageProps);
         },
         [modifyFilters, clearSelected]
+    );
+
+    const sortCb = useCallback(
+        ({ value, key }) => {
+          const { requestState } = modifyFilters({ sort: { key, value } });
+          fetchWarehouses({ ...requestState, sortBy: value === "desc" ? `-${key}` : key });
+        },
+        [fetchWarehouses, modifyFilters]
     );
 
     return (
@@ -113,7 +117,9 @@ const Warehouse = () => {
                 currentPage={filterState.currentPage}
                 pageSize={filterState.pageSize}
                 onChangePage={changePageConfigCb}
-                fetchList={fetchWarehouses} 
+                fetchList={fetchWarehouses}
+                sort={filterState.sort}
+                setSort={sortCb} 
             />
             <AddWarehouseModal 
                 addWarehouseModal={addWarehouseModal}

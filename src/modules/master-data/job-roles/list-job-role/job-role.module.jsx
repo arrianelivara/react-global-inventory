@@ -25,7 +25,9 @@ const JobRoles = () => {
 
     const { modifyFilters, filterState, requestState } = useFilter({
         pageSize: 10,
-        currentPage: 1
+        currentPage: 1,
+        sortBy: "updated_at",
+        sort: { value: "desc", key: "updated_at"} 
     });
 
     useMount(() => {
@@ -60,6 +62,14 @@ const JobRoles = () => {
         [modifyFilters, clearSelected]
     );
     
+    const sortCb = useCallback(
+        ({ value, key }) => {
+          const { requestState } = modifyFilters({ sort: { key, value } });
+          fetchJobRoles({ ...requestState, sortBy: value === "desc" ? `-${key}` : key });
+        },
+        [fetchJobRoles, modifyFilters]
+    );
+
     return (<WrapperA 
         title={lang.jobRoles} 
         description={lang.listOfJobRoles}
@@ -108,6 +118,8 @@ const JobRoles = () => {
             pageSize={filterState.pageSize}
             onChangePage={changePageConfigCb}
             fetchList={fetchJobRoles}
+            sort={filterState.sort}
+            setSort={sortCb}
         />
         <AddJobRoleModal 
             addJobRoleModal={addJobRoleModal} 

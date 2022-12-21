@@ -26,7 +26,9 @@ const Units = () => {
 
     const { modifyFilters, filterState, requestState } = useFilter({
         pageSize: 10,
-        currentPage: 1
+        currentPage: 1,
+        sortBy: "updated_at",
+        sort: { value: "desc", key: "updated_at"} 
     });
 
     useMount(() => {
@@ -52,12 +54,6 @@ const Units = () => {
         useSelectItems({
         items: units,
     });
-
-    const formState = useMemo(() => {
-        return initialFormState();
-    }, []);
-
-    const { fields, modifyField } = useForm({ initialState: formState })
     
     const changePageConfigCb = useCallback(
         (pageProps) => {
@@ -65,6 +61,14 @@ const Units = () => {
           return modifyFilters(pageProps);
         },
         [modifyFilters, clearSelected]
+    );
+
+    const sortCb = useCallback(
+        ({ value, key }) => {
+          const { requestState } = modifyFilters({ sort: { key, value } });
+          fetchUnits({ ...requestState, sortBy: value === "desc" ? `-${key}` : key });
+        },
+        [fetchUnits, modifyFilters]
     );
 
     return (
@@ -113,7 +117,9 @@ const Units = () => {
                 currentPage={filterState.currentPage}
                 pageSize={filterState.pageSize}
                 onChangePage={changePageConfigCb}
-                fetchList={fetchUnits} />
+                fetchList={fetchUnits}
+                sort={filterState.sort}
+                setSort={sortCb} />
             <AddUnitModal 
                 addUnitModal={addUnitModal}
                 refreshList={fetchUnits}

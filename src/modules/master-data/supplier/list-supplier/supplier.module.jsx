@@ -26,7 +26,9 @@ const Supplier = () => {
 
     const { modifyFilters, filterState, requestState } = useFilter({
         pageSize: 10,
-        currentPage: 1
+        currentPage: 1,
+        sortBy: "updated_at",
+        sort: { value: "desc", key: "updated_at"} 
     });
 
     useMount(() => {
@@ -53,18 +55,20 @@ const Supplier = () => {
         items: supplier,
     });
 
-    const formState = useMemo(() => {
-        return initialFormState();
-    }, []);
-
-    const { fields, modifyField } = useForm({ initialState: formState })
-
     const changePageConfigCb = useCallback(
         (pageProps) => {
           clearSelected();
           return modifyFilters(pageProps);
         },
         [modifyFilters, clearSelected]
+    );
+
+    const sortCb = useCallback(
+        ({ value, key }) => {
+          const { requestState } = modifyFilters({ sort: { key, value } });
+          fetchSupplier({ ...requestState, sortBy: value === "desc" ? `-${key}` : key });
+        },
+        [fetchSupplier, modifyFilters]
     );
 
     return (
@@ -114,6 +118,8 @@ const Supplier = () => {
                 pageSize={filterState.pageSize}
                 onChangePage={changePageConfigCb}
                 fetchList={fetchSupplier}
+                sort={filterState.sort}
+                setSort={sortCb}
             />
             <AddSupplierModal 
                 addSupplierModal={addSupplierModal}

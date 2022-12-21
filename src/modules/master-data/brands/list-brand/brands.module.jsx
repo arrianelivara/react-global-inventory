@@ -58,6 +58,14 @@ const Brands = () => {
         [modifyFilters, clearSelected]
     );
     
+    const sortCb = useCallback(
+        ({ value, key }) => {
+          const { requestState } = modifyFilters({ sort: { key, value } });
+          fetchBrands({ ...requestState, sortBy: value === "desc" ? `-${key}` : key });
+        },
+        [fetchBrands, modifyFilters]
+    );
+
     return (
         <WrapperA title={lang.brands} 
             description={lang.listOfBrands}
@@ -106,6 +114,8 @@ const Brands = () => {
                 onChangePage={changePageConfigCb}
                 fetchList={fetchBrands}
                 error={error}
+                sort={filterState.sort}
+                setSort={sortCb}
             />
             <AddBrandModal addBrandModal={addBrandModal} refreshList={fetchBrands} requestState={requestState}/> 
             <EditBrandModal editBrandModal={editBrandModal} 
