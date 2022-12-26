@@ -21,5 +21,10 @@ export const brandListResponse = {
     }
 };
 
+export const brandOptions = {
+    value: { key: "brand" },
+    text: { key: "brand" },
+};
+
   
   

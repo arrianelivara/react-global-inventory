@@ -6,6 +6,11 @@ export const getBrand = async (id) => {
   return res;
 };
 
+export const getAllBrands = async () => {
+  const res = await Get(`${ApiPath.BRAND}`);
+  return res;
+};
+
 export const createBrand = async (body) => {
   const res = await Post(ApiPath.CREATE_BRAND, body);
   return res;

@@ -55,10 +55,6 @@ const Parts = () => {
         items: parts,
     });
 
-    const formState = useMemo(() => {
-        return initialFormState();
-    }, []);
-
     const changePageConfigCb = useCallback(
         (pageProps) => {
           clearSelected();

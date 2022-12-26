@@ -86,6 +86,7 @@ export const locale = {
     supplierName: "Supplier Name",
     unitName: "Unit Name",
     warehouseName: "Warehouse Name",
-    selectWarehouse: "Select Warehouse"
+    selectWarehouse: "Select Warehouse",
+    brandDescription: "Brand Description"
 
 }; export default Object.freeze(locale);

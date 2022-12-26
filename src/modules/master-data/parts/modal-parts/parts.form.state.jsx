@@ -10,6 +10,7 @@ export const initialFormState = (initialState = {}) => {
     description = '',
     startDate = null,
     endDate = null,
+    brand
   } = initialState;
 
   return {
@@ -42,6 +43,12 @@ export const initialFormState = (initialState = {}) => {
         value: endDate === "-" || endDate === null ? null : moment(endDate),
         type: Field.DATE_RANGE,
         label: lang.endDate
+    },
+    brand: {
+      name: "brand",
+      value: brand,
+      type: Field.DROPDOWN,
+      label: lang.brand
     },
   }
 };

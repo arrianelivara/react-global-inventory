@@ -2,10 +2,11 @@ import { Modal } from 'antd';
 import { Field, Input, Text, TextArea } from 'components';
 import React, { useMemo } from 'react'
 import { initialFormState } from './parts.form.state';
-import { useForm } from 'hooks/index';
-import field from 'enums/field';
+import { useApi, useForm, useMount } from 'hooks/index';
 import moment from "moment";
-import { DatePicker } from 'components/index';
+import { DatePicker, Select } from 'components/index';
+import { getAllBrands } from 'apis/brand.api';
+import { brandOptions } from 'mappers/brand.mapper';
 const PartsModal = ({ partsModal, handleSubmit, initialState, refreshList, requestState }) => {
 
     const formState = useMemo(() => {
@@ -14,6 +15,18 @@ const PartsModal = ({ partsModal, handleSubmit, initialState, refreshList, reque
 
     const { fields, modifyField, getFormValues, clearForm } = useForm({
       initialState: formState,
+    });
+
+    const { request, loading ,
+        mappedData } = useApi({
+        api: getAllBrands,
+        isArray: true,
+        mapper: brandOptions
+    });
+
+
+    useMount(() => {
+        request();
     });
 
     return (
@@ -29,6 +42,7 @@ const PartsModal = ({ partsModal, handleSubmit, initialState, refreshList, reque
                     part: params.partNo,
                     start_date: params.startDate?.format('YYYY-MM-DD'),
                     end_date: params.endDate?.format('YYYY-MM-DD'),
+                    brand: params.brand
                 }
                 await handleSubmit(obj);
                 partsModal.close();
@@ -37,14 +51,17 @@ const PartsModal = ({ partsModal, handleSubmit, initialState, refreshList, reque
             }}
             >
                 <Text label>Note: Fields with (<span className='text-red'>*</span>) are required.</Text>
-                <div className='mt-md'>
+                <div className='mt-md grid md:grid-cols-2 gap-3'>
                     <Field {...fields.partNo} required>
                         <Input {...fields.partNo} onChange={modifyField}/>
                     </Field>
+                    <Field {...fields.description} required>
+                        <Input {...fields.description} onChange={modifyField} />
+                    </Field>
                 </div>
                 <div className='mt-sm'>
-                    <Field {...fields.description}>
-                        <TextArea {...fields.description} onChange={modifyField} />
+                    <Field {...fields.brand}>
+                        <Select {...fields.brand} loading={loading} options={mappedData} onChange={modifyField}/>
                     </Field>
                 </div>
                 <div className='mt-sm grid md:grid-cols-2 gap-3'>

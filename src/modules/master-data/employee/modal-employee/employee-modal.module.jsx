@@ -111,7 +111,7 @@ const EmployeeModal = ({ initialState, employeeModal, handleSubmit, refreshList,
                 </div>
                 <div className='mt-sm grid md:grid-cols-2 gap-3'>
                     <Field {...fields.startDate} required>
-                        <DatePicker {...fields.startDate} disabled onChange={(name, value) => {
+                        <DatePicker {...fields.startDate} onChange={(name, value) => {
                                 let startD = value;
                                 if (!value) {
                                     startD = null;
