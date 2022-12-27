@@ -1,7 +1,7 @@
 import React from 'react'
 import { Logo } from 'images';
 import { Text, Button } from "components"
-import { formatDate, redirectTo } from "services";
+import { formatDate } from "services";
 import lang from 'translations';
 import { Path } from 'paths';
 import { LogoutOutlined } from "@ant-design/icons";
@@ -25,7 +25,6 @@ const Navigation = ({ isLoggedIn }) => {
           logoutModal.close()
         }
       })
-
     }
 
     return <React.Fragment>
@@ -44,9 +43,10 @@ const Navigation = ({ isLoggedIn }) => {
       </div>
       <Modal {...logoutModal} 
         title='Are you sure you want to logout?'
-        content='You will be redirected to Sign in Page.'
         okText='Yes, I am sure.'
-        cancelText='No, go back.'/>
+        cancelText='No, go back.'>
+          <Text className="ml-sm mt-md">You will be directed to Login Page.</Text>
+        </Modal>
     </React.Fragment>
 }
 

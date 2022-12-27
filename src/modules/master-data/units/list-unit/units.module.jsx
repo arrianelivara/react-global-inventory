@@ -1,6 +1,5 @@
 import { DataTable, WrapperA, Button } from 'components';
-import { useForm, useModal } from 'hooks';
-import initialFormState from 'modules/master-data/common/warehouse-state.module';
+import { useModal } from 'hooks';
 import React, { useCallback, useMemo } from 'react';
 import lang from 'translations';
 import { PlusOutlined, EditOutlined,DeleteOutlined } from "@ant-design/icons";
@@ -11,10 +10,12 @@ import { columns } from './columns';
 import { useApi, useFilter, useMount, useSelectItems } from 'hooks/index';
 import { searchUnit } from 'apis/unit.api';
 import { unitResponse } from 'mappers/unit.mapper';
+import DeleteUnitModal from '../delete-unit/delete-unit-modal.module';
 
 const Units = () => {
     const addUnitModal = useModal();
     const editUnitModal = useModal();
+    const deleteUnitModal = useModal();
 
     const { request, loading ,
         result: searchUnitResult = { metadata: [], total: 0, numPages: 0 },
@@ -100,7 +101,10 @@ const Units = () => {
                     </Button>
                     <Button iconPrefix={<DeleteOutlined className="mr-sm" />} className="mx-sm"
                         disabled={Object.keys(selected).length === 0}
-                        type={StyleType.Danger}>
+                        type={StyleType.Danger}
+                        onClick={() => {
+                            deleteUnitModal.show();
+                        }}>
                         {lang.delete}
                     </Button>
                 </div>}
@@ -130,6 +134,12 @@ const Units = () => {
                 refreshList={fetchUnits}
                 requestState={requestState}
                 selected={selected}/>
+            <DeleteUnitModal
+                selected={selected}
+                deleteUnitModal={deleteUnitModal} 
+                refreshList={fetchUnits} 
+                requestState={requestState}
+            />
         </WrapperA>);
 }
  

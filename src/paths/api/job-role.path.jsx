@@ -4,6 +4,6 @@ export const jobRolePaths = {
     JOBROLE_ID: (jobRoleId) => jobRoleId,
     CREATE_JOBROLE: "create",
     UPDATE_JOBROLE: (jobRoleId) => `update/${jobRoleId}`,
-    BATCH_JOBROLE: "batch-jobrole"
+    BATCH_JOBROLE: "batch-delete"
 };
   

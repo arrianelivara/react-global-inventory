@@ -11,10 +11,12 @@ import { columns } from './columns';
 import { useApi, useFilter, useMount, useSelectItems } from 'hooks/index';
 import { searchSupplier } from 'apis/supplier.api';
 import { supplierResponse } from 'mappers/supplier.mapper';
+import DeleteSupplierModal from '../delete-supplier/delete-supplier-modal.module';
 
 const Supplier = () => {
     const addSupplierModal = useModal();
     const editSupplierModal = useModal();
+    const deleteSupplierModal = useModal();
 
     const { request, loading ,
         result: searchSupplierResult = { metadata: [], total: 0, numPages: 0 },
@@ -100,7 +102,10 @@ const Supplier = () => {
                     </Button>
                     <Button iconPrefix={<DeleteOutlined className="mr-sm" />} className="mx-sm"
                         disabled={Object.keys(selected).length === 0}
-                        type={StyleType.Danger}>
+                        type={StyleType.Danger}
+                        onClick={() => {
+                            deleteSupplierModal.show();
+                        }}>
                         {lang.delete}
                     </Button>
                 </div>}
@@ -130,6 +135,12 @@ const Supplier = () => {
                 refreshList={fetchSupplier} 
                 requestState={requestState}
                 selected={selected} />
+            <DeleteSupplierModal 
+                selected={selected}
+                deleteSupplierModal={deleteSupplierModal} 
+                refreshList={fetchSupplier} 
+                requestState={requestState}
+            />
         </WrapperA>);
 }
  

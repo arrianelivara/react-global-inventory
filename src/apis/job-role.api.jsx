@@ -28,6 +28,6 @@ export const deleteJobRole = async ({ jobRoleId }) => {
 
 
 export const batchDeleteJobRole = async (body) => {
-  const res = await Post(`${ApiPath.BATCH_JOB_ROLE}`, body);
+  const res = await Post(`${ApiPath.BATCH_JOBROLE}`, body);
   return res.data;
 };

@@ -13,11 +13,12 @@ import initialFormState from '../../common/warehouse-state.module';
 import { useApi, useFilter, useMount, useSelectItems } from 'hooks/index';
 import { employeeData, employeeResponse } from 'mappers/employee.mapper';
 import { getEmployeeById, searchEmployees } from 'apis/employee.api';
+import DeleteEmployeeModal from '../delete-employee/delete-employee-modal.module';
 
 const EmployeeList = () => {
     const addEmployeeModal = useModal();
     const editEmployeeModal = useModal();
-
+    const deleteEmployeeModal = useModal();
     const { request, loading ,
         result: searchEmployeeResult = { metadata: [], total: 0, numPages: 0 },
         mappedData, error } = useApi({
@@ -130,7 +131,10 @@ const EmployeeList = () => {
                     </Button>
                     <Button iconPrefix={<DeleteOutlined className="mr-sm" />} className="mx-sm"
                         disabled={Object.keys(selected).length === 0}
-                        type={StyleType.Danger}>
+                        type={StyleType.Danger}
+                        onClick={() => {
+                            deleteEmployeeModal.show();
+                        }}>
                         {lang.delete}
                     </Button>
                 </div>
@@ -165,6 +169,12 @@ const EmployeeList = () => {
                 requestState={requestState}
                 loading={requestingEmployee}
                 initialState={employeeMapped}
+            />
+            <DeleteEmployeeModal 
+                selected={selected}
+                deleteEmployeeModal={deleteEmployeeModal} 
+                refreshList={fetchEmployees} 
+                requestState={requestState}
             />
         </WrapperA>
     );

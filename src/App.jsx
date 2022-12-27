@@ -4,13 +4,16 @@ import LayoutA from "./components/layout/layout-a";
 import { SignIn } from "./modules";
 import AuthorizedPage from "./pages/authorized/authorized.page";
 import React, { useState } from "react";
-import { Loader, Error } from "components/index";
+import { Loader, Error, Text } from "components/index";
 import { AppContext } from "contexts";
+import { Modal } from "antd";
+import { useModal } from "hooks/index";
 
 function App() {
   const [appState, setAppState] = useState({ error: false });
   const [globalLoading, setGlobalLoading] = useState(false);
   const [error, setError] = useState(false);
+  const globalErrorModal = useModal();
 
   return (
     <div className="App">
@@ -20,6 +23,7 @@ function App() {
           setAppState,
           setGlobalLoading,
           setGlobalError: setError,
+          globalErrorModal,
         }}
       >
         <BrowserRouter>
@@ -35,6 +39,16 @@ function App() {
           }
         </BrowserRouter>
         {globalLoading && <Loader loading={globalLoading} />}
+        <Modal {...globalErrorModal} 
+          title="Something Went Wrong.."
+          cancelButtonProps={{ style: { display: "none" }}}
+          onOk={() => {
+            globalErrorModal.close();
+          }}
+          onCancel={() => {
+            globalErrorModal.close();
+          }}
+        ><Text className="mt-md ml-sm">Refresh page or contact administrator.</Text></Modal>
       </AppContext.Provider>
     </div>
   );

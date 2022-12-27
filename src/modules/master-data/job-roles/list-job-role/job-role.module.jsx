@@ -10,10 +10,12 @@ import { columns } from './columns';
 import { useApi, useFilter, useMount, useSelectItems } from 'hooks/index';
 import { searchJobRole } from 'apis/job-role.api';
 import { jobRolesResponse } from 'mappers/job-role.mapper';
+import DeleteJobRoleModal from '../delete-job-role/delete-job-role-modal.module';
 
 const JobRoles = () => {
     const addJobRoleModal = useModal();
     const editJobRoleModal = useModal();
+    const deleteJobRoleModal = useModal();
 
     const { request, loading ,
         result: searchJobRolesResult = { metadata: [], total: 0, numPages: 0 },
@@ -99,7 +101,10 @@ const JobRoles = () => {
                 </Button>
                 <Button iconPrefix={<DeleteOutlined className="mr-sm" />} className="mx-sm"
                         disabled={Object.keys(selected).length === 0}
-                        type={StyleType.Danger}>
+                        type={StyleType.Danger}
+                        onClick={() => {
+                            deleteJobRoleModal.show();
+                        }}>
                         {lang.delete}
                 </Button>
             </div>
@@ -129,6 +134,12 @@ const JobRoles = () => {
         <EditJobRoleModal  
             editJobRoleModal={editJobRoleModal} 
             selected={selected}
+            refreshList={fetchJobRoles} 
+            requestStae={requestState}
+        />
+        <DeleteJobRoleModal
+            selected={selected}
+            deleteJobRoleModal={deleteJobRoleModal} 
             refreshList={fetchJobRoles} 
             requestState={requestState}
         />

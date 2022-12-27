@@ -1,4 +1,5 @@
-import { useCallback, useState } from "react";
+import { AppContext } from "contexts/index";
+import { useCallback, useContext, useState } from "react";
 import { mapObject, mapObjects } from "services";
 
 const useApi = ({
@@ -16,6 +17,7 @@ const useApi = ({
   const [result, setResult] = useState(undefined);
   const [mappedData, setMappedData] = useState(isArray ? [] : {});
   const [submittedParams, setSubmittedParams] = useState({});
+  const { globalErrorModal, setGlobalError } = useContext(AppContext);
 
   const mapData = useCallback(
     (res, params) => {
@@ -39,6 +41,7 @@ const useApi = ({
     async (p) => {
       setLoading(true);
       setError(false);
+      setGlobalError(false);
       try {
         setSubmittedParams({ ...params, ...p });
         const parameter = paramsMapper
@@ -79,7 +82,7 @@ const useApi = ({
         };
 
         const showErrorAppState = () => {
-          console.log("error");
+          globalErrorModal.show();
         };
 
         err.handleError = () => {
@@ -87,11 +90,13 @@ const useApi = ({
         };
 
         if (pageError) {
+          setGlobalError(true);
           throw err;
         }
 
         const obj = {
           gateway: () => {
+            setGlobalError(true);
             throw err;
           },
           network: () => {
@@ -117,7 +122,7 @@ const useApi = ({
             throw err;
           },
           badrequest: () => {
-            
+            globalErrorModal.show();
             throw err;
           },
         };
@@ -138,6 +143,8 @@ const useApi = ({
       mapData,
       returnMappedData,
       pageError,
+      globalErrorModal,
+      setGlobalError
     ]
   );
 

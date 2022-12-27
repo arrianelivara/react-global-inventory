@@ -4,6 +4,6 @@ export const supplierPaths = {
     SUPPLIER_ID: (supplierId) => supplierId,
     CREATE_SUPPLIER: "create",
     UPDATE_SUPPLIER: (supplierId) => `update/${supplierId}`,
-    BATCH_SUPPLIER: "batch-supplier"
+    BATCH_SUPPLIER: "batch-delete"
 };
   

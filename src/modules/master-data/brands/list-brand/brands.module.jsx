@@ -11,10 +11,12 @@ import { useApi, useFilter, useMount, useSelectItems } from 'hooks/index';
 import { searchBrand } from 'apis/brand.api';
 import { brandListResponse } from 'mappers/brand.mapper';
 import { brandFilterState } from './filters';
+import DeleteBrandModal from '../delete-brand/delete-brand-modal.module';
 
 const Brands = () => {
     const addBrandModal = useModal();
     const editBrandModal = useModal();
+    const deleteBrandModal = useModal();
 
     const { request, loading ,
         result: searchBrandResult = { metadata: [], total: 0, numPages: 0 },
@@ -95,7 +97,10 @@ const Brands = () => {
                     </Button>
                     <Button iconPrefix={<DeleteOutlined className="mr-sm" />} className="mx-sm"
                         disabled={Object.keys(selected).length === 0}
-                        type={StyleType.Danger}>
+                        type={StyleType.Danger}
+                        onClick={() => {
+                            deleteBrandModal.show();
+                        }}>
                         {lang.delete}
                     </Button>
                 </div>}
@@ -120,6 +125,12 @@ const Brands = () => {
             <AddBrandModal addBrandModal={addBrandModal} refreshList={fetchBrands} requestState={requestState}/> 
             <EditBrandModal editBrandModal={editBrandModal} 
                 selected={selected}
+                refreshList={fetchBrands} 
+                requestState={requestState}
+            />
+            <DeleteBrandModal 
+                selected={selected}
+                deleteBrandModal={deleteBrandModal} 
                 refreshList={fetchBrands} 
                 requestState={requestState}
             />

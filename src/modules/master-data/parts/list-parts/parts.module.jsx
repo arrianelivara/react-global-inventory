@@ -1,6 +1,5 @@
 import { DataTable, WrapperA, Button } from 'components';
-import { useForm, useModal } from 'hooks';
-import initialFormState from 'modules/master-data/common/warehouse-state.module';
+import {  useModal } from 'hooks';
 import React, { useCallback, useMemo } from 'react';
 import lang from 'translations';
 import { PlusOutlined, EditOutlined,DeleteOutlined } from "@ant-design/icons";
@@ -11,10 +10,12 @@ import { columns } from './columns';
 import { useApi, useFilter, useMount, useSelectItems } from 'hooks/index';
 import { searchPart } from 'apis/part.api';
 import { partResponse } from 'mappers/part.mapper';
+import DeletePartModal from '../delete-parts/delete-part-modal.module';
 
 const Parts = () => {
     const addPartsModal = useModal();
     const editPartsModal = useModal();
+    const deletePartModal = useModal();
 
     const { request, loading ,
         result: searchPartsResult = { metadata: [], total: 0, numPages: 0 },
@@ -100,7 +101,10 @@ const Parts = () => {
                     </Button>
                     <Button iconPrefix={<DeleteOutlined className="mr-sm" />} className="mx-sm"
                         disabled={Object.keys(selected).length === 0}
-                        type={StyleType.Danger}>
+                        type={StyleType.Danger}
+                        onClick={() => {
+                            deletePartModal.show();
+                        }}>
                         {lang.delete}
                     </Button>
                 </div>}
@@ -130,7 +134,14 @@ const Parts = () => {
                 editPartsModal={editPartsModal} 
                 selected={selected}
                 refreshList={fetchParts}
-                requestState={requestState}/>
+                requestState={requestState}
+            />
+            <DeletePartModal 
+                selected={selected}
+                deletePartModal={deletePartModal} 
+                refreshList={fetchParts} 
+                requestState={requestState}
+            />
         </WrapperA>);
 }
  

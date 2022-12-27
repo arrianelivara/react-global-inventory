@@ -11,10 +11,12 @@ import { columns } from './columns';
 import { useApi, useFilter, useMount, useSelectItems } from 'hooks/index';
 import { searchWarehouse } from 'apis/warehouse.api';
 import { warehouseResponse } from 'mappers/warehouse.mapper';
+import DeleteWarehouseModal from '../delete-warehouse/delete-warehouse-modal.module';
 
 const Warehouse = () => {
     const addWarehouseModal = useModal();
     const editWarehouseModal = useModal();
+    const deleteWarehouseModal = useModal();
 
     const { request, loading ,
         result: searchWarehouseResult = { metadata: [], total: 0, numPages: 0 },
@@ -100,7 +102,10 @@ const Warehouse = () => {
                     </Button>
                     <Button iconPrefix={<DeleteOutlined className="mr-sm" />} className="mx-sm"
                         disabled={Object.keys(selected).length === 0}
-                        type={StyleType.Danger}>
+                        type={StyleType.Danger}
+                        onClick={() => {
+                            deleteWarehouseModal.show();
+                        }}>
                         {lang.delete}
                     </Button>
                 </div>}
@@ -131,6 +136,12 @@ const Warehouse = () => {
                 selected={selected}
                 refreshList={fetchWarehouses}
                 requestState={requestState} />
+            <DeleteWarehouseModal 
+                selected={selected}
+                deleteWarehouseModal={deleteWarehouseModal} 
+                refreshList={fetchWarehouses} 
+                requestState={requestState}
+            />
         </WrapperA>);
 }
  
