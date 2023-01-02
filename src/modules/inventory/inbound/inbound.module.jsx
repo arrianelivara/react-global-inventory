@@ -7,6 +7,8 @@ import { useApi, useForm, useModal, useMount } from 'hooks/index';
 import { getAllSupplier, getAllWarehouse } from 'apis/index';
 import { initialFormState, PartField } from './inbound-filter.form-state';
 import { Modal } from "antd";
+import { getAllParts } from 'apis/part.api';
+import { getAllUnits } from 'apis/unit.api';
 
 const Inbound = () => {
     const updateModal = useModal();
@@ -28,9 +30,29 @@ const Inbound = () => {
         isArray: true
     });
 
+    const { request: requestAllParts, mappedData: partList, loading: fetchingParts } = useApi({
+        api: getAllParts,
+        mapper: {
+            value: { key: "id" },
+            text: { key: "part"}
+        },
+        isArray: true
+    });
+
+    const { request: requestAllUnits, mappedData: unitList, loading: fetchingUnits } = useApi({
+        api: getAllUnits,
+        mapper: {
+            value: { key: "id" },
+            text: { key: "unit"}
+        },
+        isArray: true
+    });
+
     useMount(() => {
         fetchWarehouse();
         fetchSupplier();
+        fetchParts();
+        requestAllUnits();
     });
 
     const formState = useMemo(() => {
@@ -47,6 +69,10 @@ const Inbound = () => {
 
     const fetchSupplier = useCallback(async() => {
         await requestAllSupplier();
+    }, [request]);
+
+    const fetchParts = useCallback(async() => {
+        await requestAllParts();
     }, [request]);
 
     const filterByList = [
@@ -156,7 +182,7 @@ const Inbound = () => {
                     <Title className="mt-lg">{index + 1}</Title>
                 </div>
                 <Field {...field.partNo} label="Part No.">
-                    <Input {...field.partNo} onChange={(name, { value }) => {
+                    <Select {...field.partNo} options={partList} onChange={(name, { value }) => {
                         onChange({
                             partNo: {
                                 value,
@@ -174,7 +200,7 @@ const Inbound = () => {
                     }}/>
                 </Field>
                 <Field  {...field.brand} label="Brand">
-                    <Select  {...field.brand} onChange={(name, { value }) => {
+                    <Input {...field.brand} onChange={(name, { value }) => {
                         onChange({
                             brand: {
                                 value,
@@ -201,7 +227,7 @@ const Inbound = () => {
                     }}/>
                 </Field>
                 <Field {...field.unit} label="Unit">
-                    <Select {...field.unit} readOnly onChange={(name, { value }) => {
+                    <Select {...field.unit} options={unitList} loading={fetchingUnits} onChange={(name, { value }) => {
                         onChange({
                             unit: {
                                 value,

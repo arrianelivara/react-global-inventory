@@ -6,6 +6,11 @@ export const getPart = async (id) => {
   return res;
 };
 
+export const getAllParts = async () => {
+  const res = await Get(`${ApiPath.PART}`);
+  return res;
+};
+
 export const createPart = async (body) => {
   const res = await Post(ApiPath.CREATE_PART, body);
   return res;

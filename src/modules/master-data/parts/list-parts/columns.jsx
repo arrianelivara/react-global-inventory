@@ -10,6 +10,10 @@ export const columns = [
     width: "40%"
   },
   {
+    key: "brand",
+    text: "Brand",
+  },
+  {
     key: "startDate",
     text: "Start Date",
     sort: true,

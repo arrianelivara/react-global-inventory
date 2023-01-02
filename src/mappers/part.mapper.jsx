@@ -4,6 +4,7 @@ import { formatDate } from "services";
 export const partResponse = {
     id: { key: "id" },
     partNo: { key: "part" },
+    brand: { key: "brand" },
     startDate: { 
         transform: ({ src }) => {
             return formatDate(src.start_date, DateTime.A) || "-";

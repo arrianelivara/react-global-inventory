@@ -6,6 +6,11 @@ export const getUnit = async (id) => {
   return res;
 };
 
+export const getAllUnits = async () => {
+  const res = await Get(`${ApiPath.UNIT}`);
+  return res;
+};
+
 export const createUnit = async (body) => {
   const res = await Post(ApiPath.CREATE_UNIT, body);
   return res;

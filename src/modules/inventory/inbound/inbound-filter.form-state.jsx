@@ -43,7 +43,7 @@ export const PartField = {
   },
   partNo: {
     name: "partNo",
-    type: Field.INPUT,
+    type: Field.DROPDOWN,
     validations: [Validation.required()],
     label: "Part No.",
     value: null,
