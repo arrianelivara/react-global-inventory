@@ -116,9 +116,9 @@ const EmployeeModal = ({ initialState, employeeModal, handleSubmit, refreshList,
                                 if (!value) {
                                     startD = null;
                                 } else {
-                                    startD = moment(value)
+                                    startD = moment(startD)
                                 }
-                                modifyField("startDate", { value: value });
+                                modifyField("startDate", { value: startD });
                             }}/>
                         </Field>
                         <Field {...fields.endDate}>

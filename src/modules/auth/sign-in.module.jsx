@@ -36,6 +36,22 @@ const SignIn = () => {
     
   }, [signInRequest, getFormValues]);
 
+  const handleSignInEnter = useCallback(async (event) => {
+    const { email, password } = getFormValues();
+    try {
+      if(event.keyCode === 13) {  
+        const res = await signInRequest({ email, password }); 
+        if (res) {
+          localStorage.setItem("accessToken", res.access);
+          redirectTo(Path.MENU);
+        }
+      }
+    } catch (e) {
+      console.log(e);
+    }
+    
+  }, [signInRequest, getFormValues]);
+
   const showError = useMemo(() => {
     return error ? <Text error strong className="text-center">{lang.credentialsError}</Text> : null;
   }, [error]);
@@ -44,7 +60,7 @@ const SignIn = () => {
     <React.Fragment>
       <Navigation />
       <div className="mt-xxl h-full">
-        <form onKeyDown={handleSignIn}>
+        <form onKeyDown={handleSignInEnter}>
           <Card bordered={false} className="drop-shadow-md p-md bg-white m-auto rounded-md border-b-2 border-indigo-600 w-3/4 sm:w-1/2  xl:w-1/4">
             <Text title size="text-lg">{lang.loginToAccount}</Text>
             <div className="mt-xl">
