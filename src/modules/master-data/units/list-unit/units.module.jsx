@@ -39,6 +39,7 @@ const Units = () => {
     const fetchUnits = useCallback(
         (requestState) => {
             request(requestState);
+            clearSelected();
         },
         [request]
     );

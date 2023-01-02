@@ -43,6 +43,7 @@ const EmployeeList = () => {
     const fetchEmployees = useCallback(
         (requestState) => {
             request(requestState);
+            clearSelected();
         },
         [request]
     );

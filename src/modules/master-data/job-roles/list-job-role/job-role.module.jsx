@@ -39,6 +39,7 @@ const JobRoles = () => {
     const fetchJobRoles = useCallback(
         (requestState) => {
             request(requestState);
+            clearSelected();
         },
         [request]
     );

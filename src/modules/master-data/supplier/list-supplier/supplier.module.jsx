@@ -40,6 +40,7 @@ const Supplier = () => {
     const fetchSupplier = useCallback(
         (requestState) => {
             request(requestState);
+            clearSelected();
         },
         [request]
     );

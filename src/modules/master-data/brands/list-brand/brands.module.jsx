@@ -33,8 +33,9 @@ const Brands = () => {
     });
 
     const fetchBrands = useCallback(
-        (requestState) => {
+        async (requestState) => {
             request(requestState);
+            clearSelected();
         },
         [request]
     );

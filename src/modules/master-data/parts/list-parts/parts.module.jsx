@@ -39,6 +39,7 @@ const Parts = () => {
     const fetchParts = useCallback(
         (requestState) => {
             request(requestState);
+            clearSelected();
         },
         [request]
     );

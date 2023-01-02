@@ -37,7 +37,7 @@ const DeletePartModal = ({ deletePartModal, selected, refreshList, requestState 
         >
             <Text className="ml-sm my-md ">Are you sure you want to delete the following item/s:</Text>
             {Object.values(selected).map((s) => {
-                return <Title className="ml-sm">{`- ${s.partNo} ${s.description}`}</Title>
+                return <Title key={s.partNo} className="ml-sm">{`- ${s.partNo} ${s.description}`}</Title>
             })}
         </Modal>);
 }

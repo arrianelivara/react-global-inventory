@@ -40,6 +40,7 @@ const Warehouse = () => {
     const fetchWarehouses = useCallback(
         (requestState) => {
             request(requestState);
+            clearSelected();
         },
         [request]
     );
