@@ -20,10 +20,10 @@ const DeleteJobRoleModal = ({ deleteJobRoleModal, selected, refreshList, request
         title={lang.deleteJobRole}
         okText={lang.delete}
         cancelText='Cancel'
-        onOk={() => {
+        onOk={async() => {
             const ids = Object.values(selected).map((s) => s.id);
             try {
-                requestDeleteJobRoles({ ids: ids });
+                await requestDeleteJobRoles({ ids: ids });
                 refreshList(requestState);
                 deleteJobRoleModal.close();
             } catch (e){

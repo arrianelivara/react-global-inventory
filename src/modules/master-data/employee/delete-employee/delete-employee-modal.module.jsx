@@ -20,10 +20,10 @@ const DeleteEmployeeModal = ({ deleteEmployeeModal, selected, refreshList, reque
         title={lang.deleteEmployee}
         okText={lang.delete}
         cancelText='Cancel'
-        onOk={() => {
+        onOk={async() => {
             const ids = Object.values(selected).map((s) => s.id);
             try {
-                requestDeleteEmployees({ ids: ids });
+                await requestDeleteEmployees({ ids: ids });
                 refreshList(requestState);
                 deleteEmployeeModal.close();
             } catch (e){

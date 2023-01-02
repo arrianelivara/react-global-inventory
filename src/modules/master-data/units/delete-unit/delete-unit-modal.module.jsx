@@ -20,10 +20,10 @@ const DeleteUnitModal = ({ deleteUnitModal, selected, refreshList, requestState 
         title={lang.deleteUnit}
         okText={lang.delete}
         cancelText='Cancel'
-        onOk={() => {
+        onOk={async () => {
             const ids = Object.values(selected).map((s) => s.id);
             try {
-                requestDeleteUnits({ ids: ids });
+                await requestDeleteUnits({ ids: ids });
                 refreshList(requestState);
                 deleteUnitModal.close();
             } catch (e){

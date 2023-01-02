@@ -20,10 +20,10 @@ const DeleteSupplierModal = ({ deleteSupplierModal, selected, refreshList, reque
         title={lang.deleteSupplier}
         okText={lang.delete}
         cancelText='Cancel'
-        onOk={() => {
+        onOk={async() => {
             const ids = Object.values(selected).map((s) => s.id);
             try {
-                requestDeleteSuppliers({ ids: ids });
+                await requestDeleteSuppliers({ ids: ids });
                 refreshList(requestState);
                 deleteSupplierModal.close();
             } catch (e){

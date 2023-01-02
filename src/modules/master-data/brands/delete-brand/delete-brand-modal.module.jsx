@@ -20,10 +20,10 @@ const DeleteBrandModal = ({ deleteBrandModal, selected, refreshList, requestStat
         title={lang.deleteBrand}
         okText={lang.delete}
         cancelText='Cancel'
-        onOk={() => {
+        onOk={async() => {
             const ids = Object.values(selected).map((s) => s.id);
             try {
-                requestDeleteBrands({ ids: ids });
+                await requestDeleteBrands({ ids: ids });
                 refreshList(requestState);
                 deleteBrandModal.close();
             } catch (e){

@@ -16,10 +16,10 @@ const DeleteWarehouseModal = ({ deleteWarehouseModal, selected, refreshList, req
         title={lang.deleteWarehouse}
         okText={lang.delete}
         cancelText='Cancel'
-        onOk={() => {
+        onOk={async() => {
             const ids = Object.values(selected).map((s) => s.id);
             try {
-                requestDeleteWarehouses({ ids: ids });
+                await requestDeleteWarehouses({ ids: ids });
                 refreshList(requestState);
                 deleteWarehouseModal.close();
             } catch (e){
