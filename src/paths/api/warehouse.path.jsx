@@ -4,6 +4,6 @@ export const warehousePaths = {
     WAREHOUSE_ID: (warehouseId) => warehouseId,
     CREATE_WAREHOUSE: "create",
     UPDATE_WAREHOUSE: (warehouseId) => `update/${warehouseId}`,
-    BATCH_WAREHOUSE: "batch-delete"
+    BATCH_WAREHOUSE: "batch_delete"
 };
   

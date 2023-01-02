@@ -4,6 +4,6 @@ export const partPaths = {
     PART_ID: (partId) => partId,
     CREATE_PART: "create",
     UPDATE_PART: (partId) => `update/${partId}`,
-    BATCH_PART: "batch-delete"
+    BATCH_PART: "batch_delete"
 };
   

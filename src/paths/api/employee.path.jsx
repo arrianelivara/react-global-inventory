@@ -4,6 +4,6 @@ export const employeePaths = {
     EMPLOYEE_ID: (employeeId) => employeeId,
     CREATE_EMPLOYEE: "create",
     UPDATE_EMPLOYEE: (employeeId) => `update/${employeeId}`,
-    BATCH_EMPLOYEE: "batch-delete"
+    BATCH_EMPLOYEE: "batch_delete"
 };
   

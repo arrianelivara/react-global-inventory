@@ -165,7 +165,7 @@ const Inbound = () => {
                     }}/>
                 </Field>
                 <Field {...field.description} label="Description">
-                    <Input {...field.description} onChange={(name, { value }) => {
+                    <Input {...field.description} readOnly onChange={(name, { value }) => {
                         onChange({
                             description: {
                                 value,
@@ -201,7 +201,7 @@ const Inbound = () => {
                     }}/>
                 </Field>
                 <Field {...field.unit} label="Unit">
-                    <Select {...field.unit} onChange={(name, { value }) => {
+                    <Select {...field.unit} readOnly onChange={(name, { value }) => {
                         onChange({
                             unit: {
                                 value,

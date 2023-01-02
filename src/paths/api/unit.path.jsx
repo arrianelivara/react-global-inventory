@@ -4,6 +4,6 @@ export const unitPaths = {
     UNIT_ID: (unitId) => unitId,
     CREATE_UNIT: "create",
     UPDATE_UNIT: (unitId) => `update/${unitId}`,
-    BATCH_UNIT: "batch-delete"
+    BATCH_UNIT: "batch_delete"
 };
   

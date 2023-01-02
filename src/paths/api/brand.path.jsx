@@ -4,6 +4,6 @@ export const brandPaths = {
     BRAND_ID: (brandId) => brandId,
     CREATE_BRAND: "create",
     UPDATE_BRAND: (brandId) => `update/${brandId}`,
-    BATCH_BRAND: "batch-delete"
+    BATCH_BRAND: "batch_delete"
 };
   
