@@ -60,7 +60,7 @@ const PartsModal = ({ partsModal, handleSubmit, initialState, refreshList, reque
                     </Field>
                 </div>
                 <div className='mt-sm'>
-                    <Field {...fields.brand}>
+                    <Field {...fields.brand} required>
                         <Select {...fields.brand} loading={loading} options={mappedData} onChange={modifyField}/>
                     </Field>
                 </div>
